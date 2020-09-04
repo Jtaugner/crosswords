@@ -1,0 +1,48 @@
+@import "root";
+
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url("assets/Ubuntu-Regular.ttf");
+
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu-Light';
+  src: url("assets/Ubuntu-Light.ttf");
+
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+}
+
+html, body, #root {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  font: 10px/1.5 'Ubuntu', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#root{
+  background: url(assets/images/background.png) center center no-repeat;
+  background-size: 100%;
+}
+
+@media (min-width: 1000px) {
+  #root {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+  }
+}

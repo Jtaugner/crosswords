@@ -1,0 +1,19 @@
+.mainPage {
+  width: 100%;
+  min-height: 100%;
+  padding: 45px 20px;
+  background-color: lightblue;
+}
+
+@media (min-width: 359px) {
+  .mainPage {
+    padding-top: 55px;
+  }
+}
+@media (min-width: 1000px) {
+  .mainPage {
+    padding: 65px 0;
+  }
+}
+
+/*# sourceMappingURL=mainPage.css.map */

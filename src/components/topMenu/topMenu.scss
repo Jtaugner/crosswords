@@ -1,0 +1,41 @@
+@import "../../root";
+
+.top-menu{
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 45px;
+
+  padding: 0 10px;
+
+
+
+  background-color: transparent;
+
+
+  z-index: 2;
+}
+.top-menu__inner{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (min-width: 359px) {
+  .top-menu{
+    height: 55px;
+  }
+}
+@media (min-width: 1000px) {
+  .top-menu{
+    height: 65px;
+  }
+  .top-menu__inner{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
