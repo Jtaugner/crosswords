@@ -1,9 +1,9 @@
 @import '../../root';
 
-
-.crossword{
+.crossword-wrapper{
+  flex: 1 1 auto;
+  height: 40%;
   width: 98%;
-  height: 50%;
 
   border-radius: 5px;
 
@@ -11,6 +11,13 @@
   padding: 10px 5px;
 
   box-shadow: 0 0 7px 0 black;
+}
+
+.crossword{
+  width: 100%;
+  height: 100%;
+
+
 
   overflow-y: auto;
 
@@ -41,6 +48,12 @@
 
   margin-right: 5px;
 }
+
+.crossword__word_selected .crossword__letter{
+  background-color: $mainDarkColor;
+  color: white;
+}
+
 .crossword__word .crossword__letter:last-child{
   margin-right: 0;
 }

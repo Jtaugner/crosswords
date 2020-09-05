@@ -6,8 +6,12 @@
   overflow: hidden;
 
   display: flex;
-  justify-content: center;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
   align-items: center;
 
+  padding-top: 60px;
+
   touch-action: none;
+
 }

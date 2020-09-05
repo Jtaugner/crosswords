@@ -11,3 +11,19 @@ export const shuffle = (arr)=> {
     }
     return arr;
 };
+
+export const gameLevels = [
+    {"levelWords":["ПРАКТИК","НЕДОТКА","ОКУЧНИК","ОБОЛТУС","ЩИТОВКА","СЫТОСТЬ","РИВАНОЛ","МАЛЬБЕК","ШЛИХТИК","ИЗДЕЛИЕ"],"levelWordsDescriptions":{"ПРАКТИК":"Деловой человек.","НЕДОТКА":"Рыболовное орудие из редко вытканного холста, сшитого в два полотнища.","ОКУЧНИК":"«Собрат» культиватора.","ОБОЛТУС":"Слоняющийся бездельник.","ЩИТОВКА":"Насекомое, отряд клопов.","СЫТОСТЬ":"Удовлетворённость желудка.","РИВАНОЛ":"Лекарственный препарат из группы антисептических средств.","МАЛЬБЕК":"Сорт столового винограда.","ШЛИХТИК":"Рубанок с двойным лезвием для чистого строгания.","ИЗДЕЛИЕ":"Выделка, производство."}}
+
+    ];
+
+export const getLevelWords = (level) => {
+    return gameLevels[level].levelWords;
+};
+export const getLevelWordsDescription = (level, wordIndex) => {
+    return gameLevels[level].levelWordsDescriptions
+        [
+            getLevelWords(level)[wordIndex]
+                .toUpperCase()
+        ];
+};

@@ -1,0 +1,36 @@
+@import "../../../root";
+
+.keyboard__line{
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+
+  padding: 0 8px;
+  margin-bottom: 5px;
+}
+.keyboard__letter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 25px;
+  height: 41px;
+
+  border-radius: 4px;
+
+  background-color: white;
+
+  //color: $mainDarkColor;
+  color: #755394;
+  font-size: 2.4rem;
+  margin-right: 5px;
+}
+.keyboard__line .keyboard__letter:last-child{
+  margin-right: 0;
+}
+.keyboard__deleteButton{
+  background: url(delete.png) 40% center no-repeat white;
+  background-size: 75%;
+  border-radius: 8px;
+}

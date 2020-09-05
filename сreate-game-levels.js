@@ -16,8 +16,6 @@ const shuffle = (arr)=> {
 };
 
 
-
-
 function getLevel(length, amount){
     const levelWords = [];
     const levelWordsDescriptions = {};
@@ -25,7 +23,7 @@ function getLevel(length, amount){
     for(let i = 0; i < allWords.length; i++){
         const word = allWords[i].toUpperCase();
         if(word.length === length && wordsDescriptions[word]){
-            levelWords.push(word);
+            levelWords.push(word.replace(/Ё/g, 'Е'));
             //Рандомное определение слова
             levelWordsDescriptions[word] =wordsDescriptions[word][Math.floor(Math.random()*wordsDescriptions[word].length)];
             if(levelWords.length === amount) return {
@@ -36,7 +34,7 @@ function getLevel(length, amount){
 
 
 }
-fs.writeFile('gameLevels.js', `module.exports = {gameLevels: ${JSON.stringify(getLevel(5, 10))}};`, function (err) {
+fs.writeFile('gameLevels.js', `module.exports = {gameLevels: ${JSON.stringify(getLevel(7, 10))}};`, function (err) {
     if(err) throw err;
 });
 

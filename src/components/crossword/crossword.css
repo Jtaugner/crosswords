@@ -1,10 +1,16 @@
-.crossword {
+.crossword-wrapper {
+  flex: 1 1 auto;
+  height: 40%;
   width: 98%;
-  height: 50%;
   border-radius: 5px;
   margin: 0 auto;
   padding: 10px 5px;
   box-shadow: 0 0 7px 0 black;
+}
+
+.crossword {
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -25,6 +31,11 @@
   align-items: center;
   background-color: white;
   margin-right: 5px;
+}
+
+.crossword__word_selected .crossword__letter {
+  background-color: #9a52ac;
+  color: white;
 }
 
 .crossword__word .crossword__letter:last-child {
