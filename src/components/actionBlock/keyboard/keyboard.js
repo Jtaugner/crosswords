@@ -15,13 +15,18 @@ function Keyboard(props) {
         <div className={'keyboard'}>
             {
                 letters.map((line, index)=>
-                    <div className="keyboard__line">
+                    <div
+                        className="keyboard__line"
+                        key={'line' + index}
+                    >
                         {
                             line.map((letter)=>
                                 <div
                                     className={'keyboard__letter'}
                                     style={{width: letterSize + 'px'}}
-                                >{letter}</div>
+                                    key={'letter'+letter}
+                                >
+                                    {letter}</div>
                             )
                         }
                         {
