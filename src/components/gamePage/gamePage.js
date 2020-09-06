@@ -20,7 +20,6 @@ class GamePage extends Component{
         }
     }
     changeSelectedWord = (word) => {
-        console.log(crosswordRef);
         this.setState({
             selectedWordIndex: word
         })

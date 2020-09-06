@@ -14,6 +14,9 @@ function getLetterSize(length) {
 class Crossword extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+            selectedCell: [0, 0]
+        }
     }
 
     levelWords = getLevelWords(this.props.level);
@@ -27,6 +30,12 @@ class Crossword extends Component{
         console.log(letter)
     } ;
 
+
+    selectLetter = (wordIndex, letterIndex) => {
+        this.setState({
+            selectedCell: [wordIndex, letterIndex]
+        })
+    };
 
     wordRef;
     componentDidUpdate() {
@@ -56,7 +65,14 @@ class Crossword extends Component{
                                 {
                                     word.split('').map((letter, letterIndex) => {
                                         return <div
-                                            className={'crossword__letter'}
+                                            onClick={()=>this.selectLetter(wordIndex, letterIndex)}
+
+
+                                            className={'crossword__letter '
+                                            + (
+                                                (this.state.selectedCell[0] === wordIndex &&
+                                                this.state.selectedCell[1] === letterIndex) ?
+                                                'crossword__letter_selected' : '')}
                                             key={word + letterIndex}
                                             style={{
                                                 width: this.letterSize,

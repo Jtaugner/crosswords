@@ -55,7 +55,9 @@ $letterBorderRadius: 4px;
   display: block;
 }
 
-
+.crossword__letter_selected{
+  border: 2px solid white;
+}
 .keyboard__deleteButton{
   background: url(delete.png) 40% center no-repeat white;
   background-size: 75%;
