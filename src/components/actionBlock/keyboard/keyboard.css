@@ -7,6 +7,7 @@
 }
 
 .keyboard__letter {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,10 +18,26 @@
   color: #755394;
   font-size: 2.4rem;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .keyboard__line .keyboard__letter:last-child {
   margin-right: 0;
+}
+
+.keyboard__letterTip {
+  position: absolute;
+  bottom: 0;
+  height: 82px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 3rem;
+  display: none;
+  border: 1.5px solid #755394;
+}
+
+.keyboard__letter_selected .keyboard__letterTip {
+  display: block;
 }
 
 .keyboard__deleteButton {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import './gamePage.scss'
 import {connect} from "react-redux";
 import TopMenu from "../topMenu/topMenu"
@@ -10,35 +10,53 @@ import {selectLevel} from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
 import {getLevelWords, getLevelWordsDescription} from "../../projectCommon";
 
-function GamePage(props) {
-    const {
-        showAdv,
-        level
-    } = props;
-    const [selectedWordIndex, setSelectedWordIndex] = useState(0);
+const crosswordRef = React.createRef();
 
-    const changeSelectedWord = (word) => {
-        setSelectedWordIndex(word);
+class GamePage extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedWordIndex: 0
+        }
+    }
+    changeSelectedWord = (word) => {
+        console.log(crosswordRef);
+        this.setState({
+            selectedWordIndex: word
+        })
     };
 
-    return (
-        <div className={'gamePage'}>
-            <TopMenu>
-                <Money/>
-            </TopMenu>
-            <Crossword
-                level={level}
-                selectedWordIndex={selectedWordIndex}
-                changeSelectedWord={changeSelectedWord}
-            />
-            <Tips/>
-            <ActionBlock
-                level={level}
-                selectedWordIndex={selectedWordIndex}
-                changeSelectedWord={changeSelectedWord}
-            />
-        </div>
-    );
+    addLetterToCrossWord = (letter) => {
+        if (crosswordRef.current) {
+            crosswordRef.current.addLetter(letter);
+        }
+    };
+    render(){
+        return (
+            <div className={'gamePage'}>
+                <TopMenu>
+                    <Money/>
+                </TopMenu>
+
+                <Crossword
+                    ref={crosswordRef}
+                    level={this.props.level}
+                    selectedWordIndex={this.state.selectedWordIndex}
+                    changeSelectedWord={this.changeSelectedWord}
+                />
+
+                <Tips/>
+
+                <ActionBlock
+                    level={this.props.level}
+                    selectedWordIndex={this.state.selectedWordIndex}
+                    changeSelectedWord={this.changeSelectedWord}
+                    addLetterToCrossWord={this.addLetterToCrossWord}
+                />
+            </div>
+        );
+    }
+
 }
 
 export default connect((store) => ({

@@ -9,15 +9,19 @@
   padding: 0 8px;
   margin-bottom: 5px;
 }
+$letterHeight: 41px;
+$letterBorderRadius: 4px;
 .keyboard__letter{
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 25px;
-  height: 41px;
+  height: $letterHeight;
 
-  border-radius: 4px;
+  border-radius: $letterBorderRadius;
 
   background-color: white;
 
@@ -25,10 +29,33 @@
   color: #755394;
   font-size: 2.4rem;
   margin-right: 5px;
+
+  cursor: pointer;
 }
 .keyboard__line .keyboard__letter:last-child{
   margin-right: 0;
 }
+
+.keyboard__letterTip{
+  position: absolute;
+  bottom: 0;
+
+  height: $letterHeight*2;
+
+  text-align: center;
+
+  border-radius: $letterBorderRadius*2;
+  font-size: 3rem;
+
+  display: none;
+
+  border: 1.5px solid #755394;
+}
+.keyboard__letter_selected .keyboard__letterTip{
+  display: block;
+}
+
+
 .keyboard__deleteButton{
   background: url(delete.png) 40% center no-repeat white;
   background-size: 75%;

@@ -14,7 +14,7 @@ function getWordDescriptionFontSize(desc) {
 }
 
 function ActionBlock(props) {
-    const {level, changeSelectedWord, selectedWordIndex} = props;
+    const {level, changeSelectedWord, selectedWordIndex, addLetterToCrossWord} = props;
 
 
     const wordDescription = getLevelWordsDescription(level, selectedWordIndex);
@@ -55,7 +55,13 @@ function ActionBlock(props) {
                     onClick={changeWordUpOnclick}
                 />
             </div>
-            <Keyboard/>
+
+
+            <Keyboard
+                addLetterToCrossWord={addLetterToCrossWord}
+            />
+
+
         </div>
     );
 }
