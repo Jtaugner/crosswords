@@ -45,9 +45,10 @@ function Keyboard(props) {
 
     };
     const letterOnStartDesktop = (letter) => {
-        if (!isPhone){
-            letterOnStart(letter);
-        }
+        if (!isPhone) letterOnStart(letter);
+    };
+    const letterOnStartPhone = (letter) => {
+        if (isPhone) letterOnStart(letter);
     };
 
     const letterOnEnd = () => {
@@ -60,6 +61,9 @@ function Keyboard(props) {
         addLetterToCrossWord(rememberedLetter);
     };
 
+    const deleteLetter = () => {
+      addLetterToCrossWord(0);
+    };
 
     const chooseSoftLetter = () => {
         return isChangedSoftSign ? hardSign : softSign;
@@ -80,7 +84,7 @@ function Keyboard(props) {
                                     + (isLetterClicked === letter ? 'keyboard__letter_selected' : '')}
 
 
-                                    onTouchStart={() => letterOnStart(letter)}
+                                    onTouchStart={() => letterOnStartPhone(letter)}
                                     onMouseDown={() => letterOnStartDesktop(letter)}
 
                                     onMouseUp={letterOnEnd}
@@ -93,9 +97,7 @@ function Keyboard(props) {
                                     {letter}
                                     <div
                                         className="keyboard__letter keyboard__letterTip"
-                                        style={{
-                                            width: letterSize * 1.5 + 'px'
-                                        }}
+                                        style={{width: letterSize * 1.5 + 'px'}}
                                     >{letter === softSign ? chooseSoftLetter(letter) : letter}</div>
                                 </div>
                             )
@@ -104,6 +106,7 @@ function Keyboard(props) {
                             index === 2 ?
                                 <div
                                     className={'keyboard__deleteButton'}
+                                    onClick={deleteLetter}
                                     style={{width: letterSize * 2 + pixelsPerLetters + 'px'}}
                                 /> : ''
                         }

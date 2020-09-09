@@ -30,16 +30,26 @@
   justify-content: center;
   align-items: center;
   background-color: white;
+  color: #ababab;
   margin-right: 5px;
 }
 
 .crossword__word_selected .crossword__letter {
-  background-color: #9a52ac;
   color: white;
+  background-color: #b170c1;
 }
 
 .crossword__word .crossword__letter:last-child {
   margin-right: 0;
+}
+
+.crossword__word_selected .crossword__letter_done {
+  background-color: #9a52ac;
+  color: white;
+}
+
+.crossword__letter_done {
+  color: black;
 }
 
 /*# sourceMappingURL=crossword.css.map */

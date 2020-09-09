@@ -14,7 +14,11 @@ export const SUBTRACT_MONEY = "SUBTRACT_MONEY";
 export const ADD_MONEY = "ADD_MONEY";
 export const CHANGE_MONEY_FROM_PLAYER_DATA = "CHANGE_MONEY_FROM_PLAYER_DATA";
 
+
+//Уровни
 export const SELECT_LEVEL = "SELECT_LEVEL";
+export const CHANGE_LAST_LEVEL = "CHANGE_LAST_LEVEL";
+export const CHANGE_LEVEL_PROGRESS = "CHANGE_LEVEL_PROGRESS";
 
 export const getFromLocalStorage = (name, defaultVal) => {
   let val = localStorage.getItem(name);

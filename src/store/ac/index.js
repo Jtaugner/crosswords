@@ -1,6 +1,6 @@
 import {
     CHANGE_GAME_PAYMENTS,
-    CHANGE_GAME_SDK, SELECT_LEVEL,
+    CHANGE_GAME_SDK, CHANGE_LAST_LEVEL, CHANGE_LEVEL_PROGRESS, SELECT_LEVEL,
     SHOW_ADV,
     TOGGLE_SETTINGS,
     TOGGLE_SOUNDS
@@ -28,7 +28,14 @@ export const chooseLevel = (level) => ({
     type: SELECT_LEVEL,
     level
 });
-
+export const changeLastLevel = (level) => ({
+    type: CHANGE_LAST_LEVEL,
+    level
+});
+export const changeLevelProgress = (progress) => ({
+    type: CHANGE_LEVEL_PROGRESS,
+    progress
+});
 export const changeGamePayments = (payments) => ({
     type: CHANGE_GAME_PAYMENTS,
     payments

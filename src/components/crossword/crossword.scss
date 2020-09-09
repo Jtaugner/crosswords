@@ -45,15 +45,23 @@
   align-items: center;
 
   background-color: white;
+  color: #ababab;
 
   margin-right: 5px;
 }
 
 .crossword__word_selected .crossword__letter{
-  background-color: $mainDarkColor;
   color: white;
+  background-color: #b170c1;
 }
 
 .crossword__word .crossword__letter:last-child{
   margin-right: 0;
+}
+.crossword__word_selected .crossword__letter_done{
+  background-color: $mainDarkColor;
+  color: white;
+}
+.crossword__letter_done{
+  color: black;
 }
