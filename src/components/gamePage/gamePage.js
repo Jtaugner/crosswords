@@ -9,6 +9,7 @@ import Tips from '../tips/tips'
 import {selectLastLevel, selectLevel, selectLevelProgress} from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
 import {getLevelWords, getLevelWordsDescription} from "../../projectCommon";
+import MenuLink from "../menuLink/menuLink";
 
 const crosswordRef = React.createRef();
 
@@ -61,6 +62,7 @@ class GamePage extends Component{
         return (
             <div className={'gamePage'}>
                 <TopMenu>
+                    <MenuLink/>
                     <Money/>
                 </TopMenu>
 

@@ -1,0 +1,21 @@
+@import '../../root';
+
+.menu{
+  position: relative;
+
+  width: 35px;
+  height: 35px;
+
+  background: url(menu.png) center center no-repeat;
+  background-size: 100%;
+
+  cursor: pointer;
+}
+.menu:before {
+  position: absolute;
+  content: "";
+  top: -10px;
+  right: -10px;
+  left: -10px;
+  bottom: -10px;
+}
