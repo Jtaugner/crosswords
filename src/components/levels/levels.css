@@ -1,0 +1,37 @@
+.levels {
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  padding: 30px 20%;
+}
+
+.levels__level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  font-size: 3rem;
+  color: #ae90b7;
+  border: 3px solid #ae90b7;
+  border-radius: 50%;
+}
+
+.levels .levels__level:nth-child(2n) {
+  margin-left: auto;
+}
+
+.levels__level_close {
+  font-size: 0;
+  background: white url(closeLevel.png) center center no-repeat;
+  background-size: 50%;
+  border-color: #c1c0c0;
+}
+
+.levels__level_last {
+  color: #9a52ac;
+  border-color: #9a52ac;
+}
+
+/*# sourceMappingURL=levels.css.map */

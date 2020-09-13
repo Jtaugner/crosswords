@@ -1,0 +1,49 @@
+@import '../../root';
+$close: #c1c0c0;
+$doneLevel: #ae90b7;
+.levels{
+  overflow-y: auto;
+
+  height: 100%;
+  width: 100%;
+
+  padding: 30px 20%;
+}
+
+.levels__level{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 60px;
+  height: 60px;
+
+  background-color: white;
+
+  font-size: 3rem;
+  color: $doneLevel;
+
+  border: 3px solid $doneLevel;
+  border-radius: 50%;
+}
+.levels .levels__level:nth-child(2n){
+  margin-left: auto;
+}
+.levels__level_close{
+  font-size: 0;
+  background: white url(closeLevel.png) center center no-repeat;
+  background-size: 50%;
+  border-color: $close;
+
+}
+.levels__level_last{
+  color: $mainDarkColor;
+  border-color: $mainDarkColor;
+}
+@media (min-width: 359px) {
+
+}
+
+@media (min-width: 1000px) {
+
+}

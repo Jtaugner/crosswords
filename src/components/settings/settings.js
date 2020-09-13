@@ -61,6 +61,5 @@ function Settings(props) {
 export default connect((store)=>({
     sounds: selectSounds(store)
 }), (dispatch)=>({
-    closeSettings: () => dispatch(toggleSettings()),
     toggleSounds: () => dispatch(toggleSounds())
 }))(Settings);
