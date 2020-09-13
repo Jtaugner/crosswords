@@ -1,21 +1,13 @@
-@import '../../root';
-
-.menu{
-  display: block;
-
+.settingsOpen {
   position: relative;
-
   width: 35px;
   height: 35px;
-
-  margin-left: 10px;
-
-  background: url(menu.png) center center no-repeat;
+  background: url(settingsOpen.png) center center no-repeat;
   background-size: 100%;
-
   cursor: pointer;
 }
-.menu:before {
+
+.settingsOpen:before {
   position: absolute;
   content: "";
   top: -10px;
@@ -23,6 +15,5 @@
   left: -10px;
   bottom: -10px;
 }
-.menu:active{
-  transform: scale(0.97);
-}
+
+/*# sourceMappingURL=settingsOpen.css.map */

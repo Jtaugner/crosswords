@@ -28,3 +28,5 @@ export const getLevelWordsDescription = (level, wordIndex) => {
                 .toUpperCase()
         ];
 };
+
+export const tipsCost = [1, 2, 5, 10];

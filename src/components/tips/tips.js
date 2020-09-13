@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './tips.scss'
 import {connect} from "react-redux";
-
-
+import {tipsCost} from "../../projectCommon";
 function Tips(props) {
 
     return (
         <div className={'tips'}>
-            <div className="tip tip1" />
-            <div className="tip tip2" />
-            <div className="tip tip3" />
-            <div className="tip tip4"/>
+            {
+                tipsCost.map((cost, index)=>(
+                    <div
+                        className={"tip tip" + (index+1)}
+                        key={'cost' + index}
+                    >
+                        <div className="tip__cost">{cost}</div>
+                    </div>
+                ))
+            }
+
         </div>
     );
 }

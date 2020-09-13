@@ -152,7 +152,11 @@ class Crossword extends Component{
     render(){
         return (
             <div className={'crossword-wrapper'}>
-                <div className={'crossword'}>
+                <div className={'crossword'}
+                     onDrop={()=>{
+                         console.log('sd');
+                     }}
+                >
                     {
                         this.props.levelWords.map((word, wordIndex) => {
                             return <div

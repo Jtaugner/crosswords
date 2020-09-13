@@ -11,30 +11,56 @@
 }
 
 .tip1{
-  width: 32px;
-  height: 43px;
+  width: 33px;
+  height: 45px;
 
   background: url(tip1.png) center center no-repeat;
 }
 .tip2{
   width: 45px;
-  height: 46px;
+  height: 45px;
 
   background: url(tip2.png) center center no-repeat;
 }
 .tip3{
-  width: 54px;
-  height: 40px;
+  width: 38px;
+  height: 45px;
 
   background: url(tip3.png) center center no-repeat;
 }
 .tip4{
   width: 52px;
-  height: 44px;
+  height: 45px;
   background: url(tip4.png) center center no-repeat;
 }
 
 
 .tip{
+  position: relative;
   background-size: 100%;
+}
+
+.tip__cost{
+  position: absolute;
+
+  bottom: -5px;
+  right: -5px;
+
+
+  color: white;
+  font-size: 1.4rem;
+
+}
+.tip__cost:after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 20px;
+  height: 20px;
+
+  background: url(../../assets/images/money.png) center center no-repeat;
+  background-size: 100%;
+
 }

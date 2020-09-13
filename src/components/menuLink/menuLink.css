@@ -1,7 +1,9 @@
 .menu {
+  display: block;
   position: relative;
   width: 35px;
   height: 35px;
+  margin-left: 10px;
   background: url(menu.png) center center no-repeat;
   background-size: 100%;
   cursor: pointer;
@@ -14,6 +16,10 @@
   right: -10px;
   left: -10px;
   bottom: -10px;
+}
+
+.menu:active {
+  transform: scale(0.97);
 }
 
 /*# sourceMappingURL=menuLink.css.map */

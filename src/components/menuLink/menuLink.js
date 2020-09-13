@@ -4,11 +4,8 @@ import {Link} from "react-router-dom";
 
 
 function MenuLink() {
-    const MenuBlock = React.forwardRef((props, ref) => (
-        <div className="menu" ref={ref} />
-    ));
     return (
-        <Link to={'/home'} component={MenuBlock} />
+        <Link to={'/home'} className={'menu'}/>
     );
 }
 
