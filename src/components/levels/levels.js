@@ -3,14 +3,14 @@ import './levels.scss'
 import {connect} from "react-redux";
 import {chooseLevel} from "../../store/ac";
 import {selectLastLevel} from "../../store/selectors";
+import {Link} from "react-router-dom";
 
 
 class Levels extends Component {
     levelRef;
 
     componentDidMount() {
-        console.log(this.levelRef);
-        this.levelRef.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
+        this.levelRef.scrollIntoView({behavior: 'auto', block: "center", inline: "center"});
     }
 
     constructor(props) {
@@ -27,27 +27,35 @@ class Levels extends Component {
 
         let lastLevel = this.props.lastLevel;
         if(lastLevel === -1) lastLevel = 0;
-        console.log(lastLevel);
-        for (let i = 1000; i >= 0; i--) {
+        for (let i = 20; i >= 0; i--) {
+            const levelOnClick = () => this.props.chooseLevel(i);
             let LevelComponent =
-                <div
-                    className={'levels__level ' + (lastLevel < i ? 'levels__level_close' : '')}
-                    onClick={() => this.props.chooseLevel(i)}
+                <Link
+                    to={'/game'}
+                    className={'levels__level'}
+                    onClick={levelOnClick}
                     key={'level' + i}
                 >
                     {i + 1}
-                </div>;
+                </Link>;
 
-            if (i === lastLevel) {
+            if(lastLevel < i){
                 LevelComponent =
                     <div
+                        className={'levels__level levels__level_close'}
+                        key={'level' + i}
+                    />
+            } else if (i === lastLevel) {
+                LevelComponent =
+                    <Link
+                        to={'/game'}
                         className={'levels__level levels__level_last'}
-                        onClick={() => this.props.chooseLevel(i)}
+                        onClick={levelOnClick}
                         key={'level' + i}
                         ref={(div) => this.selectLevelRef(div)}
                     >
                         {i + 1}
-                    </div>;
+                    </Link>;
             }
             levelList.push(LevelComponent);
         }

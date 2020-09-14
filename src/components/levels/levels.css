@@ -23,7 +23,6 @@
 }
 
 .levels__level_close {
-  font-size: 0;
   background: white url(closeLevel.png) center center no-repeat;
   background-size: 50%;
   border-color: #c1c0c0;

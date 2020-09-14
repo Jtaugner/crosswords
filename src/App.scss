@@ -34,9 +34,36 @@ html, body, #root {
   user-select: none;
 }
 
-#root{
+#root, .mainPage, .gamePage{
   background: url(assets/images/background.png) center center no-repeat;
   background-size: cover;
+  overflow: hidden;
+}
+
+// Анимация перехода между главной страницей и игрой
+.transGroup{
+  width: 100%;
+  height: 100%;
+}
+
+.slide-enter,
+.slide-exit {
+  transition: transform 1000ms ease-out;
+}
+
+.slide-exit, .slide-enter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(0%);
+}
+.slide-exit-active {
+  transform: translateY(100%);
+}
+
+.transGroupMenu .slide-exit-active{
+  transform: translateY(-100%);
 }
 
 @media (min-width: 1000px) {
@@ -46,3 +73,4 @@ html, body, #root {
     padding: 0 25px;
   }
 }
+

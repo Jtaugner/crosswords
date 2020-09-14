@@ -3,13 +3,14 @@ import './root.css'
 import './App.css';
 import {connect} from "react-redux";
 import MainPage from "./components/mainPage/mainPage";
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch, withRouter} from "react-router-dom";
 import Settings from "./components/settings";
 import {selectSettings} from "./store/selectors";
 import GamePage from "./components/gamePage/gamePage";
 import ErrorMessage from "./components/errorMessage/errorMessage";
 
 import {YM_METRIKA_ID} from './projectCommon'
+import {CSSTransition, SwitchTransition, TransitionGroup} from "react-transition-group";
 
 export function giveParams(data) {
     try{
@@ -53,16 +54,28 @@ class App extends Component {
                 </>
             )
         }
+
+        const location = this.props.location;
         return (
             <>
-                <Switch
+
+                <TransitionGroup
+                    className={'transGroup ' + (location.pathname === '/game' ? 'transGroupMenu' : '')}
+
                 >
-                    <Route path={'/home'}
-                           render={() => <MainPage/>}
-                    />
-                    <Route path={'/game'}
-                           render={() => <GamePage/>}/>
-                </Switch>
+                    <CSSTransition
+                        key={location.key}
+                        timeout={1000}
+                        classNames="slide"
+                    >
+                        <Switch location={location}>
+                            <Route path={'/home'} component={MainPage}/>
+                            <Route path={'/game'} component={GamePage}/>
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+
+
                 {this.props.settings ? <Settings/> : ''}
 
             </>
@@ -80,4 +93,4 @@ export default connect(
         ({
         })
 
-)(App);
+)(withRouter(App));
