@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import './levels.scss'
 import {connect} from "react-redux";
 import {chooseLevel} from "../../store/ac";
-import {selectLastLevel} from "../../store/selectors";
+import {selectLastLevel, selectSounds} from "../../store/selectors";
 import {Link} from "react-router-dom";
+import {clickSound} from "../../sounds";
 
 
 class Levels extends Component {
@@ -28,7 +29,12 @@ class Levels extends Component {
         let lastLevel = this.props.lastLevel;
         if(lastLevel === -1) lastLevel = 0;
         for (let i = 20; i >= 0; i--) {
-            const levelOnClick = () => this.props.chooseLevel(i);
+            const levelOnClick = () => {
+                this.props.chooseLevel(i);
+                if(this.props.isSounds){
+                    clickSound.play();
+                }
+            };
             let LevelComponent =
                 <Link
                     to={'/game'}
@@ -70,7 +76,8 @@ class Levels extends Component {
 
 export default connect(
     (store) => ({
-        lastLevel: selectLastLevel(store)
+        lastLevel: selectLastLevel(store),
+        isSounds: selectSounds(store)
     }),
     (dispatch) => ({
         chooseLevel: (level) => dispatch(chooseLevel(level))

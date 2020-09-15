@@ -57,7 +57,7 @@ const NewAudioContext = (function () {
         }
 
         this.url = url;
-        this.volume = 0.6;
+        this.volume = 0.5;
         window.webAudioAPISoundManager = window.webAudioAPISoundManager || new WebAudioAPISoundManager(window.audioContext);
         this.manager = window.webAudioAPISoundManager;
         this.manager.addSound(this.url);
@@ -103,7 +103,8 @@ const NewAudioContext = (function () {
 })();
 
 //Пример экспорта клика
-export const clickSound = new NewAudioContext('click.mp3');
+export const clickSound = new NewAudioContext('openLevel2.mp3');
+export const goMainPageSound = new NewAudioContext('goMainPage.mp3');
 
 
 

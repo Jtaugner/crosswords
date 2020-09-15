@@ -38,7 +38,7 @@ html, body, #root {
 
 .slide-enter,
 .slide-exit {
-  transition: transform 1000ms ease-out;
+  transition: transform 1000ms ease-in-out;
 }
 
 .slide-exit, .slide-enter {
@@ -46,15 +46,15 @@ html, body, #root {
   top: 0;
   left: 0;
   width: 100%;
-  transform: translateY(0%);
+  transform: translateX(0%);
 }
 
 .slide-exit-active {
-  transform: translateY(100%);
+  transform: translateX(100%);
 }
 
 .transGroupMenu .slide-exit-active {
-  transform: translateY(-100%);
+  transform: translateX(-100%);
 }
 
 @media (min-width: 1000px) {

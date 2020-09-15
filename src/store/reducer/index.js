@@ -7,6 +7,7 @@ import {moneyReducer} from "./moneyReducer";
 import {levelReducer} from "./levelReducer";
 import {levelProgressReducer} from "./levelProgressReducer";
 import {lastLevelReducer} from "./lastLevelReducer";
+import {deleteWrongWordReducer} from "./deleteWrongWordReducer";
 
 const reducer = combineReducers({
     settings: settingsReducer,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     money: moneyReducer,
     level: levelReducer,
     levelProgress: levelProgressReducer,
-    lastLevel: lastLevelReducer
+    lastLevel: lastLevelReducer,
+    deleteWrongWord: deleteWrongWordReducer
 
 });
 

@@ -2,8 +2,8 @@
 //Стили редактируются под стиль игры
 $settings: #111112;
 .settings{
-  position: fixed;
-  right: 0;
+  position: absolute;
+  left: 0;
   top: 0;
   width: 220px;
   height: 100%;
@@ -16,6 +16,8 @@ $settings: #111112;
   z-index: 4;
 
   animation: showSettings 0.4s ease-in-out forwards;
+
+  overflow-y: auto;
 }
 .settings__blackout{
   background-color: rgba(0, 0, 0, 0.3);
@@ -35,7 +37,7 @@ $settings: #111112;
 }
 @keyframes showSettings {
   0%{
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
   100%{
     transform: translateX(0);
@@ -60,19 +62,11 @@ $settings: #111112;
   flex: 1;
   font-size: 1.5rem;
 }
-.settings__icon{
-  width: 20px;
-  height: 27px;
-  margin: 3px 12px 3px 3px;
-}
 
 
 
-.settings__music{
-  background: url(music.png) center center no-repeat;
-  background-size: 100%;
-}
-.musicCheckbox {
+
+.checkbox {
   position: absolute;
   z-index: -1;
   opacity: 0;
@@ -80,8 +74,10 @@ $settings: #111112;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.musicCheckbox + label {
+.checkbox + label {
   position: relative;
+
+  width: 100%;
 
   display: flex;
   align-items: center;
@@ -89,14 +85,15 @@ $settings: #111112;
 
 
   cursor: pointer;
+  padding-right: 50px;
 }
 
-.musicCheckbox + label:before {
+.checkbox + label:before {
   content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -55px;
+  right: 0;
   width: 45px;
   height: 20px;
   border-radius: 15px;
@@ -104,12 +101,12 @@ $settings: #111112;
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
   transition: 0.2s;
 }
-.musicCheckbox + label:after {
+.checkbox + label:after {
   content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-53%);
-  right: -30px;
+  right: 28px;
   width: 21px;
   height: 21px;
   border-radius: 50%;
@@ -117,14 +114,17 @@ $settings: #111112;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   transition: 0.2s;
 }
-.musicCheckbox:checked + label:after {
-  right: -55px;
+.checkbox:checked + label:after {
+  right: 0;
 }
-.musicCheckbox:checked + label:before {
-  background: lightgray;
+.checkbox:checked + label:before {
+  background: $mainDarkColor;
 }
+
+
 .our-games{
   font-size: 2rem;
+  color: $mainDarkColor;
 }
 .wfw{
   background: url(wfw.png) center center no-repeat;

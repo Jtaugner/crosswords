@@ -1,7 +1,7 @@
 import {
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK, CHANGE_LAST_LEVEL, CHANGE_LEVEL_PROGRESS, SELECT_LEVEL,
-    SHOW_ADV,
+    SHOW_ADV, TOGGLE_DELETE_WRONG_WORD,
     TOGGLE_SETTINGS,
     TOGGLE_SOUNDS
 } from "../common";
@@ -39,4 +39,8 @@ export const changeLevelProgress = (progress) => ({
 export const changeGamePayments = (payments) => ({
     type: CHANGE_GAME_PAYMENTS,
     payments
+});
+
+export const toggleDeleteWrongWord = () => ({
+    type: TOGGLE_DELETE_WRONG_WORD,
 });

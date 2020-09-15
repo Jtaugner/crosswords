@@ -1,6 +1,6 @@
 .settings {
-  position: fixed;
-  right: 0;
+  position: absolute;
+  left: 0;
   top: 0;
   width: 220px;
   height: 100%;
@@ -10,6 +10,7 @@
   border-left: 2px solid lightgray;
   z-index: 4;
   animation: showSettings 0.4s ease-in-out forwards;
+  overflow-y: auto;
 }
 
 .settings__blackout {
@@ -31,7 +32,7 @@
 }
 @keyframes showSettings {
   0% {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(0);
@@ -57,18 +58,7 @@
   font-size: 1.5rem;
 }
 
-.settings__icon {
-  width: 20px;
-  height: 27px;
-  margin: 3px 12px 3px 3px;
-}
-
-.settings__music {
-  background: url(music.png) center center no-repeat;
-  background-size: 100%;
-}
-
-.musicCheckbox {
+.checkbox {
   position: absolute;
   z-index: -1;
   opacity: 0;
@@ -77,20 +67,22 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.musicCheckbox + label {
+.checkbox + label {
   position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
+  padding-right: 50px;
 }
 
-.musicCheckbox + label:before {
+.checkbox + label:before {
   content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -55px;
+  right: 0;
   width: 45px;
   height: 20px;
   border-radius: 15px;
@@ -99,12 +91,12 @@
   transition: 0.2s;
 }
 
-.musicCheckbox + label:after {
+.checkbox + label:after {
   content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-53%);
-  right: -30px;
+  right: 28px;
   width: 21px;
   height: 21px;
   border-radius: 50%;
@@ -113,16 +105,17 @@
   transition: 0.2s;
 }
 
-.musicCheckbox:checked + label:after {
-  right: -55px;
+.checkbox:checked + label:after {
+  right: 0;
 }
 
-.musicCheckbox:checked + label:before {
-  background: lightgray;
+.checkbox:checked + label:before {
+  background: #9a52ac;
 }
 
 .our-games {
   font-size: 2rem;
+  color: #9a52ac;
 }
 
 .wfw {

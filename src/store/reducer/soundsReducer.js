@@ -1,12 +1,10 @@
-import {TOGGLE_SOUNDS} from "../common";
+import {getBoolFromLocalStorage, TOGGLE_SOUNDS} from "../common";
 
-let isSounds = localStorage.getItem('sounds');
-if(isSounds) isSounds = isSounds === 'true';
-else isSounds = true;
+let isSounds = getBoolFromLocalStorage('sounds');
 
 export const soundsReducer = (state = isSounds, action) => {
     if(action.type === TOGGLE_SOUNDS){
-        localStorage.setItem('sounds', !state);
+        localStorage.setItem('sounds', String(!state));
         return !state;
     }
     return state;

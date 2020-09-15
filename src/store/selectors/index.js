@@ -10,3 +10,6 @@ export const selectLevelProgress= (store) => store.levelProgress;
 
 //Покупки за монеты
 export const selectMoney= (store) => store.money;
+
+//Игра
+export const selectIsDeleteWrongWord= (store) => store.deleteWrongWord;

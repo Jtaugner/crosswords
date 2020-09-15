@@ -20,9 +20,18 @@ export const SELECT_LEVEL = "SELECT_LEVEL";
 export const CHANGE_LAST_LEVEL = "CHANGE_LAST_LEVEL";
 export const CHANGE_LEVEL_PROGRESS = "CHANGE_LEVEL_PROGRESS";
 
+//Игра
+export const TOGGLE_DELETE_WRONG_WORD = "TOGGLE_DELETE_WRONG_WORD";
+
+
 export const getFromLocalStorage = (name, defaultVal) => {
   let val = localStorage.getItem(name);
   if(val) return Number(val);
   localStorage.setItem(name, defaultVal);
   return defaultVal;
+};
+export const getBoolFromLocalStorage = (name) => {
+  let val = localStorage.getItem(name);
+  if(val) return val === 'true';
+  return true;
 };
