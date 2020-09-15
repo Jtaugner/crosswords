@@ -65,3 +65,16 @@
 .crossword__letter_done{
   color: black;
 }
+
+.crossword_word_wrong{
+  animation: tremor 0.05s ease-in-out infinite;
+}
+
+@keyframes tremor {
+  0%, 25% {
+    transform: translateX(-1%);
+  }
+  50%, 100% {
+    transform: translateX(1%);
+  }
+}

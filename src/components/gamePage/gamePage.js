@@ -6,7 +6,7 @@ import {changeLastLevel, changeLevelProgress, showAdv} from "../../store/ac";
 import Money from "../money/money";
 import Crossword from "../crossword/crossword";
 import Tips from '../tips/tips'
-import {selectLastLevel, selectLevel, selectLevelProgress} from "../../store/selectors";
+import {selectIsDeleteWrongWord, selectLastLevel, selectLevel, selectLevelProgress} from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
 import {getLevelWords, getLevelWordsDescription} from "../../projectCommon";
 import MenuLink from "../menuLink/menuLink";
@@ -22,7 +22,7 @@ function createGameProgress(length, wordLength) {
     for(let i = 0; i < length; i++){
         levelProgress.push(arrayRow.slice());
     }
-    return [[1, 1, 1, 1, 1, 1, 1], [0, 1, 0, 1, 0, 1, 1], [0, 1, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
+    return [[1, 1, 1, 1, 1, 1, 1], [0, 1, 0, 1, 0, 1, 1], [0, 1, 1, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
     return levelProgress
 }
 
@@ -71,6 +71,8 @@ class GamePage extends Component{
 
                     levelWords={this.levelWords}
 
+                    deleteWrongWord={this.props.deleteWrongWord}
+
                     levelProgress={this.props.levelProgress}
                     changeLevelProgress={this.props.changeLevelProgress}
 
@@ -97,7 +99,8 @@ class GamePage extends Component{
 export default connect((store) => ({
     level: selectLevel(store),
     lastLevel: selectLastLevel(store),
-    levelProgress: selectLevelProgress(store)
+    levelProgress: selectLevelProgress(store),
+    deleteWrongWord: selectIsDeleteWrongWord(store)
     }),
     (dispatch) => ({
         showAdv: () => dispatch(showAdv()),
