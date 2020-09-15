@@ -8,6 +8,7 @@ import {levelReducer} from "./levelReducer";
 import {levelProgressReducer} from "./levelProgressReducer";
 import {lastLevelReducer} from "./lastLevelReducer";
 import {deleteWrongWordReducer} from "./deleteWrongWordReducer";
+import {startFromFirstCellReducer} from "./startFromFirstCellReducer";
 
 const reducer = combineReducers({
     settings: settingsReducer,
@@ -18,7 +19,8 @@ const reducer = combineReducers({
     level: levelReducer,
     levelProgress: levelProgressReducer,
     lastLevel: lastLevelReducer,
-    deleteWrongWord: deleteWrongWordReducer
+    deleteWrongWord: deleteWrongWordReducer,
+    startFromFirstCell:  startFromFirstCellReducer
 
 });
 

@@ -56,6 +56,9 @@ class Crossword extends Component {
         if(cell !== undefined) newIndex = cell;
         let line = this.props.selectedWordIndex;
         if(wordIndex !== undefined) line = wordIndex;
+
+        if(this.props.levelProgress[line] === true) return -1;
+
         if (isNext && newIndex < this.wordsLength) {
             for (let i = newIndex + 1; i <= this.wordsLength; i++) {
                 if (this.props.levelProgress[line][i] !== undefined && this.props.levelProgress[line][i] !== 1) {
@@ -72,7 +75,6 @@ class Crossword extends Component {
                 }
             }
         }
-        console.log(newIndex);
         return newIndex;
     };
     setNextOrPrevLetter = (isNext, cell, wordIndex) => {
@@ -85,12 +87,24 @@ class Crossword extends Component {
         }
     };
     getNextWord = () => {
-        let line;
-        if (this.props.selectedWordIndex !== this.wordsLength) {
-            line = this.props.selectedWordIndex + 1;
-        } else {
-            line = 0;
+        let line = this.props.selectedWordIndex;
+        const lastLine = this.props.selectedWordIndex;
+        for(let i = lastLine+ 1; i <= this.wordsLength; i++) {
+            if (this.props.levelProgress[i] !== true) {
+                line = i;
+                break;
+            }
         }
+        if(line === lastLine){
+            for(let i = 0; i < lastLine; i++){
+                console.log(i, this.props.levelProgress[i]);
+                if (this.props.levelProgress[i] !== true) {
+                    line = i;
+                    break;
+                }
+            }
+        }
+
         this.props.changeSelectedWord(line);
         this.getFirstFreeCellInLine(line);
     };
@@ -122,19 +136,26 @@ class Crossword extends Component {
         }
     };
     getFirstFreeCellInLine(line){
-        if(this.props.levelProgress[line][0] === 1){
-            this.setNextOrPrevLetter(true, 0, line);
+        if(this.props.levelProgress[line] === true){
+            this.setState({
+                selectedCell: -1
+            })
+        } else if(this.props.levelProgress[line][0] === 1){
+            this.setNextOrPrevLetter(true, -1, line);
         }else{
             this.setState({
                 selectedCell: 0
             })
         }
     }
-
+    wordIndexChangedTrigger(line){
+        this.getFirstFreeCellInLine(line);
+    }
     deleteWrongWord(selectedWord) {
         if (this.props.deleteWrongWord) {
 
             let wordArray = this.props.levelProgress[selectedWord];
+            if(wordArray === true ) return;
             for (let i = 0; i < wordArray.length; i++)
                 if (wordArray[i] === 0) return;
             this.setState({
@@ -159,7 +180,10 @@ class Crossword extends Component {
     }
 
     selectLetter(wordIndex, letterIndex) {
-        if (this.props.levelProgress[wordIndex][letterIndex] === 1) {
+
+        if(this.props.startFromFirstCell){
+            this.getFirstFreeCellInLine(wordIndex);
+        }else if (this.props.levelProgress[wordIndex] === true || this.props.levelProgress[wordIndex][letterIndex] === 1) {
             this.setState({
                 selectedCell: -1
             })
@@ -172,13 +196,12 @@ class Crossword extends Component {
     };
 
     addDoneWord(selectedLine) {
-        for (let i = 0; i < this.props.levelProgress[selectedLine].length; i++) {
-            this.props.levelProgress[selectedLine][i] = 1;
-        }
+        this.props.levelProgress[selectedLine] = true;
         this.changeLevelProgress();
     }
 
     testWord(selectedLine) {
+        if(this.props.levelProgress[selectedLine] === true) return;
         let word = '';
         let wordProgress = this.props.levelProgress[selectedLine];
         for (let i = 0; i < wordProgress.length; i++) {
@@ -195,6 +218,7 @@ class Crossword extends Component {
     };
 
     fillCellByIndex(wordIndex, letterIndex, letter) {
+        if(this.props.levelProgress[wordIndex] === true) return letter;
         if (this.props.levelProgress.length === 0) return '';
         let cell = this.props.levelProgress[wordIndex][letterIndex];
         if (cell === 0) return '';
@@ -205,7 +229,7 @@ class Crossword extends Component {
     getLetterClasses(wordIndex, letterIndex) {
         return 'crossword__letter '
             + ((this.props.selectedWordIndex === wordIndex && this.state.selectedCell === letterIndex) ? ' crossword__letter_selected' : '')
-            + (this.props.levelProgress.length !== 0 && this.props.levelProgress[wordIndex][letterIndex] === 1 ? ' crossword__letter_done' : '')
+            + (this.props.levelProgress.length !== 0 && (this.props.levelProgress[wordIndex] === true || this.props.levelProgress[wordIndex][letterIndex] === 1) ? ' crossword__letter_done' : '')
     }
 
     getWordClasses(wordIndex){

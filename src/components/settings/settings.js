@@ -1,8 +1,8 @@
 import React from 'react';
 import './settings.scss'
 import {connect} from "react-redux";
-import {toggleDeleteWrongWord, toggleSettings, toggleSounds} from "../../store/ac";
-import {selectIsDeleteWrongWord, selectSounds} from "../../store/selectors";
+import {toggleDeleteWrongWord, toggleSettings, toggleSounds, toggleStartFromFirstCell} from "../../store/ac";
+import {selectIsDeleteWrongWord, selectSounds, selectStartFromFirstCell} from "../../store/selectors";
 import {giveParams} from "../../App";
 const games = [
     {id: 99195, classGame: 'wfw'},
@@ -16,12 +16,14 @@ const games = [
 function Settings(props) {
     const {closeSettings,
         toggleSounds, sounds,
-        toggleDeleteWrongWord, deleteWrongWord
+        toggleDeleteWrongWord, deleteWrongWord,
+        toggleStartFromFirstCell, startFromFirstCell
 
     } = props;
     const doParams = (id) => {
         giveParams({[id]: 1});
     };
+    console.log(deleteWrongWord, startFromFirstCell);
     return (
         <>
             <div className="blackout settings__blackout" onClick={closeSettings}/>
@@ -38,6 +40,7 @@ function Settings(props) {
                                 Звук
                             </label>
                     </li>
+
                     <li>
                         <input type="checkbox"
                                onChange={toggleDeleteWrongWord}
@@ -49,6 +52,16 @@ function Settings(props) {
                         </label>
                     </li>
 
+                    <li>
+                        <input type="checkbox"
+                               onChange={toggleStartFromFirstCell}
+                               checked={startFromFirstCell}
+                               id="startFromFirstCellCheckbox" className="checkbox" />
+                        <label
+                            htmlFor="startFromFirstCellCheckbox">
+                            Начинать с первой буквы
+                        </label>
+                    </li>
 
 
                     <li className={'our-games'}>
@@ -75,8 +88,10 @@ function Settings(props) {
 
 export default connect((store)=>({
     sounds: selectSounds(store),
-    deleteWrongWord: selectIsDeleteWrongWord(store)
+    deleteWrongWord: selectIsDeleteWrongWord(store),
+    startFromFirstCell: selectStartFromFirstCell(store)
 }), (dispatch)=>({
     toggleSounds: () => dispatch(toggleSounds()),
-    toggleDeleteWrongWord: () => dispatch(toggleDeleteWrongWord())
+    toggleDeleteWrongWord: () => dispatch(toggleDeleteWrongWord()),
+    toggleStartFromFirstCell: () => dispatch(toggleStartFromFirstCell())
 }))(Settings);

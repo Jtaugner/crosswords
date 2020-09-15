@@ -22,6 +22,7 @@ export const CHANGE_LEVEL_PROGRESS = "CHANGE_LEVEL_PROGRESS";
 
 //Игра
 export const TOGGLE_DELETE_WRONG_WORD = "TOGGLE_DELETE_WRONG_WORD";
+export const TOGGLE_START_FROM_FIRST_CELL = "TOGGLE_START_FROM_FIRST_CELL";
 
 
 export const getFromLocalStorage = (name, defaultVal) => {
