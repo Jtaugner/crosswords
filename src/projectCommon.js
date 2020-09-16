@@ -30,3 +30,9 @@ export const getLevelWordsDescription = (level, wordIndex) => {
 };
 
 export const tipsCost = [1, 2, 5, 10];
+export const shopItems = [
+    {amount: 10, price: 25},
+    {amount: 50, price: 75},
+    {amount: 100, price: 199},
+    {amount: 5, price: 0},
+];

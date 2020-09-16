@@ -1,0 +1,115 @@
+@import '../../root';
+
+.shop{
+  width: 90%;
+  height: 80%;
+
+  background: #f3f2f2;
+
+  border-radius: 30px;
+  padding-top: 50px;
+}
+.shop__header{
+  position: absolute;
+  top: -15px;
+  left: -1%;
+
+  width: 102%;
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+
+  font-size: 2.5rem;
+
+
+  border-radius: 25px;
+
+  box-shadow: 0 2px 2px #b8b7b7;
+  border-bottom: 1px solid #b8b7b7;
+}
+
+.shop__cross{
+  width: 20px;
+  height: 20px;
+
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: url(cross.png) center center no-repeat;
+  background-size: 100%;
+}
+.shop__item{
+  width: 90%;
+  height: 55px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 10px;
+
+  margin: 15px auto;
+
+  border-radius: 10px;
+
+  background-color: white;
+
+  box-shadow: 0 1px 1px #b8b7b7;
+  border-bottom: 1px solid #b8b7b7;
+}
+
+.shop__item_0 .shop__icon{
+  background: url(shop__item_1.png) center center no-repeat;
+}
+.shop__item_1 .shop__icon{
+  background: url(shop__item_2.png) center center no-repeat;
+}
+.shop__item_2 .shop__icon{
+  background: url(shop__item_3.png) center center no-repeat;
+}
+.shop__item_3 .shop__icon{
+  background: url(free.png) center center no-repeat;
+}
+
+.shop__item .shop__icon{
+  width: 35px;
+  height: 35px;
+
+  background-size: contain;
+}
+
+
+
+.shop__name{
+  font-size: 1.5rem;
+}
+
+.shop__button_buy{
+  width: 85px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #d18de2;
+  border-radius: 20px;
+
+  font-size: 1.6rem;
+  color: white;
+
+  box-shadow: 0 2px 2px #bd78ce;
+  border-bottom: 1px solid #bd78ce;
+}
+
+.shop__item_3 .shop__button_buy{
+  background-color: #bf8de2;
+  box-shadow: 0 2px 2px #9e78ce;
+  border-color: #9e78ce;
+}

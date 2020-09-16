@@ -1,5 +1,5 @@
 .blackout {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -8,20 +8,12 @@
   cursor: pointer;
 }
 
-.pop-up {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.big-form {
+.pop-up-anim {
   width: 100%;
   height: 100%;
-}
-
-.pop-up-anim {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   animation: showPopUp 0.3s ease-in-out forwards;
   z-index: 4;
 }
@@ -32,12 +24,6 @@
   }
   100% {
     opacity: 1;
-  }
-}
-@media (min-width: 1000px) {
-  .big-form {
-    width: auto;
-    height: auto;
   }
 }
 

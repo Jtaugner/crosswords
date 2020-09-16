@@ -14,3 +14,5 @@ export const selectMoney= (store) => store.money;
 //Игра
 export const selectIsDeleteWrongWord= (store) => store.deleteWrongWord;
 export const selectStartFromFirstCell= (store) => store.startFromFirstCell;
+
+export const selectShopOpened = (store) => store.shopOpened;

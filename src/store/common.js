@@ -24,6 +24,8 @@ export const CHANGE_LEVEL_PROGRESS = "CHANGE_LEVEL_PROGRESS";
 export const TOGGLE_DELETE_WRONG_WORD = "TOGGLE_DELETE_WRONG_WORD";
 export const TOGGLE_START_FROM_FIRST_CELL = "TOGGLE_START_FROM_FIRST_CELL";
 
+export const TOGGLE_SHOP_OPENED = "TOGGLE_SHOP_OPENED";
+
 
 export const getFromLocalStorage = (name, defaultVal) => {
   let val = localStorage.getItem(name);

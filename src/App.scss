@@ -1,17 +1,9 @@
 @import "root";
 
 
+
 @font-face {
   font-family: 'Ubuntu';
-  src: url("assets/Ubuntu-Regular.ttf");
-
-  font-weight: normal;
-  font-variant: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Ubuntu-Light';
   src: url("assets/Ubuntu-Light.ttf");
 
   font-weight: normal;
@@ -66,6 +58,12 @@ html, body, #root {
   transform: translateX(-100%);
 }
 
+.popUp{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 @media (min-width: 1000px) {
   #root {
     max-width: 1200px;

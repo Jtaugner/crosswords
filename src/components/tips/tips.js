@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './tips.scss'
 import {connect} from "react-redux";
 import {tipsCost} from "../../projectCommon";

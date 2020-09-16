@@ -2,7 +2,7 @@ import {
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK, CHANGE_LAST_LEVEL, CHANGE_LEVEL_PROGRESS, SELECT_LEVEL,
     SHOW_ADV, TOGGLE_DELETE_WRONG_WORD,
-    TOGGLE_SETTINGS,
+    TOGGLE_SETTINGS, TOGGLE_SHOP_OPENED,
     TOGGLE_SOUNDS, TOGGLE_START_FROM_FIRST_CELL
 } from "../common";
 import {startFromFirstCellReducer} from "../reducer/startFromFirstCellReducer";
@@ -47,4 +47,8 @@ export const toggleDeleteWrongWord = () => ({
 });
 export const toggleStartFromFirstCell = () => ({
     type: TOGGLE_START_FROM_FIRST_CELL,
+});
+
+export const toggleShopOpened = () => ({
+    type: TOGGLE_SHOP_OPENED,
 });

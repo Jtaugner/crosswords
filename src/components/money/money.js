@@ -2,25 +2,25 @@ import React from 'react';
 import './money.scss'
 import {connect} from "react-redux";
 import {selectMoney} from "../../store/selectors";
-import {Link} from "react-router-dom";
+import {toggleShopOpened} from "../../store/ac";
 
 
 function Money(props) {
-    const {money} = props;
-    const MoneyBlock = React.forwardRef((props, ref) => (
-        <div className="moneyBlock" ref={ref}>
+    const {money, toggleShopOpened} = props;
+    return (
+        <div className="moneyBlock" onClick={toggleShopOpened}>
             <div className="moneyBlock__moneyPic" />
             <span className={'moneyBlock__moneyAmount'}>{money}</span>
             <div className="moneyBlock__addMoney">+</div>
         </div>
-    ));
-    return (
-        <Link to={'/shop'} component={MoneyBlock} />
     );
 }
 
-export default connect((store) => ({
+export default connect(
+    (store) => ({
         money: selectMoney(store),
-
+    }),
+    (dispatch)=>({
+        toggleShopOpened: () => dispatch(toggleShopOpened())
     })
 )(Money);

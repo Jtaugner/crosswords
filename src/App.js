@@ -5,12 +5,13 @@ import {connect} from "react-redux";
 import MainPage from "./components/mainPage/mainPage";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Settings from "./components/settings";
-import {selectSettings} from "./store/selectors";
+import {selectSettings, selectShopOpened} from "./store/selectors";
 import GamePage from "./components/gamePage/gamePage";
 import ErrorMessage from "./components/errorMessage/errorMessage";
 
 import {YM_METRIKA_ID} from './projectCommon'
 import {CSSTransition, SwitchTransition, TransitionGroup} from "react-transition-group";
+import Shop from "./components/shop/shop";
 
 export function giveParams(data) {
     try{
@@ -69,14 +70,18 @@ class App extends Component {
                         classNames="slide"
                     >
                         <Switch location={location}>
+
+
                             <Route path={'/home'} component={MainPage}/>
                             <Route path={'/game'} component={GamePage}/>
+
+
                         </Switch>
                     </CSSTransition>
                 </TransitionGroup>
 
-
                 {this.props.settings ? <Settings/> : ''}
+                {this.props.shopOpened ? <Shop/> : ''}
 
             </>
         );
@@ -88,6 +93,7 @@ export default connect(
     (store) =>
     ({
         settings: selectSettings(store),
+        shopOpened: selectShopOpened(store),
     }),
     (dispatch) =>
         ({
