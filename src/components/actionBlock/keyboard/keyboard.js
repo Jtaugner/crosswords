@@ -20,6 +20,7 @@ let letterTimeout;
 
 function Keyboard(props) {
     const {addLetterToCrossWord} = props;
+    const selectedWord = props.selectedWord.toLowerCase();
     const letterSize = (
         (window.innerWidth - 16) - pixelsPerLetters * (10)) / 11;
 
@@ -28,14 +29,19 @@ function Keyboard(props) {
 
 
     const letterOnStart = (letter) => {
-        isLetterStarted = true;
-
         changeIsLetterClicked(letter);
+        if(props.openedKeyboard){
+            letter = letter === softSign ? chooseSoftLetter(letter) : letter;
+            if(!selectedWord.includes(letter)) return;
+        }
+
+        isLetterStarted = true;
         rememberedLetter = letter;
 
         //Для твёрдого знака
         //При удерживании мягкого знака он заменяется на твёрдый
-        if (letter === softSign) {
+        if (letter === softSign ) {
+            if(props.openedKeyboard && !selectedWord.includes(hardSign)) return;
             letterTimeout = setTimeout(()=>{
                 rememberedLetter = hardSign;
                 changeSoftSign(true);
@@ -66,7 +72,30 @@ function Keyboard(props) {
     };
 
     const chooseSoftLetter = () => {
+        if(props.openedKeyboard){
+            let includesHard = selectedWord.includes(hardSign);
+            let includesSoft = selectedWord.includes(softSign);
+            if(!(includesHard && includesSoft)){
+                if(includesHard) return hardSign;
+                return softSign
+            }
+
+        }
         return isChangedSoftSign ? hardSign : softSign;
+    };
+
+    const getKeyboardClasses = (letter) => {
+        let isSameLetter = isLetterClicked === letter;
+        if(letter === softSign && isLetterClicked === hardSign){
+            isSameLetter = true;
+        }
+        let classes = 'keyboard__letter'
+            + (isSameLetter? ' keyboard__letter_selected' : '');
+        if(props.openedKeyboard && !selectedWord.includes(letter)){
+            if(letter === softSign && selectedWord.includes(hardSign)) return classes;
+            classes += ' keyboard__letter_notVisible'
+        }
+        return classes;
     };
 
     return (
@@ -80,8 +109,7 @@ function Keyboard(props) {
                         {
                             line.map((letter) =>
                                 <div
-                                    className={'keyboard__letter '
-                                    + (isLetterClicked === letter ? 'keyboard__letter_selected' : '')}
+                                    className={getKeyboardClasses(letter)}
 
 
                                     onTouchStart={() => letterOnStartPhone(letter)}
@@ -94,7 +122,7 @@ function Keyboard(props) {
                                     style={{width: letterSize + 'px'}}
                                     key={'letter' + letter}
                                 >
-                                    {letter}
+                                    {letter === softSign ? chooseSoftLetter(letter) : letter}
                                     <div
                                         className="keyboard__letter keyboard__letterTip"
                                         style={{width: letterSize * 1.5 + 'px'}}

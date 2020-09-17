@@ -1,11 +1,11 @@
 import {
+    ADD_OPENED_KEYBOARD,
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK, CHANGE_LAST_LEVEL, CHANGE_LEVEL_PROGRESS, SELECT_LEVEL,
-    SHOW_ADV, TOGGLE_DELETE_WRONG_WORD,
+    SHOW_ADV, SUBTRACT_MONEY, TOGGLE_DELETE_WRONG_WORD,
     TOGGLE_SETTINGS, TOGGLE_SHOP_OPENED,
     TOGGLE_SOUNDS, TOGGLE_START_FROM_FIRST_CELL
 } from "../common";
-import {startFromFirstCellReducer} from "../reducer/startFromFirstCellReducer";
 
 
 
@@ -51,4 +51,17 @@ export const toggleStartFromFirstCell = () => ({
 
 export const toggleShopOpened = () => ({
     type: TOGGLE_SHOP_OPENED,
+});
+
+//Деньги
+export const subtractMoney = (money) => ({
+    type: SUBTRACT_MONEY,
+    money
+});
+export const clearOpenedKeyboardWords = () => ({
+    type: SUBTRACT_MONEY,
+});
+export const addOpenedKeyboard = (index) => ({
+    type: ADD_OPENED_KEYBOARD,
+    index
 });

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {selectMoney} from "../../store/selectors";
 import {toggleShopOpened} from "../../store/ac";
 import popUpBlackout from "../../decorators/pop-up-blackout/PopUpBlackout";
-import {freeItems, shopItems} from "../../projectCommon";
+import {shopItems} from "../../projectCommon";
 
 
 function Shop(props) {

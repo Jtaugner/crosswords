@@ -10,6 +10,7 @@ import {lastLevelReducer} from "./lastLevelReducer";
 import {deleteWrongWordReducer} from "./deleteWrongWordReducer";
 import {startFromFirstCellReducer} from "./startFromFirstCellReducer";
 import {shopOpenedReducer} from "./shopOpenedReducer";
+import {openedKeyboardWordsReducer} from "./openedKeyboardWordsReducer";
 
 const reducer = combineReducers({
     settings: settingsReducer,
@@ -22,7 +23,8 @@ const reducer = combineReducers({
     lastLevel: lastLevelReducer,
     deleteWrongWord: deleteWrongWordReducer,
     startFromFirstCell:  startFromFirstCellReducer,
-    shopOpened: shopOpenedReducer
+    shopOpened: shopOpenedReducer,
+    openedKeyboardWords: openedKeyboardWordsReducer
 
 });
 

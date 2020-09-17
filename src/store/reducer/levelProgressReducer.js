@@ -1,4 +1,4 @@
-import {CHANGE_LEVEL_PROGRESS, getFromLocalStorage, SELECT_LEVEL} from "../common";
+import {CHANGE_LEVEL_PROGRESS, getJSONFromLocalStorage, SELECT_LEVEL} from "../common";
 
 // Массив, каждые элемент обозначает строку кроссворда:
     // Строки:
@@ -6,11 +6,11 @@ import {CHANGE_LEVEL_PROGRESS, getFromLocalStorage, SELECT_LEVEL} from "../commo
             // 0 - буква закрыта
             // 1 - буква открыта
             // буква - буква вставлена игроком
-let levelProgress = getFromLocalStorage('levelProgress', []);
-
+let levelProgress = getJSONFromLocalStorage('levelProgress', []);
 
 export const levelProgressReducer = (state = levelProgress, action) => {
     if(action.type === CHANGE_LEVEL_PROGRESS){
+        localStorage.setItem('levelProgress', JSON.stringify(action.progress));
         return [...action.progress];
     }
     return state;

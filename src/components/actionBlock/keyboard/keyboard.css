@@ -1,3 +1,7 @@
+.keyboard {
+  position: relative;
+}
+
 .keyboard__line {
   width: 100%;
   display: flex;
@@ -48,6 +52,10 @@
   background: url(delete.png) 40% center no-repeat white;
   background-size: 75%;
   border-radius: 8px;
+}
+
+.keyboard__letter_notVisible {
+  opacity: 0;
 }
 
 /*# sourceMappingURL=keyboard.css.map */

@@ -37,7 +37,7 @@ function ActionBlock(props) {
     };
 
     return (
-        <div className={'actionBlock'}>
+        <div className={'actionBlock'} >
             <div className="actionBlock__interaction">
                 <div
                     className="actionBlock__changeWord actionBlock__changeWord-down"
@@ -59,9 +59,11 @@ function ActionBlock(props) {
 
             <Keyboard
                 addLetterToCrossWord={addLetterToCrossWord}
+                openedKeyboard={props.openedKeyboard}
+                selectedWord={props.selectedWord}
             />
 
-
+            {props.usingTip ? <div className="innerBlackout" /> : ''}
         </div>
     );
 }

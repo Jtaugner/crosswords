@@ -19,12 +19,15 @@ export const CHANGE_MONEY_FROM_PLAYER_DATA = "CHANGE_MONEY_FROM_PLAYER_DATA";
 export const SELECT_LEVEL = "SELECT_LEVEL";
 export const CHANGE_LAST_LEVEL = "CHANGE_LAST_LEVEL";
 export const CHANGE_LEVEL_PROGRESS = "CHANGE_LEVEL_PROGRESS";
+export const ADD_OPENED_KEYBOARD = "ADD_OPENED_KEYBOARD";
+export const CLEAR_OPENED_KEYBOARD = "CLEAR_OPENED_KEYBOARD";
 
 //Игра
 export const TOGGLE_DELETE_WRONG_WORD = "TOGGLE_DELETE_WRONG_WORD";
 export const TOGGLE_START_FROM_FIRST_CELL = "TOGGLE_START_FROM_FIRST_CELL";
 
 export const TOGGLE_SHOP_OPENED = "TOGGLE_SHOP_OPENED";
+
 
 
 export const getFromLocalStorage = (name, defaultVal) => {
@@ -37,4 +40,9 @@ export const getBoolFromLocalStorage = (name) => {
   let val = localStorage.getItem(name);
   if(val) return val === 'true';
   return true;
+};
+export const getJSONFromLocalStorage = (name, defaultVal) => {
+  let val = localStorage.getItem(name);
+  if(val) return JSON.parse(val);
+  return defaultVal;
 };
