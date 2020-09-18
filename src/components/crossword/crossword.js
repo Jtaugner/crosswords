@@ -17,9 +17,13 @@ function createPair(i1, i2){
     return i1 + '-' + i2;
 }
 let timeout;
-let timeout1;
-let timeout2;
-
+let canUseTip1 = true;
+function useTip1() {
+    canUseTip1 = false;
+    setTimeout(()=>{
+        canUseTip1 = 1;
+    }, 1000);
+}
 class Crossword extends Component {
     letterSize = getLetterSize(this.props.levelWords[0].length);
     wordsLength = this.props.levelWords.length - 1;
@@ -30,12 +34,6 @@ class Crossword extends Component {
     };
 
 
-
-    componentDidUpdate() {
-        if(this.wordRef){
-            this.wordRef.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
-        }
-    }
 
     componentWillUnmount() {
         clearTimeout(timeout);
@@ -55,18 +53,32 @@ class Crossword extends Component {
         };
     }
 
-    wordRef;
     selectedWordRef = (div, index) => {
-        if (this.props.selectedWordIndex === index) this.wordRef = div;
+        if (this.props.selectedWordIndex === index) this.props.changeWordRef(div);
     };
 
 
     wordOnclick = (wordIndex) => {
         if(this.props.usingTip){
+            if(this.props.tipType === 1) return;
             if(this.props.tipType === 2){
                 this.props.addOpenedKeyboard(wordIndex);
                 this.props.getTip(2, wordIndex);
             }
+            if(this.props.tipType === 3){
+                this.props.levelProgress[wordIndex] = true;
+                this.changeLevelProgress();
+                this.setState({
+                    rightWords: [wordIndex]
+                });
+                this.props.getTip();
+                timeout = setTimeout(()=>{
+                    this.setState({
+                        rightWords: []
+                    });
+                }, 1000);
+            }
+
         }
         this.props.changeSelectedWord(wordIndex);
     };
@@ -78,13 +90,13 @@ class Crossword extends Component {
         let line;
         if(wordIndex !== undefined) line = wordIndex;
         else line = this.props.selectedWordIndex;
-        console.log('get line', line);
+
 
         if(this.props.levelProgress[line] === true) return -1;
 
         if (isNext && newIndex < this.wordsLength) {
             for (let i = newIndex + 1; i <= this.wordsLength; i++) {
-                if (this.props.levelProgress[line][i] !== undefined && this.props.levelProgress[line][i] !== 1) {
+                if (this.props.levelProgress[line][i] !== undefined && this.props.levelProgress[line][i] === 0) {
                     console.log('cell ', i);
                     newIndex = i;
                     break;
@@ -144,13 +156,13 @@ class Crossword extends Component {
 
         if (this.testWord(index)) {
             this.setState({
-                rightWord: [index]
+                rightWords: [index]
             });
             timeout = setTimeout(()=>{
                 this.getNextWord();
                 timeout = setTimeout(()=>{
                     this.setState({
-                        rightWord: []
+                        rightWords: []
                     });
                 }, 400)
             }, 600);
@@ -163,12 +175,29 @@ class Crossword extends Component {
         }
     };
 
+    testAllWords = () => {
+        const rightWords = [];
+        for(let i = 0; i < this.props.levelWords.length; i++){
+            if (this.testWord(i)) {
+                rightWords.push(i);
+            } else {
+                this.deleteWrongWord(i);
+            }
+        }
+        this.setState({
+            rightWords: rightWords
+        });
+        timeout = setTimeout(()=>{
+            this.setState({
+                rightWords: []
+            });
+        }, 1000)
+    };
+
     addLetter = (letter) => {
-        console.log('addLetter', letter);
         if ( this.state.selectedCell === -1
             || this.props.levelProgress[this.props.selectedWordIndex][this.state.selectedCell] === 1)
             return;
-        console.log('dsd ');
         if (letter === 0 && this.props.levelProgress
             [this.props.selectedWordIndex]
             [this.state.selectedCell] === 0) {
@@ -187,7 +216,7 @@ class Crossword extends Component {
             this.setState({
                 selectedCell: -1
             })
-        } else if(this.props.levelProgress[line][0] === 1){
+        } else if(this.props.levelProgress[line][0] !== 0){
             this.setNextOrPrevLetter(true, -1, line);
         }else{
             this.setState({
@@ -294,6 +323,7 @@ class Crossword extends Component {
         return 'crossword__letter '
             + ((this.props.selectedWordIndex === wordIndex && this.state.selectedCell === letterIndex) ? ' crossword__letter_selected' : '')
             + (this.props.levelProgress.length !== 0 && (this.props.levelProgress[wordIndex] === true || this.props.levelProgress[wordIndex][letterIndex] === 1) ? ' crossword__letter_done' : '')
+            + (this.state.newLetters.includes(createPair(wordIndex, letterIndex)) ? ' crossword__letter_new' : '')
     }
 
     getWordClasses(wordIndex) {
@@ -306,16 +336,54 @@ class Crossword extends Component {
                 ' crossword__word_right' : '') ;
     }
     addNewLetters(array){
+        console.log(array);
+        for(let i = 0; i < array.length; i++){
+            this.props.levelProgress[array[i][0]][array[i][1]] = 1;
+            array[i] = createPair(array[i][0], array[i][1]);
+        }
+        this.changeLevelProgress();
+        this.testAllWords();
+
+
         this.setState({
             newLetters: array
         });
-        timeout = setTimeout()
+        timeout = setTimeout( ()=>{
+            this.setState({
+                newLetters: []
+            })
+        }, 1000)
     }
     crosswordOnClick = () => {
-        if(this.props.usingTip){
-            if(this.props.tipType === 1){
-                //Ищем все свободные клетки
+        if(this.props.usingTip && this.props.tipType === 1 && canUseTip1){
+            const progress = this.props.levelProgress;
+            //Ищем все свободные клетки
+            let allFreeCells = [];
+            for(let i = 0; i < progress.length; i++){
+                if(progress[i] === true) continue;
+                for(let q = 0; q < progress[i].length; q++){
+                    if(progress[i][q] !== 1){
+                        allFreeCells.push([i, q]);
+                    }
+                }
             }
+
+
+            let newLetters = [];
+            if(allFreeCells.length <= 5){
+                newLetters = allFreeCells;
+            }else{
+                for(let i = 0; i < 5; i++){
+                    const randCell = Math.floor(Math.random()*allFreeCells.length);
+
+                    newLetters.push(allFreeCells[randCell]);
+
+                    allFreeCells.splice(randCell, 1);
+                }
+            }
+            this.addNewLetters(newLetters);
+            this.props.getTip();
+            useTip1();
         }
 
     };

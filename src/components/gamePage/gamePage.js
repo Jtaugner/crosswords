@@ -44,6 +44,7 @@ class GamePage extends Component {
     levelWords = getLevelWords(this.props.level);
     openedKeyboard;
     selectedWord;
+    wordRef;
 
     constructor(props) {
         super(props);
@@ -74,7 +75,16 @@ class GamePage extends Component {
 
 
     }
+    changeWordRef = (ref) => {
+        this.wordRef = ref;
+        this.scrollToWord();
+    };
 
+    scrollToWord = () => {
+        if(this.wordRef){
+            this.wordRef.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
+        }
+    };
 
     changeSelectedWord = (wordIndex) => {
         this.setState({
@@ -97,6 +107,7 @@ class GamePage extends Component {
         }
     };
     getTip = (type, index) => {
+        console.log('d111sd');
         this.props.subtractMoney(tipsCost[this.state.tipType]);
         this.setState({
             usingTip: false,
@@ -162,6 +173,8 @@ class GamePage extends Component {
 
                     addOpenedKeyboard={this.props.addOpenedKeyboard}
 
+                    changeWordRef={this.changeWordRef}
+
                 />
 
                 <Tips
@@ -170,6 +183,8 @@ class GamePage extends Component {
 
                 <ActionBlock
                     usingTip={this.state.usingTip}
+
+                    levelProgress={this.props.levelProgress}
 
                     level={this.props.level}
 

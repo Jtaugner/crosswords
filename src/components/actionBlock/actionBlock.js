@@ -14,25 +14,31 @@ function getWordDescriptionFontSize(desc) {
 }
 
 function ActionBlock(props) {
-    const {level, changeSelectedWord, selectedWordIndex, addLetterToCrossWord} = props;
+    const {level, changeSelectedWord, selectedWordIndex, addLetterToCrossWord,
+        levelProgress} = props;
 
 
     const wordDescription = getLevelWordsDescription(level, selectedWordIndex);
-    const wordsLength = getLevelWords(level).length;
 
+
+    const changeWord = (word) => {
+        changeSelectedWord(word);
+    };
 
     const changeWordDownOnclick = () => {
-        if(selectedWordIndex !== (wordsLength-1)){
-            changeSelectedWord(selectedWordIndex + 1);
-        }else{
-            changeSelectedWord(0);
+        for(let i = selectedWordIndex + 1; i < levelProgress.length; i++){
+            if(levelProgress[i] !== true) return changeWord(i);
+        }
+        for(let i = 0; i < selectedWordIndex; i++){
+            if(levelProgress[i] !== true) return changeWord(i);
         }
     };
     const changeWordUpOnclick = () => {
-        if(selectedWordIndex !== 0){
-            changeSelectedWord(selectedWordIndex - 1);
-        }else{
-            changeSelectedWord(wordsLength-1);
+        for(let i = selectedWordIndex - 1; i >= 0; i--){
+            if(levelProgress[i] !== true) return changeWord(i);
+        }
+        for(let i = levelProgress.length-1; i > selectedWordIndex; i++){
+            if(levelProgress[i] !== true) return changeWord(i);
         }
     };
 
