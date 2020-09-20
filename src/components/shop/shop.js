@@ -11,7 +11,7 @@ function Shop(props) {
     const {money, onClick} = props;
     return (
         <div className="shop popUp">
-            <div className="shop__header">
+            <div className="popUp__header">
                 Магазин
                 <div className="shop__cross" onClick={onClick}/>
             </div>

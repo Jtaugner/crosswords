@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import './gamePage.scss'
 import {connect} from "react-redux";
 import TopMenu from "../topMenu/topMenu"
@@ -6,7 +6,7 @@ import {
     addOpenedKeyboard,
     changeLastLevel,
     changeLevelProgress,
-    clearOpenedKeyboardWords,
+    clearOpenedKeyboardWords, increaseLevel,
     showAdv,
     subtractMoney,
     toggleShopOpened
@@ -22,8 +22,9 @@ import {
     selectStartFromFirstCell
 } from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
-import {getLevelWords, getLevelWordsDescription, shopItems, tipsCost} from "../../projectCommon";
+import {getLevelWords, tipsCost} from "../../projectCommon";
 import MenuLink from "../menuLink/menuLink";
+import EndGameWindow from "../endGameWindow/endGameWindow";
 
 const crosswordRef = React.createRef();
 
@@ -39,6 +40,8 @@ function createGameProgress(length, wordLength) {
     return levelProgress;
 }
 
+
+
 class GamePage extends Component {
 
     levelWords = getLevelWords(this.props.level);
@@ -46,9 +49,14 @@ class GamePage extends Component {
     selectedWord;
     wordRef;
 
+
     constructor(props) {
         super(props);
-        let selectedWordIndex;
+        this.state = this.getNewGameState(false);
+    }
+
+    getNewGameState = () => {
+        let selectedWordIndex = 0;
         let progress = this.props.levelProgress;
         if (this.props.level > this.props.lastLevel || progress.length === 0 || !progress) {
             this.props.changeLastLevel(this.props.level);
@@ -67,14 +75,30 @@ class GamePage extends Component {
         this.openedKeyboard = this.props.openedKeyboardWords.includes(selectedWordIndex);
         this.selectedWord = this.levelWords[selectedWordIndex];
 
-        this.state = {
+        return  {
             selectedWordIndex: selectedWordIndex,
             usingTip: false,
-            tipType: -1
+            tipType: -1,
+            isEnd: false
         };
 
+    };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.level !== this.props.level){
+            this.setState(this.getNewGameState());
+        }
     }
+
+    nextGame = () => {
+        this.setState({isEnd: false});
+        this.props.increaseLevel();
+    };
+
+    endGame = () => {
+        this.setState({isEnd: true});
+    };
+
     changeWordRef = (ref) => {
         this.wordRef = ref;
         this.scrollToWord();
@@ -175,6 +199,8 @@ class GamePage extends Component {
 
                     changeWordRef={this.changeWordRef}
 
+                    endGame={this.endGame}
+
                 />
 
                 <Tips
@@ -196,6 +222,7 @@ class GamePage extends Component {
                     openedKeyboard={this.openedKeyboard}
                     selectedWord={this.selectedWord}
                 />
+                {this.state.isEnd ? <EndGameWindow nextGame={this.nextGame}/> : ''}
             </div>
         );
     }
@@ -220,6 +247,7 @@ export default connect((store) => ({
         toggleShop: () => dispatch(toggleShopOpened()),
         subtractMoney: (money) => dispatch(subtractMoney(money)),
         clearOpenedKeyboardWords: () => dispatch(clearOpenedKeyboardWords()),
-        addOpenedKeyboard: (index) => dispatch(addOpenedKeyboard(index))
+        addOpenedKeyboard: (index) => dispatch(addOpenedKeyboard(index)),
+        increaseLevel: () => dispatch(increaseLevel())
     })
 )(GamePage);

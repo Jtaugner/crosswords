@@ -26,3 +26,8 @@
 .menu:active{
   transform: scale(0.97);
 }
+
+.menu__endGame{
+  background: url(menuEndGame.png) center center no-repeat ;
+  background-size: 100%;
+}

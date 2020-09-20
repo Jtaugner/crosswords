@@ -7,14 +7,17 @@ import {selectSounds} from "../../store/selectors";
 
 
 function MenuLink(props) {
-    const {isSounds} = props;
+    const {isSounds, endGame} = props;
     const onClick = () => {
         if(isSounds){
             goMainPageSound.play();
         }
     };
     return (
-        <Link to={'/home'} className={'menu'} onClick={onClick}/>
+        <Link
+            to={'/home'}
+            className={'menu' + (endGame ? ' menu__endGame' : '')}
+            onClick={onClick}/>
     );
 }
 

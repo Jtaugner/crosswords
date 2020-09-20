@@ -1,7 +1,7 @@
 import {
     ADD_OPENED_KEYBOARD,
     CHANGE_GAME_PAYMENTS,
-    CHANGE_GAME_SDK, CHANGE_LAST_LEVEL, CHANGE_LEVEL_PROGRESS, CLEAR_OPENED_KEYBOARD, SELECT_LEVEL,
+    CHANGE_GAME_SDK, CHANGE_LAST_LEVEL, CHANGE_LEVEL_PROGRESS, CLEAR_OPENED_KEYBOARD, INCREASE_LEVEL, SELECT_LEVEL,
     SHOW_ADV, SUBTRACT_MONEY, TOGGLE_DELETE_WRONG_WORD,
     TOGGLE_SETTINGS, TOGGLE_SHOP_OPENED,
     TOGGLE_SOUNDS, TOGGLE_START_FROM_FIRST_CELL
@@ -32,6 +32,9 @@ export const chooseLevel = (level) => ({
 export const changeLastLevel = (level) => ({
     type: CHANGE_LAST_LEVEL,
     level
+});
+export const increaseLevel = () => ({
+    type: INCREASE_LEVEL
 });
 export const changeLevelProgress = (progress) => ({
     type: CHANGE_LEVEL_PROGRESS,

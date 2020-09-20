@@ -1,25 +1,6 @@
 .shop {
   width: 90%;
   height: 80%;
-  background: #f3f2f2;
-  border-radius: 30px;
-  padding-top: 50px;
-}
-
-.shop__header {
-  position: absolute;
-  top: -15px;
-  left: -1%;
-  width: 102%;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  font-size: 2.5rem;
-  border-radius: 25px;
-  box-shadow: 0 2px 2px #b8b7b7;
-  border-bottom: 1px solid #b8b7b7;
 }
 
 .shop__cross {

@@ -68,6 +68,7 @@ class Crossword extends Component {
             if(this.props.tipType === 3){
                 this.props.levelProgress[wordIndex] = true;
                 this.changeLevelProgress();
+                this.addDoneWord(wordIndex);
                 this.setState({
                     rightWords: [wordIndex]
                 });
@@ -191,7 +192,14 @@ class Crossword extends Component {
             this.setState({
                 rightWords: []
             });
-        }, 1000)
+        }, 1000);
+    };
+    testWin = () => {
+        const progress = this.props.levelProgress;
+        for(let i = 0; i < progress.length; i++){
+            if(progress[i] !== true) return;
+        }
+        return this.props.endGame();
     };
 
     addLetter = (letter) => {
@@ -259,6 +267,7 @@ class Crossword extends Component {
         /* Подсказки */
         if(this.props.usingTip){
             if(this.props.tipType === 0
+                && this.props.levelProgress[wordIndex] !== true
                 && !(this.props.levelProgress[wordIndex][letterIndex] === 1)){
                 this.props.levelProgress[wordIndex][letterIndex] = 1;
 
@@ -290,6 +299,7 @@ class Crossword extends Component {
     addDoneWord(selectedLine) {
         this.props.levelProgress[selectedLine] = true;
         this.changeLevelProgress();
+        this.testWin();
     }
 
     testWord(selectedLine) {
