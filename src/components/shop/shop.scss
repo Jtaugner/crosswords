@@ -16,6 +16,8 @@
 
   background: url(cross.png) center center no-repeat;
   background-size: 100%;
+
+  cursor: pointer;
 }
 .shop__item{
   width: 90%;
@@ -79,10 +81,72 @@
 
   box-shadow: 0 2px 2px #bd78ce;
   border-bottom: 1px solid #bd78ce;
+
+  cursor: pointer;
 }
 
 .shop__item_3 .shop__button_buy{
   background-color: #bf8de2;
   box-shadow: 0 2px 2px #9e78ce;
   border-color: #9e78ce;
+}
+
+@media (min-width: 600px) {
+  .shop{
+    width: 450px;
+  }
+  .shop__item{
+    width: 80%;
+    height: 65px;
+  }
+  .shop__item .shop__icon{
+    width: 40px;
+    height: 40px;
+  }
+  .shop__name{
+    font-size: 1.7rem;
+  }
+  .shop__button_buy{
+    width: 100px;
+    height: 35px;
+    font-size: 1.8rem;
+  }
+  .shop__cross{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+}
+@media (min-width: 1000px) {
+  .shop{
+    width: 550px;
+    height: 70%;
+  }
+
+  .shop .popUp__header{
+    height: 70px;
+    top: -25px;
+    font-size: 3rem;
+  }
+  .shop__cross{
+    width: 27px;
+    height: 27px;
+  }
+
+
+  .shop__item{
+    height: 80px;
+  }
+  .shop__item .shop__icon{
+    width: 45px;
+    height: 45px;
+  }
+  .shop__name{
+    font-size: 2rem;
+  }
+  .shop__button_buy{
+    width: 110px;
+    height: 40px;
+    font-size: 2.1rem;
+  }
 }

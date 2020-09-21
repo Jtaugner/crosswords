@@ -11,6 +11,7 @@
   font-size: 1.6rem;
   color: #282828;
   margin-left: auto;
+  cursor: pointer;
 }
 
 .moneyBlock__moneyAmount {
@@ -47,6 +48,27 @@
   line-height: 2rem;
   color: white;
   cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .moneyBlock {
+    width: 180px;
+    height: 55px;
+    font-size: 1.9rem;
+    margin-right: 20px;
+  }
+
+  .moneyBlock__moneyPic {
+    width: 35px;
+    height: 35px;
+  }
+
+  .moneyBlock__addMoney {
+    width: 32px;
+    height: 32px;
+    right: -10px;
+    font-size: 2.5rem;
+  }
 }
 
 /*# sourceMappingURL=money.css.map */

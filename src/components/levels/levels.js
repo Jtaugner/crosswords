@@ -24,11 +24,12 @@ class Levels extends Component {
 
 
     render() {
-        const levelList = [];
+        let levelList = [];
 
         let lastLevel = this.props.lastLevel;
         if(lastLevel === -1) lastLevel = 0;
-        for (let i = 20; i >= 0; i--) {
+
+        const addLevel = (i) => {
             const levelOnClick = () => {
                 this.props.chooseLevel(i);
                 if(this.props.isSounds){
@@ -63,13 +64,50 @@ class Levels extends Component {
                         {i + 1}
                     </Link>;
             }
-            levelList.push(LevelComponent);
+            return LevelComponent
+        };
+        if(window.innerWidth >= 600){
+            let k = 0;
+            let isReverse = false;
+            levelList = [[], [], [], [], []];
+            for (let i = 0; i < 56; i++) {
+                levelList[k].push(addLevel(i));
+                if(isReverse) k--;
+                else k++;
+                if(k === 5) {
+                    k = 4;
+                    isReverse = true;
+                }else if(k === -1){
+                    k = 0;
+                    isReverse = false;
+                }
+            }
+
+            return (
+                <div className={'levels'}>
+                    {levelList.map((levelsLine, i)=>(
+                        <div
+                            className={'levels__line'}
+                            key={'line' + i}
+                        >
+                            {
+                                levelsLine
+                            }
+                        </div>
+                    ))}
+                </div>
+            );
         }
+        for (let i = 55; i >= 0; i--) {
+            levelList.push(addLevel(i));
+        }
+
         return (
             <div className={'levels'}>
                 {levelList}
             </div>
         );
+
     }
 
 }

@@ -21,3 +21,18 @@
   left: -10px;
   bottom: -10px;
 }
+
+@media (min-width: 600px) {
+  .settingsOpen{
+    width: 45px;
+    height: 45px;
+
+    margin-left: 15px;
+  }
+  .settingsOpen:before {
+    top: -20px;
+    right: -20px;
+    left: -20px;
+    bottom: -20px;
+  }
+}

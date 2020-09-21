@@ -55,12 +55,8 @@
     height: 55px;
   }
 }
-@media (min-width: 1000px) {
+@media (min-width: 600px) {
   .top-menu{
-    height: 65px;
-  }
-  .top-menu__inner{
-    max-width: 1200px;
-    margin: 0 auto;
+    height: 90px;
   }
 }

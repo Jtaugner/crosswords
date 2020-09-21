@@ -9,7 +9,7 @@ import SettingsOpen from "../settingsOpen/settingsOpen";
 import Levels from "../levels/levels";
 
 
-function MainPage(props) {
+function MainPage() {
     const [isSettingsOpen, changeSettingsOpen] = useState(false);
 
     const settingsOpenOnClick = () => {changeSettingsOpen(true)};

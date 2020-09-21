@@ -22,6 +22,8 @@ $settings: #111112;
 .settings__blackout{
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 3;
+
+  cursor: pointer;
 }
 .settings__blackout{
   animation: showBlackout 0.4s ease-in-out forwards;

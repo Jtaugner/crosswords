@@ -7,4 +7,10 @@
   height: 100%;
 }
 
+@media (min-width: 600px) {
+  .mainPage {
+    padding-top: 90px;
+  }
+}
+
 /*# sourceMappingURL=mainPage.css.map */

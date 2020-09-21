@@ -33,4 +33,36 @@
   border-color: #9a52ac;
 }
 
+@media (min-width: 600px) {
+  .levels {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    overflow-x: auto;
+    height: 600px;
+    padding: 0 40px;
+  }
+
+  .levels__line {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .levels .levels__line:nth-child(odd) {
+    padding-left: 75px;
+  }
+
+  .levels__level {
+    width: 75px;
+    height: 75px;
+    font-size: 3.2rem;
+  }
+
+  .levels__level, .levels .levels__level:nth-child(2n) {
+    margin: 18px 35px;
+  }
+}
+
 /*# sourceMappingURL=levels.css.map */
