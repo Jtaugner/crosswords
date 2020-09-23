@@ -100,3 +100,11 @@
     opacity: 1;
   }
 }
+@media (min-width: 600px) {
+  .crossword-wrapper{
+    width: 600px;
+  }
+  .crossword{
+    overflow-x: hidden;
+  }
+}

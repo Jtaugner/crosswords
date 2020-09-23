@@ -85,6 +85,35 @@ html, body, #root {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.icon {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon:before {
+  position: absolute;
+  content: "";
+  top: -10px;
+  right: -10px;
+  left: -10px;
+  bottom: -10px;
+}
+
+@media (min-width: 600px) {
+  .icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .icon:before {
+    top: -20px;
+    right: -20px;
+    left: -20px;
+    bottom: -20px;
+  }
+}
 @media (min-width: 600px) and (min-height: 750px) {
   #root, .mainPage, .gamePage {
     background: url(assets/images/background_desktop.png) center center no-repeat;

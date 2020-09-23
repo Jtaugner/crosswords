@@ -5,8 +5,10 @@ import './crossword.scss'
 const pixelsPerLetters = 5;
 
 function getLetterSize(length) {
+    let width = window.innerWidth;
+    if(width > 600) width = 600;
     return (
-        window.innerWidth - window.innerWidth * 0.03 - pixelsPerLetters * (length - 1)
+        width - width * 0.03 - pixelsPerLetters * (length - 1)
     ) / length;
 }
 
@@ -98,7 +100,6 @@ class Crossword extends Component {
         if (isNext && newIndex < this.wordsLength) {
             for (let i = newIndex + 1; i <= this.wordsLength; i++) {
                 if (this.props.levelProgress[line][i] !== undefined && this.props.levelProgress[line][i] === 0) {
-                    console.log('cell ', i);
                     newIndex = i;
                     break;
                 }
@@ -123,6 +124,7 @@ class Crossword extends Component {
         }
     };
     getNextWord = () => {
+        console.log('get next word');
         let line = this.props.selectedWordIndex;
         const lastLine = this.props.selectedWordIndex;
         for(let i = lastLine+ 1; i <= this.wordsLength; i++) {
@@ -133,14 +135,12 @@ class Crossword extends Component {
         }
         if(line === lastLine){
             for(let i = 0; i < lastLine; i++){
-                console.log(i, this.props.levelProgress[i]);
                 if (this.props.levelProgress[i] !== true) {
                     line = i;
                     break;
                 }
             }
         }
-        console.log('line: ', line);
 
         this.props.changeSelectedWord(line);
         this.getFirstFreeCellInLine(line);
@@ -151,6 +151,7 @@ class Crossword extends Component {
     };
 
     testWordAndGetNext = (wordIndex) => {
+        console.log('testWordAndGetNext');
         let index;
         if(wordIndex !== undefined) index = wordIndex;
         else index = this.props.selectedWordIndex;
@@ -204,7 +205,9 @@ class Crossword extends Component {
 
     addLetter = (letter) => {
         if ( this.state.selectedCell === -1
-            || this.props.levelProgress[this.props.selectedWordIndex][this.state.selectedCell] === 1)
+            || this.props.levelProgress[this.props.selectedWordIndex] === true
+            || this.props.levelProgress[this.props.selectedWordIndex][this.state.selectedCell] === 1
+            || this.state.wrongWords.length > 0 || this.state.rightWords.length > 0)
             return;
         if (letter === 0 && this.props.levelProgress
             [this.props.selectedWordIndex]
@@ -311,7 +314,6 @@ class Crossword extends Component {
             if (wordProgress[i] === 1) word += this.props.levelWords[selectedLine][i];
             else word += wordProgress[i];
         }
-        console.log(word, this.props.levelWords[selectedLine]);
         if (compareWords(word, this.props.levelWords[selectedLine])) {
             this.addDoneWord(selectedLine);
             return true;
@@ -346,7 +348,6 @@ class Crossword extends Component {
                 ' crossword__word_right' : '') ;
     }
     addNewLetters(array){
-        console.log(array);
         for(let i = 0; i < array.length; i++){
             this.props.levelProgress[array[i][0]][array[i][1]] = 1;
             array[i] = createPair(array[i][0], array[i][1]);
@@ -401,11 +402,7 @@ class Crossword extends Component {
     render() {
         return (
             <div className={'crossword-wrapper'} onClick={this.crosswordOnClick}>
-                <div className={'crossword'}
-                     onDrop={() => {
-                         console.log('sd');
-                     }}
-                >
+                <div className={'crossword'}>
                     {
                         this.props.levelWords.map((word, wordIndex) => {
                             return <div

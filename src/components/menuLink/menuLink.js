@@ -16,7 +16,7 @@ function MenuLink(props) {
     return (
         <Link
             to={'/home'}
-            className={'menu' + (endGame ? ' menu__endGame' : '')}
+            className={'menu icon ' + (endGame ? ' menu__endGame' : '')}
             onClick={onClick}/>
     );
 }

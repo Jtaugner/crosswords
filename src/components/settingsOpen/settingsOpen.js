@@ -4,7 +4,7 @@ import './settingsOpen.scss'
 
 function SettingsOpen(props) {
     const {onClick} = props;
-    return  <div className="settingsOpen" onClick={onClick}/>
+    return  <div className="icon settingsOpen" onClick={onClick}/>
 }
 
 export default SettingsOpen;

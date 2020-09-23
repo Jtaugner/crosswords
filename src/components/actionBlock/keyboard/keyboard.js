@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './keyboard.scss'
 import {connect} from "react-redux";
 import {isPhone} from "../../../projectCommon";
@@ -17,12 +17,15 @@ let rememberedLetter;
 let isLetterStarted = false;
 
 let letterTimeout;
+let width = window.innerWidth;
+if(width > 800) width = 800;
+
 
 function Keyboard(props) {
     const {addLetterToCrossWord} = props;
     const selectedWord = props.selectedWord.toLowerCase();
     const letterSize = (
-        (window.innerWidth - 16) - pixelsPerLetters * (10)) / 11;
+        (width- 16) - pixelsPerLetters * (10)) / 11;
 
     const [isLetterClicked, changeIsLetterClicked] = useState('');
     const [isChangedSoftSign, changeSoftSign] = useState(false);
@@ -97,9 +100,16 @@ function Keyboard(props) {
         }
         return classes;
     };
+    const getLetterTipSize = () => {
+        let size = letterSize * 1.5;
+        if(size > 75) return 75 + 'px';
+        return size + 'px';
+    };
 
     return (
-        <div className={'keyboard'}>
+        <div
+            className={'keyboard'}
+        >
             {
                 letters.map((line, index) =>
                     <div
@@ -125,7 +135,7 @@ function Keyboard(props) {
                                     {letter === softSign ? chooseSoftLetter(letter) : letter}
                                     <div
                                         className="keyboard__letter keyboard__letterTip"
-                                        style={{width: letterSize * 1.5 + 'px'}}
+                                        style={{width:  getLetterTipSize()}}
                                     >{letter === softSign ? chooseSoftLetter(letter) : letter}</div>
                                 </div>
                             )
@@ -145,6 +155,4 @@ function Keyboard(props) {
         </div>
     );
 }
-
-export default connect((store) => ({})
-)(Keyboard);
+export default Keyboard;

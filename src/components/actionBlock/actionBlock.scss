@@ -7,8 +7,7 @@
   height: 220px;
   max-height: 40%;
 
-  background: url(bg.png) center center no-repeat;
-  background-size: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 
@@ -25,8 +24,11 @@
   color: #e3e3e3;
   text-align: center;
   font-size: 1rem;
-}
 
+  max-height: 100%;
+  overflow-y: auto;
+
+}
 //Стрелки смены слова
 $changeWordMargin: 15px;
 $changeWordSize: 25px;
@@ -45,6 +47,14 @@ $changeWordSize: 25px;
   margin: 0 $changeWordMargin;
 
   background-size: 100%;
+
+  cursor: pointer;
 }
 
 
+@media (min-width: 800px) {
+  .actionBlock__interaction{
+    width: 800px;
+    margin: 0 auto;
+  }
+}

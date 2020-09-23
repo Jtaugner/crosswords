@@ -6,7 +6,7 @@ import {
     addOpenedKeyboard,
     changeLastLevel,
     changeLevelProgress,
-    clearOpenedKeyboardWords, increaseLevel,
+    clearOpenedKeyboardWords, increaseLastLevel, increaseLevel,
     showAdv,
     subtractMoney,
     toggleShopOpened
@@ -22,32 +22,18 @@ import {
     selectStartFromFirstCell
 } from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
-import {getLevelWords, tipsCost} from "../../projectCommon";
+import {createLastLevelGameProgress, getLevelWords, tipsCost} from "../../projectCommon";
 import MenuLink from "../menuLink/menuLink";
 import EndGameWindow from "../endGameWindow/endGameWindow";
 
 const crosswordRef = React.createRef();
 
-function createGameProgress(length, wordLength) {
-    const levelProgress = [];
-    const arrayRow = [];
-    for (let i = 0; i < wordLength; i++) {
-        arrayRow.push(0);
-    }
-    for (let i = 0; i < length; i++) {
-        levelProgress.push(arrayRow.slice());
-    }
-    return levelProgress;
-}
 
 
 
 class GamePage extends Component {
 
-    levelWords = getLevelWords(this.props.level);
-    openedKeyboard;
-    selectedWord;
-    wordRef;
+    levelWords;
 
 
     constructor(props) {
@@ -58,23 +44,21 @@ class GamePage extends Component {
     getNewGameState = () => {
         let selectedWordIndex = 0;
         let progress = this.props.levelProgress;
-        if (this.props.level > this.props.lastLevel || progress.length === 0 || !progress) {
-            this.props.changeLastLevel(this.props.level);
-            this.props.clearOpenedKeyboardWords();
-
-            progress = createGameProgress(this.levelWords.length, this.levelWords[0].length);
-            this.props.changeLevelProgress(progress);
-        }
-
         for(let i = 0; i < progress.length; i++){
             if(progress[i] !== true) {
                 selectedWordIndex = i;
                 break;
             }
         }
-        this.openedKeyboard = this.props.openedKeyboardWords.includes(selectedWordIndex);
-        this.selectedWord = this.levelWords[selectedWordIndex];
-
+        if(this.props.level === this.props.lastLevel &&
+            (!this.props.levelProgress
+                || this.props.levelProgress.length === 0) ){
+            this.props.clearOpenedKeyboardWords();
+            this.props.changeLevelProgress(
+                createLastLevelGameProgress(this.props.level + 1)
+            );
+        }
+        this.levelWords = getLevelWords(this.props.level);
         return  {
             selectedWordIndex: selectedWordIndex,
             usingTip: false,
@@ -91,22 +75,29 @@ class GamePage extends Component {
     }
 
     nextGame = () => {
+        console.log('next gmaa');
         this.setState({isEnd: false});
         this.props.increaseLevel();
     };
 
     endGame = () => {
         this.setState({isEnd: true});
+        if(this.props.level === this.props.lastLevel){
+            this.props.increaseLastLevel();
+            this.props.clearOpenedKeyboardWords();
+            this.props.changeLevelProgress(
+                createLastLevelGameProgress(this.props.level + 1)
+            );
+        }
     };
 
     changeWordRef = (ref) => {
-        this.wordRef = ref;
-        this.scrollToWord();
+        this.scrollToWord(ref);
     };
 
-    scrollToWord = () => {
-        if(this.wordRef){
-            this.wordRef.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
+    scrollToWord = (ref) => {
+        if(ref){
+            ref.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
         }
     };
 
@@ -114,9 +105,7 @@ class GamePage extends Component {
         this.setState({
             selectedWordIndex: wordIndex
         });
-        this.openedKeyboard = this.props.openedKeyboardWords.includes(wordIndex);
 
-        this.selectedWord = this.levelWords[wordIndex];
     };
     changeSelectedWordFromAction = (word) => {
         this.changeSelectedWord(word);
@@ -130,28 +119,22 @@ class GamePage extends Component {
             crosswordRef.current.addLetter(letter);
         }
     };
-    getTip = (type, index) => {
-        console.log('d111sd');
+    getTip = () => {
         this.props.subtractMoney(tipsCost[this.state.tipType]);
+        this.switchOffTip();
+    };
+    switchOffTip = () => {
         this.setState({
             usingTip: false,
             tipType: -1
         });
-        if(type === 2){
-            this.openedKeyboard = true;
-            this.selectedWord = this.levelWords[index];
-        }
     };
 
     switchOnTip = (type) => {
-        console.log(type, this.state.tipType);
         const notEnoughMoney = this.props.money < tipsCost[type];
 
         if (this.state.tipType === type || notEnoughMoney) {
-            this.setState({
-                usingTip: false,
-                tipType: -1
-            });
+            this.switchOffTip();
 
             if (notEnoughMoney) {
                 //Открыть магазин при нехватке денег
@@ -167,6 +150,8 @@ class GamePage extends Component {
     };
 
     render() {
+        const selectedWord = this.levelWords[this.state.selectedWordIndex];
+        const openedKeyboard = this.props.openedKeyboardWords.includes(this.state.selectedWordIndex);
         return (
             <div className={'gamePage'}>
                 <TopMenu
@@ -219,8 +204,10 @@ class GamePage extends Component {
 
                     addLetterToCrossWord={this.addLetterToCrossWord}
 
-                    openedKeyboard={this.openedKeyboard}
-                    selectedWord={this.selectedWord}
+                    openedKeyboard={openedKeyboard}
+                    selectedWord={selectedWord}
+                    
+                    switchOffTip={this.switchOffTip}
                 />
                 {this.state.isEnd ? <EndGameWindow nextGame={this.nextGame}/> : ''}
             </div>
@@ -248,6 +235,7 @@ export default connect((store) => ({
         subtractMoney: (money) => dispatch(subtractMoney(money)),
         clearOpenedKeyboardWords: () => dispatch(clearOpenedKeyboardWords()),
         addOpenedKeyboard: (index) => dispatch(addOpenedKeyboard(index)),
-        increaseLevel: () => dispatch(increaseLevel())
+        increaseLevel: () => dispatch(increaseLevel()),
+        increaseLastLevel: () => dispatch(increaseLastLevel())
     })
 )(GamePage);

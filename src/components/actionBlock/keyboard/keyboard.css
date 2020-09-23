@@ -42,6 +42,7 @@
 
 .keyboard__letter_selected .keyboard__letterTip {
   display: block;
+  z-index: 2;
 }
 
 .crossword__letter_selected {
@@ -52,10 +53,29 @@
   background: url(delete.png) 40% center no-repeat white;
   background-size: 75%;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .keyboard__letter_notVisible {
   opacity: 0;
+  cursor: default;
+}
+
+@media (min-width: 600px) {
+  .keyboard__deleteButton {
+    background-size: 65%;
+  }
+}
+@media (min-width: 800px) {
+  .keyboard {
+    width: 800px;
+    margin: 0 auto;
+    font-size: 2.7rem;
+  }
+
+  .keyboard__deleteButton {
+    background-size: 55%;
+  }
 }
 
 /*# sourceMappingURL=keyboard.css.map */

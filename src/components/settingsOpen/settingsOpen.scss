@@ -1,38 +1,13 @@
 @import '../../root';
 
 .settingsOpen{
-  position: relative;
-
-  width: 35px;
-  height: 35px;
-
   background: url(settingsOpen.png) center center no-repeat;
   background-size: 100%;
-
-  cursor: pointer;
-
-
 }
-.settingsOpen:before {
-  position: absolute;
-  content: "";
-  top: -10px;
-  right: -10px;
-  left: -10px;
-  bottom: -10px;
-}
+
 
 @media (min-width: 600px) {
   .settingsOpen{
-    width: 45px;
-    height: 45px;
-
     margin-left: 15px;
-  }
-  .settingsOpen:before {
-    top: -20px;
-    right: -20px;
-    left: -20px;
-    bottom: -20px;
   }
 }
