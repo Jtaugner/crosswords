@@ -114,9 +114,14 @@
   background: #9a52ac;
 }
 
+.settings__group {
+  font-size: 1.7rem;
+  color: #9a52ac;
+}
+
 .our-games {
   font-size: 2rem;
-  color: #9a52ac;
+  color: #7f3e90;
 }
 
 .wfw {

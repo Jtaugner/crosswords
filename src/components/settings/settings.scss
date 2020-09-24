@@ -123,10 +123,15 @@ $settings: #111112;
   background: $mainDarkColor;
 }
 
+.settings__group{
+  font-size: 1.7rem;
+  color: $mainDarkColor;
+}
+
 
 .our-games{
   font-size: 2rem;
-  color: $mainDarkColor;
+  color: #7f3e90;
 }
 .wfw{
   background: url(wfw.png) center center no-repeat;
@@ -145,6 +150,7 @@ $settings: #111112;
   height: 80px;
   background-size: 100%;
 }
+
 
 @media (min-width: 1000px) {
   .settings__header{

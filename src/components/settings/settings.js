@@ -63,6 +63,12 @@ function Settings(props) {
                         </label>
                     </li>
 
+                    <li>
+                        <a href={'https://vk.com/jaugr'} target="_blank" className={'settings__group'}>
+                            Наша группа ВКонтакте
+                        </a>
+                    </li>
+
 
                     <li className={'our-games'}>
                         Наши игры
