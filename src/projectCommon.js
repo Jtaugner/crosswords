@@ -35,8 +35,8 @@ export const createGameProgress = (length, wordLength) => {
     return levelProgress;
 };
 
-export const createLastLevelGameProgress = (lastLevel) => {
-    const words = gameLevels[lastLevel].levelWords;
+export const createLastLevelGameProgress = (level) => {
+    const words = gameLevels[level].levelWords;
     return createGameProgress(words.length, words[0].length);
 };
 
@@ -49,7 +49,7 @@ export const getLevelWordsDescription = (level, wordIndex) => {
         ];
 };
 
-export const tipsCost = [1, 2, 5, 10];
+export const tipsCost = [1, 2, 5, 5];
 export const shopItems = [
     {amount: 10, price: 25},
     {amount: 50, price: 75},

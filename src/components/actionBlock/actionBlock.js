@@ -47,12 +47,10 @@ class ActionBlock extends Component{
 
 
     componentDidMount() {
-        console.log('mount');
         document.addEventListener("keydown", this.onKeyPressed);
     }
 
     componentWillUnmount() {
-        console.log('unmount');
         document.removeEventListener("keydown", this.onKeyPressed);
     }
 
@@ -80,7 +78,6 @@ class ActionBlock extends Component{
     };
     render(){
         const wordDescription = getLevelWordsDescription(this.props.level, this.props.selectedWordIndex);
-        console.log(this.props.selectedWord);
         return (
             <div
                 className={'actionBlock'}

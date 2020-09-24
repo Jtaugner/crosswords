@@ -3,7 +3,7 @@ import {
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK,
     CHANGE_LAST_LEVEL,
-    CHANGE_LEVEL_PROGRESS,
+    CHANGE_LEVEL_PROGRESS, CLEAR_LEVEL_FROM_PROGRESS,
     CLEAR_OPENED_KEYBOARD,
     INCREASE_LAST_LEVEL,
     INCREASE_LEVEL,
@@ -39,20 +39,22 @@ export const chooseLevel = (level) => ({
     type: SELECT_LEVEL,
     level
 });
-export const changeLastLevel = (level) => ({
-    type: CHANGE_LAST_LEVEL,
-    level
-});
 export const increaseLevel = () => ({
     type: INCREASE_LEVEL
 });
 export const increaseLastLevel = () => ({
     type: INCREASE_LAST_LEVEL
 });
-export const changeLevelProgress = (progress) => ({
+export const changeLevelProgress = (level, progress) => ({
     type: CHANGE_LEVEL_PROGRESS,
-    progress
+    progress, level
 });
+
+export const clearLevelFromProgress = (level) => ({
+    type: CLEAR_LEVEL_FROM_PROGRESS,
+    level
+});
+
 export const changeGamePayments = (payments) => ({
     type: CHANGE_GAME_PAYMENTS,
     payments
@@ -74,10 +76,11 @@ export const subtractMoney = (money) => ({
     type: SUBTRACT_MONEY,
     money
 });
-export const clearOpenedKeyboardWords = () => ({
+export const clearOpenedKeyboardWords = (level) => ({
     type: CLEAR_OPENED_KEYBOARD,
+    level
 });
-export const addOpenedKeyboard = (index) => ({
+export const addOpenedKeyboard = (level, index) => ({
     type: ADD_OPENED_KEYBOARD,
-    index
+    level, index
 });

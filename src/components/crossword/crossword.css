@@ -32,6 +32,7 @@
   background-color: white;
   color: #9b9b9b;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .crossword__word_selected .crossword__letter {
@@ -50,6 +51,7 @@
 
 .crossword__letter_done {
   color: black;
+  cursor: default;
 }
 
 .crossword_word_wrong {
