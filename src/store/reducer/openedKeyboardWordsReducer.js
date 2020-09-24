@@ -5,6 +5,9 @@ let keyboardProgress = getJSONFromLocalStorage('keyboardProgress',
 
 export const openedKeyboardWordsReducer = (state = keyboardProgress, action) => {
     if(action.type === ADD_OPENED_KEYBOARD){
+        if(!state[action.level]){
+            state[action.level] = [];
+        }
         state[action.level].push(action.index);
         localStorage.setItem('keyboardProgress', JSON.stringify(state));
         return {...state};

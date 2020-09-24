@@ -131,6 +131,7 @@ class GamePage extends Component {
     };
 
     addOpenedKeyboard = (index) => {
+        console.log(this.props.level, index);
         this.props.addOpenedKeyboard(this.props.level, index);
     };
 
