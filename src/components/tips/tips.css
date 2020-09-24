@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 5px;
+  padding-right: 10px;
 }
 
 .tip1 {
@@ -54,6 +54,39 @@
   height: 20px;
   background: url(../../assets/images/money.png) center center no-repeat;
   background-size: 100%;
+}
+
+@media (min-width: 600px) {
+  .tips {
+    width: 600px;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+@media (min-height: 800px) {
+  .tips {
+    height: 70px;
+  }
+
+  .tip1 {
+    width: 40px;
+    height: 53.3px;
+  }
+
+  .tip2 {
+    width: 53.3px;
+    height: 53.3px;
+  }
+
+  .tip3 {
+    width: 45.3px;
+    height: 53.3px;
+  }
+
+  .tip4 {
+    width: 26.6px;
+    height: 60px;
+  }
 }
 
 /*# sourceMappingURL=tips.css.map */

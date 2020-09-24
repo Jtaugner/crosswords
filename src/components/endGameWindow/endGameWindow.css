@@ -49,4 +49,45 @@
   cursor: pointer;
 }
 
+@media (min-width: 600px) {
+  .endGame {
+    width: 550px;
+    height: 280px;
+  }
+
+  .endGame .popUp__header {
+    font-size: 2.8rem;
+    height: 70px;
+    top: -25px;
+  }
+
+  .endGame__prize {
+    font-size: 2.6rem;
+  }
+
+  .endGame__prizeMoney {
+    font-size: 3.5rem;
+  }
+
+  .endGame__money {
+    width: 50px;
+    height: 50px;
+  }
+
+  .endGame__actions {
+    height: 60px;
+  }
+
+  .endGame__actions .menu {
+    width: 50px;
+    height: 50px;
+  }
+
+  .endGame__nextLevel {
+    background: url(next.png) center center no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+  }
+}
+
 /*# sourceMappingURL=endGameWindow.css.map */

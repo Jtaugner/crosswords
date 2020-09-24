@@ -44,8 +44,8 @@ class GamePage extends Component {
     getNewGameState = () => {
         let selectedWordIndex = 0;
         let progress = this.props.levelProgress[this.props.level];
-        if(progress === true){
-            //Вывести окно, что уровень пройден
+        if(!progress && this.props.level < this.props.lastLevel){
+
         }else if(!progress){
 
             progress = createLastLevelGameProgress(this.props.level);

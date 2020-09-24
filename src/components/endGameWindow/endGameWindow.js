@@ -22,7 +22,7 @@ function EndGameWindow(props) {
             <div className="endGame__actions">
                     <MenuLink endGame={true}/>
                     <div
-                        className="menu endGame__nextLevel"
+                        className="menu endGame__nextLevel icon"
                         onClick={nextGame}
                     />
             </div>
