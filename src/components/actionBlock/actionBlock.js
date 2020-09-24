@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './actionBlock.scss'
 import {getLevelWordsDescription} from "../../projectCommon";
 import Keyboard from "./keyboard/keyboard";
+import StartGameBlock from "./startGameBlock/startGameBlock";
 
 function getWordDescriptionFontSize(desc) {
     if(window.innerWidth > 600) return 16;
@@ -102,12 +103,15 @@ class ActionBlock extends Component{
                     />
                 </div>
 
-
-                <Keyboard
+                {this.props.isDoneLevel ?
+                    <StartGameBlock startLevelAgain={this.props.startLevelAgain} /> :
+                    <Keyboard
                     addLetterToCrossWord={this.props.addLetterToCrossWord}
                     openedKeyboard={this.props.openedKeyboard}
                     selectedWord={this.props.selectedWord}
-                />
+                />}
+
+
 
                 {this.props.usingTip ? <div className="innerBlackout" /> : ''}
             </div>

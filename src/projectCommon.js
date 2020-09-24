@@ -34,7 +34,12 @@ export const createGameProgress = (length, wordLength) => {
     }
     return levelProgress;
 };
-
+export const getDoneProgressLevel = (level) => {
+    const length = gameLevels[level].levelWords.length;
+    const progress = [];
+    for(let i = 0; i < length; i++) progress.push(true);
+    return progress;;
+};
 export const createLastLevelGameProgress = (level) => {
     const words = gameLevels[level].levelWords;
     return createGameProgress(words.length, words[0].length);

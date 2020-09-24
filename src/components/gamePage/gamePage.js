@@ -21,7 +21,7 @@ import {
     selectStartFromFirstCell
 } from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
-import {createLastLevelGameProgress, getLevelWords, tipsCost} from "../../projectCommon";
+import {createLastLevelGameProgress, getDoneProgressLevel, getLevelWords, tipsCost} from "../../projectCommon";
 import MenuLink from "../menuLink/menuLink";
 import EndGameWindow from "../endGameWindow/endGameWindow";
 
@@ -38,16 +38,17 @@ class GamePage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = this.getNewGameState(false);
+        this.state = this.getNewGameState();
     }
 
-    getNewGameState = () => {
+    getNewGameState = (startGameAgain) => {
         let selectedWordIndex = 0;
         let progress = this.props.levelProgress[this.props.level];
-        if(!progress && this.props.level < this.props.lastLevel){
-
-        }else if(!progress){
-
+        let isDoneLevel = false;
+        if(!progress && this.props.level < this.props.lastLevel && !startGameAgain){
+            isDoneLevel = true;
+            progress = getDoneProgressLevel(this.props.level);
+        }else if(!progress && startGameAgain){
             progress = createLastLevelGameProgress(this.props.level);
 
             this.props.changeLevelProgress(this.props.level, progress);
@@ -66,9 +67,17 @@ class GamePage extends Component {
             selectedWordIndex: selectedWordIndex,
             usingTip: false,
             tipType: -1,
-            isEnd: false
+            isEnd: false,
+            isDoneLevel
         };
 
+    };
+
+    startLevelAgain = () => {
+        this.getNewGameState(true);
+        this.setState({
+            isDoneLevel: false
+        });
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -142,6 +151,7 @@ class GamePage extends Component {
     };
 
     switchOnTip = (type) => {
+        if(this.state.isDoneLevel) return;
         const notEnoughMoney = this.props.money < tipsCost[type];
 
         if (this.state.tipType === type || notEnoughMoney) {
@@ -212,6 +222,10 @@ class GamePage extends Component {
                     usingTip={this.state.usingTip}
 
                     levelProgress={this.progress}
+
+                    startLevelAgain={this.startLevelAgain}
+
+                    isDoneLevel={this.state.isDoneLevel}
 
                     level={this.props.level}
 
