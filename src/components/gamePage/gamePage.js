@@ -48,7 +48,7 @@ class GamePage extends Component {
         if(!progress && this.props.level < this.props.lastLevel && !startGameAgain){
             isDoneLevel = true;
             progress = getDoneProgressLevel(this.props.level);
-        }else if(!progress && startGameAgain){
+        }else if(!progress){
             progress = createLastLevelGameProgress(this.props.level);
 
             this.props.changeLevelProgress(this.props.level, progress);

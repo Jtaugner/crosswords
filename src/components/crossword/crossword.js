@@ -331,6 +331,7 @@ class Crossword extends Component {
     addDoneWord(selectedLine) {
         this.props.levelProgress[selectedLine] = true;
         this.changeLevelProgress();
+        this.openLettersForNewWord();
         this.testWin();
     }
 
@@ -394,34 +395,58 @@ class Crossword extends Component {
             })
         }, 1000)
     }
+    getFreeCells = (dontCountWordWithoutOneLetter) => {
+        const progress = this.props.levelProgress;
+        let allFreeCells = [];
+        for(let i = 0; i < progress.length; i++){
+            if(progress[i] === true) continue;
+            const freeCells = [];
+            for(let q = 0; q < progress[i].length; q++){
+                if(progress[i][q] !== 1){
+                    freeCells.push([i, q]);
+                }
+            }
+            if(!dontCountWordWithoutOneLetter ||
+                (dontCountWordWithoutOneLetter && freeCells.length > 1)){
+                allFreeCells = [...allFreeCells, ...freeCells];
+            }
+
+        }
+        return allFreeCells;
+    };
+    addRandomLetters = (freeCells, amount) => {
+        let newLetters = [];
+        if(freeCells.length <= amount){
+            newLetters = freeCells;
+        }else{
+            for(let i = 0; i < amount; i++){
+                const randCell = Math.floor(Math.random()*freeCells.length);
+
+                newLetters.push(freeCells[randCell]);
+
+                freeCells.splice(randCell, 1);
+            }
+        }
+        this.addNewLetters(newLetters);
+    };
+    openLettersForNewWord = () => {
+        const allFreeCells = this.getFreeCells(false);
+        let amount = 0;
+        console.log(allFreeCells);
+        if(allFreeCells.length > 15) amount = 3;
+        else if(allFreeCells.length > 10) amount = 2;
+        else if(allFreeCells.length > 5) amount = 1;
+        console.log(allFreeCells, amount);
+        this.addRandomLetters(allFreeCells, amount);
+    };
     crosswordOnClick = () => {
         if(this.props.usingTip && this.props.tipType === 1 && canUseTip1){
-            const progress = this.props.levelProgress;
             //Ищем все свободные клетки
-            let allFreeCells = [];
-            for(let i = 0; i < progress.length; i++){
-                if(progress[i] === true) continue;
-                for(let q = 0; q < progress[i].length; q++){
-                    if(progress[i][q] !== 1){
-                        allFreeCells.push([i, q]);
-                    }
-                }
-            }
+            const allFreeCells = this.getFreeCells(false);
+
+            this.addRandomLetters(allFreeCells, 5);
 
 
-            let newLetters = [];
-            if(allFreeCells.length <= 5){
-                newLetters = allFreeCells;
-            }else{
-                for(let i = 0; i < 5; i++){
-                    const randCell = Math.floor(Math.random()*allFreeCells.length);
-
-                    newLetters.push(allFreeCells[randCell]);
-
-                    allFreeCells.splice(randCell, 1);
-                }
-            }
-            this.addNewLetters(newLetters);
             this.props.getTip();
             useTip1();
         }
