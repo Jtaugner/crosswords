@@ -30,19 +30,19 @@ class ActionBlock extends Component{
     };
 
     changeWordDownOnclick = () => {
-        for(let i = this.props.selectedWordIndex + 1; i < this.props.levelProgress.length; i++){
-            if(this.props.levelProgress[i] !== true) return this.changeWord(i);
+        for(let i = this.props.selectedWordIndex + 1; i < this.props.levelWords.length; i++){
+            if(this.props.levelWords[i] !== true) return this.changeWord(i);
         }
         for(let i = 0; i < this.props.selectedWordIndex; i++){
-            if(this.props.levelProgress[i] !== true) return this.changeWord(i);
+            if(this.props.levelWords[i] !== true) return this.changeWord(i);
         }
     };
     changeWordUpOnclick = () => {
         for(let i = this.props.selectedWordIndex - 1; i >= 0; i--){
-            if(this.props.levelProgress[i] !== true) return this.changeWord(i);
+            if(this.props.levelWords[i] !== true) return this.changeWord(i);
         }
-        for(let i = this.props.levelProgress.length-1; i > this.props.selectedWordIndex; i++){
-            if(this.props.levelProgress[i] !== true) return this.changeWord(i);
+        for(let i = this.props.levelWords.length-1; i > this.props.selectedWordIndex; i++){
+            if(this.props.levelWords[i] !== true) return this.changeWord(i);
         }
     };
 

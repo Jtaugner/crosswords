@@ -251,6 +251,7 @@ class Crossword extends Component {
         this.testWordAndGetNext();
     };
     getFirstFreeCellInLine(line){
+        console.log('line ', line);
         if(this.props.levelProgress[line] === true){
             this.setState({
                 selectedCell: -1

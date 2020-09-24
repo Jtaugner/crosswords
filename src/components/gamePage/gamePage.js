@@ -76,8 +76,12 @@ class GamePage extends Component {
     startLevelAgain = () => {
         this.getNewGameState(true);
         this.setState({
-            isDoneLevel: false
+            isDoneLevel: false,
+            selectedWordIndex: 0
         });
+        if (crosswordRef.current) {
+            crosswordRef.current.setNewGameState(this.levelWords);
+        }
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -222,7 +226,7 @@ class GamePage extends Component {
                 <ActionBlock
                     usingTip={this.state.usingTip}
 
-                    levelProgress={this.progress}
+                    levelWords={this.levelWords}
 
                     startLevelAgain={this.startLevelAgain}
 
