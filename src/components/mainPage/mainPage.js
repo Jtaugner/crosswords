@@ -9,7 +9,7 @@ import SettingsOpen from "../settingsOpen/settingsOpen";
 import Levels from "../levels/levels";
 
 
-function MainPage() {
+function MainPage(props) {
     const [isSettingsOpen, changeSettingsOpen] = useState(false);
 
     const settingsOpenOnClick = () => {changeSettingsOpen(true)};
@@ -21,7 +21,7 @@ function MainPage() {
                 <Money/>
             </TopMenu>
 
-            <Levels/>
+            <Levels canSwitchPage={props.canSwitchPage}/>
 
             {isSettingsOpen ? <Settings closeSettings={settingsCloseOnClick}/> : ''}
         </div>

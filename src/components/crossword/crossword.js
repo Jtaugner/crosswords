@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import './crossword.scss'
+import {openNewLetterSound,
+    openKeyboardSound, newWordSound, wrongWordSound,
+    newLettersSound, addLetterSound} from "../../sounds";
 
 
 const pixelsPerLetters = 5;
 
 function getLetterSize(length) {
     let width = window.innerWidth;
-    if(width > 600) width = 600;
+    if(width > 600) width = 570;
     return (
         width - width * 0.03 - pixelsPerLetters * (length - 1)
     ) / length;
@@ -18,7 +21,7 @@ function compareWords(word1, word2) {
 function createPair(i1, i2){
     return i1 + '-' + i2;
 }
-let timeout;
+let timeout, timeout2;
 let canUseTip1 = true;
 function useTip1() {
     canUseTip1 = false;
@@ -38,6 +41,7 @@ class Crossword extends Component {
 
     componentWillUnmount() {
         clearTimeout(timeout);
+        clearTimeout(timeout2);
     }
 
     constructor(props) {
@@ -46,7 +50,6 @@ class Crossword extends Component {
     }
 
     setNewGameState(levelWords) {
-        console.log('setNewGameState');
         this.setState(this.getGameState(levelWords));
     }
 
@@ -80,22 +83,19 @@ class Crossword extends Component {
         if(this.props.usingTip){
             if(this.props.tipType === 1) return;
             if(this.props.tipType === 2){
+                if(this.props.openedKeyboardWords && this.props.openedKeyboardWords.includes(wordIndex)) return;
                 this.props.addOpenedKeyboard(wordIndex);
+                if(this.props.isSounds) openKeyboardSound.play();
                 this.props.getTip();
             }
             if(this.props.tipType === 3){
+                if(this.props.levelProgress[wordIndex] === true) return;
                 this.props.levelProgress[wordIndex] = true;
                 this.changeLevelProgress();
                 this.addDoneWord(wordIndex);
-                this.setState({
-                    rightWords: [wordIndex]
-                });
+                this.addRightWords([wordIndex]);
+                this.getNextWordTimeout();
                 this.props.getTip();
-                timeout = setTimeout(()=>{
-                    this.setState({
-                        rightWords: []
-                    });
-                }, 1000);
             }
 
         }
@@ -110,19 +110,18 @@ class Crossword extends Component {
         if(wordIndex !== undefined) line = wordIndex;
         else line = this.props.selectedWordIndex;
 
-
         if(this.props.levelProgress[line] === true) return -1;
-
         if (isNext && newIndex < this.props.levelWords[0].length - 1) {
             for (let i = newIndex + 1; i < this.props.levelWords[0].length; i++) {
-                if (this.props.levelProgress[line][i] !== undefined && this.props.levelProgress[line][i] === 0) {
+                if((this.props.deleteWrongWord && this.props.levelProgress[line][i] !== 1)
+                ||(!this.props.deleteWrongWord && this.props.levelProgress[line][i] === 0)){
                     newIndex = i;
                     break;
                 }
             }
-        } else if (newIndex > 0) {
+        } else if (!isNext && newIndex > 0) {
             for (let i = newIndex - 1; i >= 0; i--) {
-                if (this.props.levelProgress[line][i] !== undefined && this.props.levelProgress[line][i] !== 1) {
+                if (this.props.levelProgress[line][i] !== 1) {
                     newIndex = i;
                     break;
                 }
@@ -134,15 +133,23 @@ class Crossword extends Component {
         const newIndex = this.getNextOrPrevLetter(false);
 
         if (newIndex !== this.state.selectedCell) {
-            console.log('dsd');
             this.setState({selectedCell: newIndex});
 
             this.props.levelProgress[this.props.selectedWordIndex][newIndex] = 0;
             this.changeLevelProgress();
         }
     };
+
+    getFilledLetter = (index) => {
+        if(this.props.levelProgress[index] === true) return -1;
+        for (let i = this.props.levelWords[0].length - 1; i >= 0 ; i++) {
+           if(this.props.levelProgress[index][i] !== 1) return i;
+        }
+        return -1;
+    };
     setNextOrPrevLetter = (isNext, cell, wordIndex) => {
-        const newIndex = this.getNextOrPrevLetter(isNext, cell, wordIndex);
+        let newIndex = this.getNextOrPrevLetter(isNext, cell, wordIndex);
+        if(newIndex === -1) newIndex = this.getFilledLetter(wordIndex);
 
         if (newIndex !== this.state.selectedCell) {
             this.setState({selectedCell: newIndex})
@@ -174,43 +181,38 @@ class Crossword extends Component {
         this.props.changeLevelProgress(this.props.levelProgress);
     };
 
+    getNextWordTimeout = () => {
+        timeout2 = setTimeout(()=>{
+            this.getNextWord();
+        }, 1000);
+    };
+
     testWordAndGetNext = (wordIndex, getFirstCell) => {
         let index;
         if(wordIndex !== undefined) index = wordIndex;
         else index = this.props.selectedWordIndex;
 
         if (this.testWord(index)) {
-            this.setState({
-                rightWords: [index]
-            });
-            timeout = setTimeout(()=>{
-                this.getNextWord();
-                timeout = setTimeout(()=>{
-                    this.setState({
-                        rightWords: []
-                    });
-                }, 400)
-            }, 600);
-
+            this.addRightWords([index]);
+            this.getNextWordTimeout();
         } else {
-            this.deleteWrongWord(index);
-            if(getFirstCell){
-                this.getFirstFreeCellInLine(wordIndex);
-            }else if(index === this.props.selectedWordIndex){
-                this.setNextOrPrevLetter(true);
+            let isWordDeleted = false;
+            if (this.props.deleteWrongWord) {
+                isWordDeleted = this.deleteWrongWord(index);
             }
+            if(!isWordDeleted){
+                if(getFirstCell){
+                    this.getFirstFreeCellInLine(wordIndex);
+                }else if(index === this.props.selectedWordIndex){
+                    this.setNextOrPrevLetter(true);
+                }
+            }
+
         }
     };
 
-    testAllWords = () => {
-        const rightWords = [];
-        for(let i = 0; i < this.props.levelWords.length; i++){
-            if (this.testWord(i)) {
-                rightWords.push(i);
-            } else {
-                this.deleteWrongWord(i);
-            }
-        }
+    addRightWords = (rightWords) => {
+        if(this.props.isSounds) newWordSound.play();
         this.setState({
             rightWords: rightWords
         });
@@ -219,6 +221,22 @@ class Crossword extends Component {
                 rightWords: []
             });
         }, 1000);
+    };
+
+    testAllWords = () => {
+        const rightWords = [];
+        for(let i = 0; i < this.props.levelWords.length; i++){
+            if (this.testWord(i)) {
+                rightWords.push(i);
+            } else {
+                if (this.props.deleteWrongWord) {
+                    this.deleteWrongWord(i);
+                }
+            }
+        }
+        if(rightWords.length > 0) this.addRightWords(rightWords);
+
+
     };
     testWin = () => {
         const progress = this.props.levelProgress;
@@ -229,6 +247,7 @@ class Crossword extends Component {
     };
 
     addLetter = (letter) => {
+        console.log(letter, this.props.levelProgress);
         if ( this.state.selectedCell === -1
             || this.props.levelProgress[this.props.selectedWordIndex] === true
             || this.props.levelProgress[this.props.selectedWordIndex][this.state.selectedCell] === 1
@@ -247,11 +266,11 @@ class Crossword extends Component {
             [this.state.selectedCell] = letter;
         this.changeLevelProgress();
         if (letter === 0) return;
+        if(this.props.isSounds) addLetterSound.play();
 
         this.testWordAndGetNext();
     };
     getFirstFreeCellInLine(line){
-        console.log('line ', line);
         if(this.props.levelProgress[line] === true){
             this.setState({
                 selectedCell: -1
@@ -268,31 +287,28 @@ class Crossword extends Component {
         this.getFirstFreeCellInLine(line);
     }
     deleteWrongWord(selectedWord) {
-        if (this.props.deleteWrongWord) {
-
-            let wordArray = this.props.levelProgress[selectedWord];
-            if(wordArray === true ) return;
-            for (let i = 0; i < wordArray.length; i++)
-                if (wordArray[i] === 0) return;
+        let wordArray = this.props.levelProgress[selectedWord];
+        if(wordArray === true) return false;
+        for (let i = 0; i < wordArray.length; i++)
+            if (wordArray[i] === 0) return false;
+        this.setState({
+            wrongWords: [selectedWord]
+        });
+        if(this.props.isSounds) wrongWordSound.play();
+        timeout = setTimeout(() => {
             this.setState({
-                wrongWords: [selectedWord]
+                wrongWords: []
             });
-            timeout = setTimeout(() => {
-                this.setState({
-                    wrongWords: []
-                });
-                wordArray = wordArray.map((el) => {
-                    if (el !== 1) return 0;
-                    return 1;
-                });
-                this.props.levelProgress[selectedWord] = wordArray;
-                this.changeLevelProgress();
-                this.getFirstFreeCellInLine(selectedWord);
+            wordArray = wordArray.map((el) => {
+                if (el !== 1) return 0;
+                return 1;
+            });
+            this.props.levelProgress[selectedWord] = wordArray;
+            this.changeLevelProgress();
+            this.getFirstFreeCellInLine(selectedWord);
 
-            }, 500);
-
-
-        }
+        }, 500);
+        return true;
     }
 
     selectLetter(wordIndex, letterIndex) {
@@ -306,6 +322,8 @@ class Crossword extends Component {
 
                 this.changeLevelProgress();
                 this.testWordAndGetNext(wordIndex, true);
+
+                if(this.props.isSounds) openNewLetterSound.play();
 
                 this.props.getTip();
             }
@@ -337,6 +355,7 @@ class Crossword extends Component {
 
     testWord(selectedLine) {
         if(this.props.levelProgress[selectedLine] === true) return;
+
         let word = '';
         let wordProgress = this.props.levelProgress[selectedLine];
         for (let i = 0; i < wordProgress.length; i++) {
@@ -348,6 +367,7 @@ class Crossword extends Component {
             this.addDoneWord(selectedLine);
             return true;
         }
+
 
         return false
     };
@@ -447,6 +467,7 @@ class Crossword extends Component {
             this.addRandomLetters(allFreeCells, 5);
 
 
+            if(this.props.isSounds) newLettersSound.play();
             this.props.getTip();
             useTip1();
         }

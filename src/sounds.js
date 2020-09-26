@@ -102,9 +102,14 @@ const NewAudioContext = (function () {
     return WebAudioAPISound;
 })();
 
-//Пример экспорта клика
-export const clickSound = new NewAudioContext('openLevel2.mp3');
+export const openGameSound = new NewAudioContext('MovementFoliage JUR01_71_7.wav');
+export const openNewLetterSound = new NewAudioContext('18934197_poof_by_fantasy_sfx_preview.mp3');
+export const openKeyboardSound = new NewAudioContext('openKeyboard.mp3');
 export const goMainPageSound = new NewAudioContext('goMainPage.mp3');
+export const newWordSound = new NewAudioContext('newWord.mp3');
+export const wrongWordSound = new NewAudioContext('wrongWord.mp3');
+export const newLettersSound = new NewAudioContext('newLetters.mp3');
+export const addLetterSound = new NewAudioContext('addLetter.mp3');
 
 
 

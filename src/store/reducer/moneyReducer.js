@@ -2,7 +2,7 @@ import {CHANGE_MONEY_FROM_PLAYER_DATA, getFromLocalStorage, SUBTRACT_MONEY} from
 import {ADD_MONEY} from "../common";
 
 let gameMoney = getFromLocalStorage('gameMoney', 10);
-
+if(isNaN(gameMoney)) gameMoney = 10;
 
 export const moneyReducer = (state = gameMoney, action) => {
     if(action.type === SUBTRACT_MONEY){

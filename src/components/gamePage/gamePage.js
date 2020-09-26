@@ -17,7 +17,7 @@ import {
     selectIsDeleteWrongWord,
     selectLastLevel,
     selectLevel,
-    selectLevelProgress, selectMoney, selectOpenedKeyboardWords,
+    selectLevelProgress, selectMoney, selectOpenedKeyboardWords, selectSounds,
     selectStartFromFirstCell
 } from "../../store/selectors";
 import ActionBlock from "../actionBlock/actionBlock";
@@ -62,6 +62,7 @@ class GamePage extends Component {
         }
         this.progress = progress;
 
+
         this.levelWords = getLevelWords(this.props.level);
         return  {
             selectedWordIndex: selectedWordIndex,
@@ -74,11 +75,7 @@ class GamePage extends Component {
     };
 
     startLevelAgain = () => {
-        this.getNewGameState(true);
-        this.setState({
-            isDoneLevel: false,
-            selectedWordIndex: 0
-        });
+        this.setState(this.getNewGameState(true));
         if (crosswordRef.current) {
             crosswordRef.current.setNewGameState(this.levelWords);
         }
@@ -135,7 +132,6 @@ class GamePage extends Component {
     };
 
     addOpenedKeyboard = (index) => {
-        console.log(this.props.level, index);
         this.props.addOpenedKeyboard(this.props.level, index);
     };
 
@@ -178,9 +174,11 @@ class GamePage extends Component {
     render() {
         const selectedWord = this.levelWords[this.state.selectedWordIndex];
         let openedKeyboard = false;
-        if(this.props.openedKeyboardWords[this.props.level]){
-            openedKeyboard = this.props.openedKeyboardWords[this.props.level].includes(this.state.selectedWordIndex);
+        const openedKeyboardWords = this.props.openedKeyboardWords[this.props.level];
+        if(openedKeyboardWords){
+            openedKeyboard = openedKeyboardWords.includes(this.state.selectedWordIndex);
         }
+
 
 
         return (
@@ -206,6 +204,7 @@ class GamePage extends Component {
 
                     selectedWordIndex={this.state.selectedWordIndex}
                     changeSelectedWord={this.changeSelectedWord}
+                    openedKeyboardWords={openedKeyboardWords}
 
                     usingTip={this.state.usingTip}
                     tipType={this.state.tipType}
@@ -216,6 +215,8 @@ class GamePage extends Component {
                     changeWordRef={this.changeWordRef}
 
                     endGame={this.endGame}
+
+                    isSounds={this.props.isSounds}
 
                 />
 
@@ -258,7 +259,8 @@ export default connect((store) => ({
         deleteWrongWord: selectIsDeleteWrongWord(store),
         startFromFirstCell: selectStartFromFirstCell(store),
         money: selectMoney(store),
-        openedKeyboardWords: selectOpenedKeyboardWords(store)
+        openedKeyboardWords: selectOpenedKeyboardWords(store),
+        isSounds: selectSounds(store)
     }),
     (dispatch) => ({
         showAdv: () => dispatch(showAdv()),

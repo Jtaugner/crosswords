@@ -18,14 +18,31 @@ export function giveParams(data) {
         window.ym(YM_METRIKA_ID, 'params', data);
     }catch(ignored){}
 }
-
+let timeout;
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isError: false
+            isError: false,
+            canSwitchPage: true
         };
 
+    }
+
+    changeCanSwitchPage = (bool) => {
+        this.setState({canSwitchPage: bool});
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.location !== this.props.location){
+            console.log('dsd');
+            clearTimeout(timeout);
+            this.changeCanSwitchPage(false);
+            timeout = setTimeout(()=>{
+                this.changeCanSwitchPage(true);
+            }, 1200);
+
+        }
     }
 
     componentDidCatch(error, info) {
@@ -62,7 +79,6 @@ class App extends Component {
 
                 <TransitionGroup
                     className={'transGroup ' + (location.pathname === '/game' ? 'transGroupMenu' : '')}
-
                 >
                     <CSSTransition
                         key={location.key}
@@ -72,8 +88,12 @@ class App extends Component {
                         <Switch location={location}>
 
 
-                            <Route path={'/home'} component={MainPage}/>
-                            <Route path={'/game'} component={GamePage}/>
+                            <Route path={'/home'}
+                                   render={() => <MainPage canSwitchPage={this.state.canSwitchPage}/>}
+                                   />
+                            <Route path={'/game'}
+                                   render={() => <GamePage/>}
+                                   />
 
 
                         </Switch>

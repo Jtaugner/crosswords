@@ -7,9 +7,9 @@ import {createLastLevelGameProgress} from "../../projectCommon";
             // 0 - буква закрыта
             // 1 - буква открыта
             // буква - буква вставлена игроком
-let levelProgress = getJSONFromLocalStorage('levelProgress',
-    {0: createLastLevelGameProgress(0)});
-
+const defaultProgress = {0: createLastLevelGameProgress(0)};
+let levelProgress = getJSONFromLocalStorage('levelProgress', defaultProgress);
+if(Array.isArray(levelProgress)) levelProgress = defaultProgress;
 export const levelProgressReducer = (state = levelProgress, action) => {
     if(action.type === CHANGE_LEVEL_PROGRESS){
         state[action.level] = action.progress;

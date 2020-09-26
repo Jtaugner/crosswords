@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {chooseLevel} from "../../store/ac";
 import {selectLastLevel, selectSounds} from "../../store/selectors";
 import {Link} from "react-router-dom";
-import {clickSound} from "../../sounds";
+import {openGameSound} from "../../sounds";
 
 
 class Levels extends Component {
@@ -30,11 +30,13 @@ class Levels extends Component {
         if(lastLevel === -1) lastLevel = 0;
 
         const addLevel = (i) => {
-            const levelOnClick = () => {
-                this.props.chooseLevel(i);
-                if(this.props.isSounds){
-                    clickSound.play();
+            const levelOnClick = (e) => {
+                if(!this.props.canSwitchPage) {
+                    e.preventDefault();
+                    return;
                 }
+                this.props.chooseLevel(i);
+                if(this.props.isSounds) openGameSound.play();
             };
             let LevelComponent =
                 <Link
