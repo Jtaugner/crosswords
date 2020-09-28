@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './crossword.scss'
 import {openNewLetterSound,
     openKeyboardSound, newWordSound, wrongWordSound,
-    newLettersSound, addLetterSound} from "../../sounds";
+     addLetterSound} from "../../sounds";
 
 
 const pixelsPerLetters = 5;
@@ -10,6 +10,7 @@ const pixelsPerLetters = 5;
 function getLetterSize(length) {
     let width = window.innerWidth;
     if(width > 600) width = 570;
+    else width = width - 10;
     return (
         width - width * 0.03 - pixelsPerLetters * (length - 1)
     ) / length;

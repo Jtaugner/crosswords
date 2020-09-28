@@ -117,6 +117,36 @@ html, body, #root {
   left: -10px;
   bottom: -10px;
 }
+::-webkit-scrollbar-button {
+  background-repeat:no-repeat;
+  width:6px;
+  height:0px
+}
+
+::-webkit-scrollbar-track {
+  background-color: #261624;
+  box-shadow:0px 0px 3px #000 inset;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+    background-color:#9a52ac;
+}
+
+::-webkit-resizer{
+  background-repeat:no-repeat;
+  width: 5px;
+  height:0px
+}
+
+::-webkit-scrollbar{
+  width: 5px;
+  height: 13px;
+}
+
 
 @media (min-width: 600px) {
   .icon{
@@ -128,6 +158,13 @@ html, body, #root {
     right: -20px;
     left: -20px;
     bottom: -20px;
+  }
+  ::-webkit-resizer{
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar{
+    width: 10px;
   }
 }
 

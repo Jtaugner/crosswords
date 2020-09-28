@@ -72,7 +72,7 @@ class Levels extends Component {
             let k = 0;
             let isReverse = false;
             levelList = [[], [], [], [], []];
-            for (let i = 0; i < 56; i++) {
+            for (let i = 0; i < 106; i++) {
                 levelList[k].push(addLevel(i));
                 if(isReverse) k--;
                 else k++;
