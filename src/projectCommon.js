@@ -55,7 +55,7 @@ export const getLevelWordsDescription = (level, wordIndex) => {
         ];
 };
 
-export const tipsCost = [1, 2, 5, 5];
+export const tipsCost = [1, 3, 2, 4];
 export const shopItems = [
     {amount: 10, price: 25},
     {amount: 50, price: 75},
