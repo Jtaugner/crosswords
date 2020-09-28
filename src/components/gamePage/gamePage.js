@@ -24,6 +24,7 @@ import ActionBlock from "../actionBlock/actionBlock";
 import {createLastLevelGameProgress, getDoneProgressLevel, getLevelWords, tipsCost} from "../../projectCommon";
 import MenuLink from "../menuLink/menuLink";
 import EndGameWindow from "../endGameWindow/endGameWindow";
+import {winSound} from "../../sounds";
 
 const crosswordRef = React.createRef();
 
@@ -99,6 +100,10 @@ class GamePage extends Component {
         this.setState({isEnd: true});
         this.props.clearOpenedKeyboardWords(this.props.level);
         this.props.clearLevelFromProgress(this.props.level);
+        setTimeout(()=>{
+            if(this.props.isSounds) winSound.play();
+        }, 400);
+
         if(this.props.level === this.props.lastLevel){
             this.props.increaseLastLevel();
         }

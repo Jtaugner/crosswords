@@ -113,8 +113,8 @@ class Crossword extends Component {
         if(this.props.levelProgress[line] === true) return -1;
         if (isNext && newIndex < this.props.levelWords[0].length - 1) {
             for (let i = newIndex + 1; i < this.props.levelWords[0].length; i++) {
-                if((this.props.deleteWrongWord && this.props.levelProgress[line][i] !== 1)
-                ||(!this.props.deleteWrongWord && this.props.levelProgress[line][i] === 0)){
+                if(this.props.levelProgress[line][i] === 0){
+                    console.log('new index ', i);
                     newIndex = i;
                     break;
                 }
@@ -150,7 +150,6 @@ class Crossword extends Component {
     setNextOrPrevLetter = (isNext, cell, wordIndex) => {
         let newIndex = this.getNextOrPrevLetter(isNext, cell, wordIndex);
         if(newIndex === -1) newIndex = this.getFilledLetter(wordIndex);
-
         if (newIndex !== this.state.selectedCell) {
             this.setState({selectedCell: newIndex})
         }
@@ -467,7 +466,7 @@ class Crossword extends Component {
             this.addRandomLetters(allFreeCells, 5);
 
 
-            if(this.props.isSounds) newLettersSound.play();
+            if(this.props.isSounds) openNewLetterSound.play();
             this.props.getTip();
             useTip1();
         }

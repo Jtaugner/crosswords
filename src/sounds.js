@@ -80,14 +80,11 @@ const NewAudioContext = (function () {
             this.manager.stopSoundWithUrl(this.url);
         },
         getVolume: function () {
-            return this.translateVolume(this.volume, true);
+            return this.volume;
         },
         //Expect to receive in range 0-100
         setVolume: function (volume) {
-            this.volume = this.translateVolume(volume);
-        },
-        translateVolume: function (volume, inverse) {
-            return inverse ? volume * 100 : volume / 100;
+            this.volume = volume;
         },
         makeSource: function (buffer) {
             var source = this.manager.context.createBufferSource();
@@ -102,14 +99,16 @@ const NewAudioContext = (function () {
     return WebAudioAPISound;
 })();
 
-export const openGameSound = new NewAudioContext('MovementFoliage JUR01_71_7.wav');
-export const openNewLetterSound = new NewAudioContext('18934197_poof_by_fantasy_sfx_preview.mp3');
-export const openKeyboardSound = new NewAudioContext('openKeyboard.mp3');
+export const openGameSound = new NewAudioContext('openGame.wav');
 export const goMainPageSound = new NewAudioContext('goMainPage.mp3');
+export const openKeyboardSound = new NewAudioContext('openKeyboard.mp3');
+
+export const openNewLetterSound = new NewAudioContext('newLetters.mp3');
 export const newWordSound = new NewAudioContext('newWord.mp3');
 export const wrongWordSound = new NewAudioContext('wrongWord.mp3');
-export const newLettersSound = new NewAudioContext('newLetters.mp3');
+export const winSound = new NewAudioContext('win.mp3');
 export const addLetterSound = new NewAudioContext('addLetter.mp3');
+addLetterSound.setVolume(0.3);
 
 
 
