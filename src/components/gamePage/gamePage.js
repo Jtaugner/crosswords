@@ -3,6 +3,7 @@ import './gamePage.scss'
 import {connect} from "react-redux";
 import TopMenu from "../topMenu/topMenu"
 import {
+    addMoney,
     addOpenedKeyboard,
     changeLevelProgress, clearLevelFromProgress,
     clearOpenedKeyboardWords, increaseLastLevel, increaseLevel,
@@ -70,7 +71,8 @@ class GamePage extends Component {
             usingTip: false,
             tipType: -1,
             isEnd: false,
-            isDoneLevel
+            isDoneLevel,
+            addMoney: false
         };
 
     };
@@ -103,9 +105,17 @@ class GamePage extends Component {
         setTimeout(()=>{
             if(this.props.isSounds) winSound.play();
         }, 400);
-
         if(this.props.level === this.props.lastLevel){
             this.props.increaseLastLevel();
+            this.props.addMoney();
+            this.setState({
+                addMoney: true
+            })
+        }else{
+            this.props.addMoney();
+            this.setState({
+                addMoney: false
+            })
         }
     };
 
@@ -250,7 +260,9 @@ class GamePage extends Component {
                     
                     switchOffTip={this.switchOffTip}
                 />
-                {this.state.isEnd ? <EndGameWindow nextGame={this.nextGame}/> : ''}
+                {this.state.isEnd ? <EndGameWindow nextGame={this.nextGame}
+                addMoney={this.state.addMoney}
+                /> : ''}
             </div>
         );
     }
@@ -278,6 +290,7 @@ export default connect((store) => ({
         clearLevelFromProgress: (level) => dispatch(clearLevelFromProgress(level)),
         addOpenedKeyboard: (level, index) => dispatch(addOpenedKeyboard(level, index)),
         increaseLevel: () => dispatch(increaseLevel()),
-        increaseLastLevel: () => dispatch(increaseLastLevel())
+        increaseLastLevel: () => dispatch(increaseLastLevel()),
+        addMoney: () => dispatch(addMoney(3))
     })
 )(GamePage);

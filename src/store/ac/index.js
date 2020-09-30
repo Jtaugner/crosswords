@@ -1,4 +1,5 @@
 import {
+    ADD_MONEY,
     ADD_OPENED_KEYBOARD,
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK,
@@ -76,6 +77,12 @@ export const subtractMoney = (money) => ({
     type: SUBTRACT_MONEY,
     money
 });
+export const addMoney = (money) => ({
+    type: ADD_MONEY,
+    money
+});
+
+
 export const clearOpenedKeyboardWords = (level) => ({
     type: CLEAR_OPENED_KEYBOARD,
     level
