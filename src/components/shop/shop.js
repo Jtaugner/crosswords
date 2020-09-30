@@ -13,7 +13,7 @@ function Shop(props) {
         <div className="shop popUp">
             <div className="popUp__header">
                 Магазин
-                <div className="shop__cross" onClick={onClick}/>
+                <div className="shop__cross icon" onClick={onClick}/>
             </div>
             {
                 shopItems.map((item, index) => (

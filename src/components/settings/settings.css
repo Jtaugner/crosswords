@@ -136,8 +136,9 @@
   background: url(stm.png) center center no-repeat;
 }
 
-.er {
-  background: url(er.png) center center no-repeat;
+.tm {
+  background: url(tm.png) center center no-repeat;
+  box-shadow: 0 0 1px black;
 }
 
 .my-game {
