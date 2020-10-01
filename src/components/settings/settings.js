@@ -1,7 +1,7 @@
 import React from 'react';
 import './settings.scss'
 import {connect} from "react-redux";
-import {toggleDeleteWrongWord, toggleSettings, toggleSounds, toggleStartFromFirstCell} from "../../store/ac";
+import {toggleDeleteWrongWord, toggleSounds, toggleStartFromFirstCell} from "../../store/ac";
 import {selectIsDeleteWrongWord, selectSounds, selectStartFromFirstCell} from "../../store/selectors";
 import {giveParams} from "../../App";
 const games = [

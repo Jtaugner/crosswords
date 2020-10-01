@@ -46,11 +46,12 @@ class GamePage extends Component {
     getNewGameState = (startGameAgain) => {
         let selectedWordIndex = 0;
         let progress = this.props.levelProgress[this.props.level];
+        this.levelWords = getLevelWords(this.props.level);
         let isDoneLevel = false;
         if(!progress && this.props.level < this.props.lastLevel && !startGameAgain){
             isDoneLevel = true;
             progress = getDoneProgressLevel(this.props.level);
-        }else if(!progress){
+        }else if(!progress || progress[0].length !== this.levelWords[0].length){
             progress = createLastLevelGameProgress(this.props.level);
 
             this.props.changeLevelProgress(this.props.level, progress);
@@ -65,7 +66,6 @@ class GamePage extends Component {
         this.progress = progress;
 
 
-        this.levelWords = getLevelWords(this.props.level);
         return  {
             selectedWordIndex: selectedWordIndex,
             usingTip: false,

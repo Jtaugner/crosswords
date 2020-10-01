@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './crossword.scss'
-import {openNewLetterSound,
+import {
+    openNewLetterSound,
     openKeyboardSound, newWordSound, wrongWordSound,
-     addLetterSound} from "../../sounds";
+    addLetterSound, deleteLetterSound
+} from "../../sounds";
 
 
 const pixelsPerLetters = 5;
@@ -254,13 +256,16 @@ class Crossword extends Component {
             || this.state.wrongWords.length > 0 || this.state.rightWords.length > 0)
             return;
 
-
-        if (letter === 0 && this.props.levelProgress
-            [this.props.selectedWordIndex]
-            [this.state.selectedCell] === 0) {
-            this.deletePrevLetter();
-            return;
+        if(letter === 0){
+            if(this.props.isSounds) deleteLetterSound.play();
+            if (this.props.levelProgress
+                [this.props.selectedWordIndex]
+                [this.state.selectedCell] === 0) {
+                this.deletePrevLetter();
+                return;
+            }
         }
+
         this.props.levelProgress
             [this.props.selectedWordIndex]
             [this.state.selectedCell] = letter;
