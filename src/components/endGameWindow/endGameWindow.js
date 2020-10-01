@@ -14,7 +14,7 @@ function EndGameWindow(props) {
             <div className="endGame__prize">
                 Ваша награда:
                 <div className="endGame__prizeMoney">
-                    {props.addMoney ? '+3' : 0}
+                    {props.addMoney ? '+5' : 0}
                     <div className="endGame__money" />
                 </div>
             </div>

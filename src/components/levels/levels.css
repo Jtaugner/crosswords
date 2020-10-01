@@ -18,6 +18,10 @@
   border-radius: 50%;
 }
 
+.levels__level_small {
+  font-size: 2.5rem;
+}
+
 .levels .levels__level:nth-child(2n) {
   margin-left: auto;
 }
@@ -31,6 +35,7 @@
 .levels__level_last {
   color: #b95dc2;
   border-color: #b95dc2;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 @media (min-width: 600px) {
@@ -58,6 +63,10 @@
     width: 75px;
     height: 75px;
     font-size: 3.2rem;
+  }
+
+  .levels__level_small {
+    font-size: 2.8rem;
   }
 
   .levels__level, .levels .levels__level:nth-child(2n) {

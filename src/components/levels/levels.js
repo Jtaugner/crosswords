@@ -5,13 +5,17 @@ import {chooseLevel} from "../../store/ac";
 import {selectLastLevel, selectSounds} from "../../store/selectors";
 import {Link} from "react-router-dom";
 import {openGameSound} from "../../sounds";
+import {gameLevels} from "../../projectCommon";
 
-
+const gameLevelsLength = gameLevels.length;
 class Levels extends Component {
     levelRef;
 
     componentDidMount() {
-        this.levelRef.scrollIntoView({behavior: 'auto', block: "center", inline: "center"});
+        if(this.levelRef){
+            this.levelRef.scrollIntoView({behavior: 'auto', block: "center", inline: "center"});
+        }
+
     }
 
     constructor(props) {
@@ -38,10 +42,12 @@ class Levels extends Component {
                 this.props.chooseLevel(i);
                 if(this.props.isSounds) openGameSound.play();
             };
+            const levelSmall =  i > 99 ? ' levels__level_small' : '';
+
             let LevelComponent =
                 <Link
                     to={'/game'}
-                    className={'levels__level'}
+                    className={'levels__level' + levelSmall}
                     onClick={levelOnClick}
                     key={'level' + i}
                 >
@@ -51,14 +57,14 @@ class Levels extends Component {
             if(lastLevel < i){
                 LevelComponent =
                     <div
-                        className={'levels__level levels__level_close'}
+                        className={'levels__level levels__level_close' + levelSmall}
                         key={'level' + i}
                     />
             } else if (i === lastLevel) {
                 LevelComponent =
                     <Link
                         to={'/game'}
-                        className={'levels__level levels__level_last'}
+                        className={'levels__level levels__level_last' + levelSmall}
                         onClick={levelOnClick}
                         key={'level' + i}
                         ref={(div) => this.selectLevelRef(div)}
@@ -72,7 +78,7 @@ class Levels extends Component {
             let k = 0;
             let isReverse = false;
             levelList = [[], [], [], [], []];
-            for (let i = 0; i < 106; i++) {
+            for (let i = 0; i < gameLevelsLength; i++) {
                 levelList[k].push(addLevel(i));
                 if(isReverse) k--;
                 else k++;
@@ -100,7 +106,7 @@ class Levels extends Component {
                 </div>
             );
         }
-        for (let i = 55; i >= 0; i--) {
+        for (let i = gameLevelsLength - 1; i >= 0; i--) {
             levelList.push(addLevel(i));
         }
 

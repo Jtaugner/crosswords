@@ -291,6 +291,6 @@ export default connect((store) => ({
         addOpenedKeyboard: (level, index) => dispatch(addOpenedKeyboard(level, index)),
         increaseLevel: () => dispatch(increaseLevel()),
         increaseLastLevel: () => dispatch(increaseLastLevel()),
-        addMoney: () => dispatch(addMoney(3))
+        addMoney: () => dispatch(addMoney(5))
     })
 )(GamePage);
