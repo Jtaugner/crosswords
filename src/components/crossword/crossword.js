@@ -83,6 +83,7 @@ class Crossword extends Component {
 
 
     wordOnclick = (wordIndex) => {
+        clearTimeout(timeout2);
         if(this.props.usingTip){
             if(this.props.tipType === 1) return;
             if(this.props.tipType === 2){
@@ -117,7 +118,6 @@ class Crossword extends Component {
         if (isNext && newIndex < this.props.levelWords[0].length - 1) {
             for (let i = newIndex + 1; i < this.props.levelWords[0].length; i++) {
                 if(this.props.levelProgress[line][i] === 0){
-                    console.log('new index ', i);
                     newIndex = i;
                     break;
                 }
@@ -186,7 +186,7 @@ class Crossword extends Component {
     getNextWordTimeout = () => {
         timeout2 = setTimeout(()=>{
             this.getNextWord();
-        }, 1000);
+        }, 700);
     };
 
     testWordAndGetNext = (wordIndex, getFirstCell) => {
@@ -249,7 +249,6 @@ class Crossword extends Component {
     };
 
     addLetter = (letter) => {
-        console.log(letter, this.props.levelProgress);
         if ( this.state.selectedCell === -1
             || this.props.levelProgress[this.props.selectedWordIndex] === true
             || this.props.levelProgress[this.props.selectedWordIndex][this.state.selectedCell] === 1
@@ -457,11 +456,14 @@ class Crossword extends Component {
     openLettersForNewWord = () => {
         const allFreeCells = this.getFreeCells(false);
         let amount = 0;
-        console.log(allFreeCells);
-        if(allFreeCells.length > 15) amount = 3;
-        else if(allFreeCells.length > 10) amount = 2;
-        else if(allFreeCells.length > 5) amount = 1;
-        console.log(allFreeCells, amount);
+        if(this.props.levelWords[0].length >= 7){
+            if(allFreeCells.length > 15) amount = 4;
+            else if(allFreeCells.length > 5) amount = 2;
+        }else{
+            if(allFreeCells.length > 15) amount = 3;
+            else if(allFreeCells.length > 10) amount = 2;
+            else if(allFreeCells.length > 5) amount = 1;
+        }
         this.addRandomLetters(allFreeCells, amount);
     };
     crosswordOnClick = () => {

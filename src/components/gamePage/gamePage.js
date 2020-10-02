@@ -48,10 +48,23 @@ class GamePage extends Component {
         let progress = this.props.levelProgress[this.props.level];
         this.levelWords = getLevelWords(this.props.level);
         let isDoneLevel = false;
+
+        let progressWordLength = 0;
+        if(progress){
+            for(let i = 0; i < progress.length; i++){
+                if(progress[i] !== true) {
+                    progressWordLength = progress[i].length;
+                    break;
+                }
+            }
+        }
+
+
+
         if(!progress && this.props.level < this.props.lastLevel && !startGameAgain){
             isDoneLevel = true;
             progress = getDoneProgressLevel(this.props.level);
-        }else if(!progress || progress[0].length !== this.levelWords[0].length){
+        }else if(!progress || progressWordLength !== this.levelWords[0].length){
             progress = createLastLevelGameProgress(this.props.level);
 
             this.props.changeLevelProgress(this.props.level, progress);
@@ -105,14 +118,15 @@ class GamePage extends Component {
         setTimeout(()=>{
             if(this.props.isSounds) winSound.play();
         }, 400);
+        console.log(this.props.level, this.props.lastLevel);
         if(this.props.level === this.props.lastLevel){
+            console.log('last level', 'true');
             this.props.increaseLastLevel();
             this.props.addMoney();
             this.setState({
                 addMoney: true
             })
         }else{
-            this.props.addMoney();
             this.setState({
                 addMoney: false
             })
@@ -260,8 +274,11 @@ class GamePage extends Component {
                     
                     switchOffTip={this.switchOffTip}
                 />
-                {this.state.isEnd ? <EndGameWindow nextGame={this.nextGame}
-                addMoney={this.state.addMoney}
+                {this.state.isEnd ?
+                    <EndGameWindow
+                    nextGame={this.nextGame}
+                    addMoney={this.state.addMoney}
+                    level={this.props.level}
                 /> : ''}
             </div>
         );
