@@ -25,6 +25,7 @@ import {createLastLevelGameProgress, getDoneProgressLevel, getLevelWords, tipsCo
 import MenuLink from "../menuLink/menuLink";
 import EndGameWindow from "../endGameWindow/endGameWindow";
 import {winSound} from "../../sounds";
+import {giveParams} from "../../App";
 
 const crosswordRef = React.createRef();
 
@@ -125,7 +126,16 @@ class GamePage extends Component {
             this.props.addMoney();
             this.setState({
                 addMoney: true
-            })
+            });
+            if(this.props.level === 10){
+                giveParams({'level10': 1});
+            }else if(this.props.level === 50){
+                giveParams({'level50': 1});
+            }else if(this.props.level === 150){
+                giveParams({'level150': 150});
+            }else if(this.props.level === 200){
+                giveParams({'level200': 200});
+            }
         }else{
             this.setState({
                 addMoney: false
@@ -171,6 +181,8 @@ class GamePage extends Component {
     };
     getTip = () => {
         this.props.subtractMoney(tipsCost[this.state.tipType]);
+        const paramName =  'tip' + this.state.tipType;
+        giveParams({[paramName]: 1});
         this.switchOffTip();
     };
     switchOffTip = () => {
