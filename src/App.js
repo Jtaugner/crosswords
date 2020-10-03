@@ -124,14 +124,10 @@ export default connect(
     }),
     null,
     (stateProps, dispatchProps) => {
-        console.log('STATE DEF aDV');
-        console.log(stateProps, stateProps.sdk);
         return ({
             ...stateProps,
             ...dispatchProps,
             showAdv: () => {
-                console.log('showAdv');
-                console.log(stateProps.sdk);
                 if(stateProps.sdk && advTime){
                     stateProps.sdk.adv.showFullscreenAdv({
                         callbacks: {

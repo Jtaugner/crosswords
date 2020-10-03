@@ -29,9 +29,7 @@ function getState() {
 // Сохранение данных в аккаунт пользователя Яндекса
 export function saveData() {
     try{
-        console.log('save');
         if (playerGame) {
-            console.log('save player');
             const state = {gameProgress: getState()};
             if(playerGame) playerGame.setData(state).then((ignored) => {}).catch(()=>{});
         }
@@ -52,7 +50,6 @@ function consumePurchase(purchase, payments) {
 
 export function initPlayer(ysdk) {
     ysdk.getPlayer().then(_player => {
-        console.log('initing');
         // Игрок авторизован.
         playerGame = _player;
 
