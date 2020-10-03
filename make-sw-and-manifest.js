@@ -1,6 +1,6 @@
 //Файл для автоматического создания service worker и manifest для игры
 //Сменить цвет игры
-const gameColor = "#309e7e";
+const gameColor = "#b170c1";
 const { promises: fsp } = require('fs');
 
 var fs = require('fs');
