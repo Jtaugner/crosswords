@@ -23,7 +23,6 @@ function Settings(props) {
     const doParams = (id) => {
         giveParams({[id]: 1});
     };
-    console.log(deleteWrongWord, startFromFirstCell);
     return (
         <>
             <div className="blackout settings__blackout" onClick={closeSettings}/>

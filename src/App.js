@@ -63,7 +63,6 @@ class App extends Component {
             return (
                 <>
                     <ErrorMessage
-                        getHome={true}
                         onClick={
                             () => {
                                 this.setState({
