@@ -17,6 +17,7 @@ function Shop(props) {
             showAdv();
             giveParams({'free': 1});
             addMoney(5);
+            return;
         }
         try{
             if(payments){
@@ -55,17 +56,19 @@ function Shop(props) {
             </div>
             {
                 shopItems.map((item, index) => {
-                        return (item !== 'free' || (item === 'free' && advTime)) ?
+                        return (item.id !== 'free' || (item.id === 'free' && advTime)) ?
                             <div
                                 className={'shop__item shop__item_' + index}
                                 key={'shop' + index}
-                                onClick={()=>buyThing(item.id)}
                             >
                                 <div className="shop__icon"/>
                                 <div className="shop__name">
                                     {item.amount} подсказок
                                 </div>
-                                <div className="shop__button_buy">
+                                <div
+                                    className="shop__button_buy"
+                                    onClick={()=>buyThing(item.id)}
+                                >
                                     {item.price} ₽
                                 </div>
                             </div> : ''

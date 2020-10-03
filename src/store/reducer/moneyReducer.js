@@ -13,7 +13,8 @@ export const moneyReducer = (state = gameMoney, action) => {
         const sum = state + action.money;
         localStorage.setItem('gameMoney', String(sum));
         return sum;
-    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.data === 'money'){
+    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.id === 'money'){
+        console.log('money', action);
         return action.data;
     }
     return state;

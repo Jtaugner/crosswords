@@ -1,4 +1,4 @@
-import {getBoolFromLocalStorage, TOGGLE_DELETE_WRONG_WORD, TOGGLE_START_FROM_FIRST_CELL} from "../common";
+import {getBoolFromLocalStorage, TOGGLE_START_FROM_FIRST_CELL} from "../common";
 
 let startFromFirstCell = getBoolFromLocalStorage('startFromFirstCell');
 

@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import MainPage from "./components/mainPage/mainPage";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Settings from "./components/settings";
-import {selectSettings, selectShopOpened} from "./store/selectors";
+import {selectGameSDK, selectSettings, selectShopOpened} from "./store/selectors";
 import GamePage from "./components/gamePage/gamePage";
 import ErrorMessage from "./components/errorMessage/errorMessage";
 
@@ -120,19 +120,20 @@ export default connect(
     ({
         settings: selectSettings(store),
         shopOpened: selectShopOpened(store),
+        sdk: selectGameSDK(store)
     }),
     null,
     (stateProps, dispatchProps) => {
-        let sdk = stateProps.sdk;
-        console.log('asd', sdk);
+        console.log('STATE DEF aDV');
+        console.log(stateProps, stateProps.sdk);
         return ({
             ...stateProps,
             ...dispatchProps,
             showAdv: () => {
                 console.log('showAdv');
-                console.log(sdk);
-                if(sdk && advTime){
-                    sdk.adv.showFullscreenAdv({
+                console.log(stateProps.sdk);
+                if(stateProps.sdk && advTime){
+                    stateProps.sdk.adv.showFullscreenAdv({
                         callbacks: {
                             onClose: function(wasShown) {
                                 if(wasShown){

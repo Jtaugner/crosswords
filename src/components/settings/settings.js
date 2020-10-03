@@ -64,7 +64,7 @@ function Settings(props) {
                     </li>
 
                     <li>
-                        <a href={'https://vk.com/jaugr'} target="_blank" className={'settings__group'}>
+                        <a href={'https://vk.com/jaugr'} target="_blank" rel="noopener noreferrer" className={'settings__group'}>
                             Наша группа ВКонтакте
                         </a>
                     </li>

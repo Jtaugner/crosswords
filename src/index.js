@@ -13,7 +13,7 @@ import {
 import {shopItems} from "./projectCommon";
 import {selectLastLevel, selectLevelProgress, selectMoney, selectOpenedKeyboardWords} from "./store/selectors";
 
-var playerGame, ysdkGame;
+var playerGame;
 
 
 function getState() {
@@ -29,7 +29,9 @@ function getState() {
 // Сохранение данных в аккаунт пользователя Яндекса
 export function saveData() {
     try{
+        console.log('save');
         if (playerGame) {
+            console.log('save player');
             const state = {gameProgress: getState()};
             if(playerGame) playerGame.setData(state).then((ignored) => {}).catch(()=>{});
         }
@@ -48,8 +50,9 @@ function consumePurchase(purchase, payments) {
     saveData();
 }
 
-export function initPlayer(ysdk, fromShop) {
+export function initPlayer(ysdk) {
     ysdk.getPlayer().then(_player => {
+        console.log('initing');
         // Игрок авторизован.
         playerGame = _player;
 
@@ -66,6 +69,7 @@ export function initPlayer(ysdk, fromShop) {
 
         playerGame.getData(['gameProgress'], false).then((data) => {
             const gp = data.gameProgress;
+            console.log('date', gp);
             if(gp){
                 if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
                 if(gp.lastLevel) store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
@@ -105,9 +109,7 @@ function createApp() {
                 initialEntries={['/home']}
                 initialIndex={0}
             >
-                <App
-                    ysdkGame={ysdkGame}
-                />
+                <App/>
             </MemoryRouter>
         </Provider>
 
@@ -121,7 +123,6 @@ if (window.YaGames) {
             .then(ysdk => {
                 store.dispatch(changeGameSDK(ysdk));
                 var isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
-
                 if ('serviceWorker' in navigator && !isNativeCache) {
                     window.onload = function () {
                         navigator.serviceWorker
@@ -135,7 +136,6 @@ if (window.YaGames) {
                     };
                 }
 
-                ysdkGame = ysdk;
                 initPlayer(ysdk);
             });
 } else {

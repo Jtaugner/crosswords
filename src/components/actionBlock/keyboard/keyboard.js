@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './keyboard.scss'
-import {connect} from "react-redux";
 import {isPhone} from "../../../projectCommon";
 
 const letters = [

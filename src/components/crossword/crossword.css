@@ -25,7 +25,6 @@
 }
 
 .crossword__letter {
-  font-family: Ubuntu-Light, sans-serif;
   border-radius: 10px;
   display: flex;
   justify-content: center;

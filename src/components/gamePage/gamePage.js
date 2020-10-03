@@ -14,7 +14,6 @@ import Money from "../money/money";
 import Crossword from "../crossword/crossword";
 import Tips from '../tips/tips'
 import {
-    selectGameSDK,
     selectIsDeleteWrongWord,
     selectLastLevel,
     selectLevel,
@@ -297,8 +296,7 @@ export default connect((store) => ({
         startFromFirstCell: selectStartFromFirstCell(store),
         money: selectMoney(store),
         openedKeyboardWords: selectOpenedKeyboardWords(store),
-        isSounds: selectSounds(store),
-        sdk: selectGameSDK(store)
+        isSounds: selectSounds(store)
     }),
     (dispatch) => ({
         changeLevelProgress: (level, progress) => {

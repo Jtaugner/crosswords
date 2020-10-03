@@ -2,8 +2,7 @@ import {
     CHANGE_FROM_PLAYER_DATA,
     CHANGE_LEVEL_PROGRESS,
     CLEAR_LEVEL_FROM_PROGRESS,
-    getJSONFromLocalStorage,
-    SELECT_LEVEL
+    getJSONFromLocalStorage
 } from "../common";
 import {createLastLevelGameProgress} from "../../projectCommon";
 
@@ -25,7 +24,8 @@ export const levelProgressReducer = (state = levelProgress, action) => {
         delete state[action.level];
         localStorage.setItem('levelProgress', JSON.stringify(state));
         return {...state};
-    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.data === 'levelProgress'){
+    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.id === 'levelProgress'){
+        console.log('levelProgress', action);
         return action.data;
     }
     return state;

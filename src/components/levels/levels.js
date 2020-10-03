@@ -18,10 +18,6 @@ class Levels extends Component {
 
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     selectLevelRef = (div) => {
         this.levelRef = div;
     };

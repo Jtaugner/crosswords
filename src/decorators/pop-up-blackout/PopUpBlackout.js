@@ -1,6 +1,5 @@
 import React from 'react'
 import './index.scss'
-import {Link} from "react-router-dom";
 
 function popUpBlackout(OriginalComponent) {
     //В onClick должна приходить функция закрытия модального окна

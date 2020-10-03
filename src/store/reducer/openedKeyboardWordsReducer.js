@@ -15,7 +15,8 @@ export const openedKeyboardWordsReducer = (state = keyboardProgress, action) => 
         delete state[action.level];
         localStorage.setItem('keyboardProgress', JSON.stringify(state));
         return {...state};
-    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.data === 'openedKeyboardWords'){
+    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.id === 'openedKeyboardWords'){
+        console.log('openedKeyboardWords', action);
         return action.data;
     }
     return state;
