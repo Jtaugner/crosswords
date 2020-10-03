@@ -1,4 +1,4 @@
-import {ADD_OPENED_KEYBOARD, CLEAR_OPENED_KEYBOARD, getJSONFromLocalStorage} from "../common";
+import {ADD_OPENED_KEYBOARD, CHANGE_FROM_PLAYER_DATA, CLEAR_OPENED_KEYBOARD, getJSONFromLocalStorage} from "../common";
 let keyboardProgress = getJSONFromLocalStorage('keyboardProgress',
     {0: []});
 
@@ -15,6 +15,8 @@ export const openedKeyboardWordsReducer = (state = keyboardProgress, action) => 
         delete state[action.level];
         localStorage.setItem('keyboardProgress', JSON.stringify(state));
         return {...state};
+    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.data === 'openedKeyboardWords'){
+        return action.data;
     }
     return state;
 };

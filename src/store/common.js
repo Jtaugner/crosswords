@@ -1,4 +1,4 @@
-export const SHOW_ADV = "SHOW_ADV";
+
 
 
 export const TOGGLE_SETTINGS = "TOGGLE_SETTINGS";
@@ -12,7 +12,7 @@ export const CHANGE_GAME_PAYMENTS = "CHANGE_GAME_PAYMENTS";
 //Покупки за монеты
 export const SUBTRACT_MONEY = "SUBTRACT_MONEY";
 export const ADD_MONEY = "ADD_MONEY";
-export const CHANGE_MONEY_FROM_PLAYER_DATA = "CHANGE_MONEY_FROM_PLAYER_DATA";
+export const CHANGE_FROM_PLAYER_DATA = "CHANGE_FROM_PLAYER_DATA";
 
 
 //Уровни

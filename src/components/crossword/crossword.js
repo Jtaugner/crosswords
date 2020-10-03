@@ -367,6 +367,7 @@ class Crossword extends Component {
             if (wordProgress[i] === 1) word += this.props.levelWords[selectedLine][i];
             else word += wordProgress[i];
         }
+        this.props.showAdv();
         if (compareWords(word, this.props.levelWords[selectedLine])) {
             this.addDoneWord(selectedLine);
             return true;

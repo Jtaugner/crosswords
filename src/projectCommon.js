@@ -1,4 +1,4 @@
-export const YM_METRIKA_ID = 0;
+export const YM_METRIKA_ID = 67896859;
 
 // Алгоритм случайного перемешивания массива
 export const shuffle = (arr)=> {
@@ -252,10 +252,10 @@ export const getLevelWordsDescription = (level, wordIndex) => {
 
 export const tipsCost = [1, 3, 2, 4];
 export const shopItems = [
-    {amount: 10, price: 25},
-    {amount: 50, price: 75},
-    {amount: 100, price: 199},
-    {amount: 5, price: 0},
+    {amount: 25, price: 20, id: 'item1'},
+    {amount: 75, price: 40, id: 'item2'},
+    {amount: 150, price: 70, id: 'item3'},
+    {amount: 5, price: 0, id: 'free'},
 ];
 
 export const tipsDescription = ['Открывает выбранную букву', 'Открывает 5 случайных букв', 'Подсвечивает на клавиатуре буквы из слова', 'Открывает выбранное слово'];

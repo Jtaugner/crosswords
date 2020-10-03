@@ -10,7 +10,7 @@ import GamePage from "./components/gamePage/gamePage";
 import ErrorMessage from "./components/errorMessage/errorMessage";
 
 import {YM_METRIKA_ID} from './projectCommon'
-import {CSSTransition, SwitchTransition, TransitionGroup} from "react-transition-group";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Shop from "./components/shop/shop";
 
 export function giveParams(data) {
@@ -19,6 +19,9 @@ export function giveParams(data) {
     }catch(ignored){}
 }
 let timeout;
+
+//Реклама
+let advTime = true;
 class App extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +38,6 @@ class App extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.location !== this.props.location){
-            console.log('dsd');
             clearTimeout(timeout);
             this.changeCanSwitchPage(false);
             timeout = setTimeout(()=>{
@@ -92,7 +94,7 @@ class App extends Component {
                                    render={() => <MainPage canSwitchPage={this.state.canSwitchPage}/>}
                                    />
                             <Route path={'/game'}
-                                   render={() => <GamePage/>}
+                                   render={() => <GamePage showAdv={this.props.showAdv}/>}
                                    />
 
 
@@ -101,7 +103,11 @@ class App extends Component {
                 </TransitionGroup>
 
                 {this.props.settings ? <Settings/> : ''}
-                {this.props.shopOpened ? <Shop/> : ''}
+                {this.props.shopOpened ?
+                    <Shop
+                        showAdv={this.props.showAdv}
+                        advTime={advTime}
+                /> : ''}
 
             </>
         );
@@ -115,8 +121,32 @@ export default connect(
         settings: selectSettings(store),
         shopOpened: selectShopOpened(store),
     }),
-    (dispatch) =>
-        ({
+    null,
+    (stateProps, dispatchProps) => {
+        let sdk = stateProps.sdk;
+        console.log('asd', sdk);
+        return ({
+            ...stateProps,
+            ...dispatchProps,
+            showAdv: () => {
+                console.log('showAdv');
+                console.log(sdk);
+                if(sdk && advTime){
+                    sdk.adv.showFullscreenAdv({
+                        callbacks: {
+                            onClose: function(wasShown) {
+                                if(wasShown){
+                                    advTime = false;
+                                    setTimeout(()=>{
+                                        advTime = true;
+                                    }, 200000);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
         })
+    }
 
 )(withRouter(App));

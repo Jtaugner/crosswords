@@ -1,18 +1,15 @@
 import {
     ADD_MONEY,
-    ADD_OPENED_KEYBOARD,
+    ADD_OPENED_KEYBOARD, CHANGE_FROM_PLAYER_DATA,
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK,
-    CHANGE_LAST_LEVEL,
     CHANGE_LEVEL_PROGRESS, CLEAR_LEVEL_FROM_PROGRESS,
     CLEAR_OPENED_KEYBOARD,
     INCREASE_LAST_LEVEL,
     INCREASE_LEVEL,
     SELECT_LEVEL,
-    SHOW_ADV,
     SUBTRACT_MONEY,
     TOGGLE_DELETE_WRONG_WORD,
-    TOGGLE_SETTINGS,
     TOGGLE_SHOP_OPENED,
     TOGGLE_SOUNDS,
     TOGGLE_START_FROM_FIRST_CELL
@@ -22,9 +19,6 @@ import {
 
 
 
-export const toggleSettings = () => ({
-    type: TOGGLE_SETTINGS,
-});
 export const toggleSounds = () => ({
     type: TOGGLE_SOUNDS,
 });
@@ -32,9 +26,7 @@ export const changeGameSDK= (gameSDK) => ({
     type: CHANGE_GAME_SDK,
     gameSDK
 });
-export const showAdv = () => ({
-    type: SHOW_ADV
-});
+
 
 export const chooseLevel = (level) => ({
     type: SELECT_LEVEL,
@@ -59,6 +51,12 @@ export const clearLevelFromProgress = (level) => ({
 export const changeGamePayments = (payments) => ({
     type: CHANGE_GAME_PAYMENTS,
     payments
+});
+
+
+export const changeFromPlayerData = (id, data) => ({
+    type: CHANGE_FROM_PLAYER_DATA,
+    id, data
 });
 
 export const toggleDeleteWrongWord = () => ({

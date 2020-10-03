@@ -7,7 +7,6 @@ import {
     addOpenedKeyboard,
     changeLevelProgress, clearLevelFromProgress,
     clearOpenedKeyboardWords, increaseLastLevel, increaseLevel,
-    showAdv,
     subtractMoney,
     toggleShopOpened
 } from "../../store/ac";
@@ -15,6 +14,7 @@ import Money from "../money/money";
 import Crossword from "../crossword/crossword";
 import Tips from '../tips/tips'
 import {
+    selectGameSDK,
     selectIsDeleteWrongWord,
     selectLastLevel,
     selectLevel,
@@ -79,6 +79,8 @@ class GamePage extends Component {
         this.progress = progress;
 
 
+        this.props.showAdv();
+
         return  {
             selectedWordIndex: selectedWordIndex,
             usingTip: false,
@@ -120,7 +122,6 @@ class GamePage extends Component {
         }, 400);
         console.log(this.props.level, this.props.lastLevel);
         if(this.props.level === this.props.lastLevel){
-            console.log('last level', 'true');
             this.props.increaseLastLevel();
             this.props.addMoney();
             this.setState({
@@ -247,6 +248,8 @@ class GamePage extends Component {
 
                     isSounds={this.props.isSounds}
 
+                    showAdv={this.props.showAdv}
+
                 />
 
                 <Tips
@@ -294,10 +297,10 @@ export default connect((store) => ({
         startFromFirstCell: selectStartFromFirstCell(store),
         money: selectMoney(store),
         openedKeyboardWords: selectOpenedKeyboardWords(store),
-        isSounds: selectSounds(store)
+        isSounds: selectSounds(store),
+        sdk: selectGameSDK(store)
     }),
     (dispatch) => ({
-        showAdv: () => dispatch(showAdv()),
         changeLevelProgress: (level, progress) => {
             dispatch(changeLevelProgress(level, progress))
         },

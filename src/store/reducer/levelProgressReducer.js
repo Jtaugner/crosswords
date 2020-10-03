@@ -1,4 +1,10 @@
-import {CHANGE_LEVEL_PROGRESS, CLEAR_LEVEL_FROM_PROGRESS, getJSONFromLocalStorage, SELECT_LEVEL} from "../common";
+import {
+    CHANGE_FROM_PLAYER_DATA,
+    CHANGE_LEVEL_PROGRESS,
+    CLEAR_LEVEL_FROM_PROGRESS,
+    getJSONFromLocalStorage,
+    SELECT_LEVEL
+} from "../common";
 import {createLastLevelGameProgress} from "../../projectCommon";
 
 // Массив, каждые элемент обозначает строку кроссворда:
@@ -19,6 +25,8 @@ export const levelProgressReducer = (state = levelProgress, action) => {
         delete state[action.level];
         localStorage.setItem('levelProgress', JSON.stringify(state));
         return {...state};
+    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.data === 'levelProgress'){
+        return action.data;
     }
     return state;
 };

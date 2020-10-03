@@ -1,4 +1,4 @@
-import {CHANGE_MONEY_FROM_PLAYER_DATA, getFromLocalStorage, SUBTRACT_MONEY} from "../common";
+import {CHANGE_FROM_PLAYER_DATA, getFromLocalStorage, SUBTRACT_MONEY} from "../common";
 import {ADD_MONEY} from "../common";
 
 let gameMoney = getFromLocalStorage('gameMoney', 15);
@@ -13,8 +13,8 @@ export const moneyReducer = (state = gameMoney, action) => {
         const sum = state + action.money;
         localStorage.setItem('gameMoney', String(sum));
         return sum;
-    }else if(action.type === CHANGE_MONEY_FROM_PLAYER_DATA){
-        return action.money;
+    }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.data === 'money'){
+        return action.data;
     }
     return state;
 };

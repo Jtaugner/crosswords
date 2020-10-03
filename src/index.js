@@ -1,14 +1,17 @@
 //Jtaugner (yotik123@yandex.ru) Copyright © 2020
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App, {giveParams} from './App';
 import {Provider} from 'react-redux'
 import {store} from "./store";
 import {MemoryRouter} from "react-router-dom";
 import {
+    addMoney, changeFromPlayerData,
     changeGamePayments,
     changeGameSDK,
 } from "./store/ac";
+import {shopItems} from "./projectCommon";
+import {selectLastLevel, selectLevelProgress, selectMoney, selectOpenedKeyboardWords} from "./store/selectors";
 
 var playerGame, ysdkGame;
 
@@ -16,11 +19,10 @@ var playerGame, ysdkGame;
 function getState() {
     const state = store.getState();
     return {
-        /*
-        Пример, что должно быть в объекте
-        level: selectPlayerLevel(state),
-
-         */
+        money: selectMoney(state),
+        lastLevel: selectLastLevel(state),
+        levelProgress: selectLevelProgress(state),
+        openedKeyboardWords: selectOpenedKeyboardWords(state),
     }
 }
 
@@ -32,6 +34,18 @@ export function saveData() {
             if(playerGame) playerGame.setData(state).then((ignored) => {}).catch(()=>{});
         }
     }catch (ignored) {}
+}
+
+function consumePurchase(purchase, payments) {
+    for(let i = 0; i < shopItems.length; i++){
+        if(shopItems[i].id === purchase.productID){
+            store.dispatch(addMoney(shopItems[i].amount));
+            break;
+        }
+    }
+    giveParams({[purchase.productID]: 1});
+    payments.consumePurchase(purchase.purchaseToken);
+    saveData();
 }
 
 export function initPlayer(ysdk, fromShop) {
@@ -53,6 +67,11 @@ export function initPlayer(ysdk, fromShop) {
         playerGame.getData(['gameProgress'], false).then((data) => {
             const gp = data.gameProgress;
             if(gp){
+                if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
+                if(gp.lastLevel) store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
+                if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
+                if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
+
                 /*
                     Пример измененеия данных
                         store.dispatch(changeExp(gp.exp));
@@ -60,15 +79,18 @@ export function initPlayer(ysdk, fromShop) {
             }else{
                 saveData();
             }
+            ysdk.getPayments({signed: false}).then(_payments => {
+                // Покупки доступны.
+                store.dispatch(changeGamePayments(_payments));
+                _payments.getPurchases().then(purchases => purchases.forEach((id)=>{
+                    consumePurchase(id, _payments);
+                }));
+            }).catch(err => {
+                console.log(err);
+            });
             createApp();
         }).catch((e) => {
             createApp();
-        });
-        ysdk.getPayments({signed: false}).then(_payments => {
-            // Покупки доступны.
-            store.dispatch(changeGamePayments(_payments));
-        }).catch(err => {
-            console.log(err);
         });
     }).catch((e) => {
         console.log(e);
