@@ -25,7 +25,6 @@ export const levelProgressReducer = (state = levelProgress, action) => {
         localStorage.setItem('levelProgress', JSON.stringify(state));
         return {...state};
     }else if(action.type === CHANGE_FROM_PLAYER_DATA && action.id === 'levelProgress'){
-        console.log('levelProgress', action);
         return action.data;
     }
     return state;
