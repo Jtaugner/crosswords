@@ -16,6 +16,8 @@ import {selectLastLevel, selectLevelProgress, selectMoney, selectOpenedKeyboardW
 var playerGame;
 
 
+let recentData = '';
+
 function getState() {
     const state = store.getState();
     return {
@@ -31,6 +33,8 @@ export function saveData() {
     try{
         if (playerGame) {
             const state = {gameProgress: getState()};
+            const newData = JSON.stringify(state);
+            if(newData === recentData) return;
             if(playerGame) playerGame.setData(state).then((ignored) => {}).catch(()=>{});
         }
     }catch (ignored) {}
