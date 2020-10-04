@@ -7,7 +7,7 @@ const letters = [
     ["ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э"],
     ["я", "ч", "с", "м", "и", "т", "ь", "б", "ю"]
 ];
-const pixelsPerLetters = 5;
+const pixelsPerLetters = 3;
 const softSign = 'ь';
 const hardSign = 'ъ';
 

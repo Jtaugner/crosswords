@@ -144,7 +144,10 @@ $settings: #111112;
 }
 .tm{
   background: url(tm.png) center center no-repeat;
-  box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  border: 1px solid rgba(0,0,0,.05);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 6px;
 }
 .my-game{
   width: 140px;

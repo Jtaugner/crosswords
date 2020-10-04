@@ -50,13 +50,19 @@ class GamePage extends Component {
         let isDoneLevel = false;
 
         let progressWordLength = 0;
+        const newProgress = createLastLevelGameProgress(this.props.level);
         if(progress){
-            for(let i = 0; i < progress.length; i++){
-                if(progress[i] !== true) {
-                    progressWordLength = progress[i].length;
-                    break;
+            if(progress.length !== newProgress.length){
+                progressWordLength = -1;
+            }else{
+                for(let i = 0; i < progress.length; i++){
+                    if(progress[i] !== true) {
+                        progressWordLength = progress[i].length;
+                        break;
+                    }
                 }
             }
+
         }
 
 
@@ -65,7 +71,7 @@ class GamePage extends Component {
             isDoneLevel = true;
             progress = getDoneProgressLevel(this.props.level);
         }else if(!progress || progressWordLength !== this.levelWords[0].length){
-            progress = createLastLevelGameProgress(this.props.level);
+            progress = newProgress;
 
             this.props.changeLevelProgress(this.props.level, progress);
         }
