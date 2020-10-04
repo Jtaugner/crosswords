@@ -51,7 +51,7 @@ $settings: #111112;
   color: $settings;
 
   padding-bottom: 5px;
-  border-bottom: 1px solid $settings;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
 
   margin-bottom: 10px;
 }
@@ -144,7 +144,7 @@ $settings: #111112;
 }
 .tm{
   background: url(tm.png) center center no-repeat;
-  box-shadow: 0 0 1px black;
+  box-shadow: 0 0 1px rgba(0,0,0,0.2);
 }
 .my-game{
   width: 140px;

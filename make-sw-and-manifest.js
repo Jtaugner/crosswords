@@ -46,7 +46,7 @@ allFiles = allFiles.map((file) => {
 const allFilesString = allFiles.join(',\n');
 const version = Date.now();
 
-const  contentSW = `var CACHE_NAME = 'v${version}';
+const  contentSW = `var CACHE_NAME = 'brainGame';
 
 this.addEventListener('install', function (event) {
     event.waitUntil(
@@ -55,7 +55,7 @@ this.addEventListener('install', function (event) {
         })
     );
 });
-var CACHE_PREFIX = 'game-v';
+var CACHE_PREFIX = 'game-v${version}';
 
 this.addEventListener('activate', function (event) {
     event.waitUntil(
@@ -103,7 +103,6 @@ const contentManifest = `
 }
 `;
 
-console.log('sw version:', version);
 
 fsp.writeFile(path.join(__dirname, 'build/sw.js'), contentSW);
 fsp.writeFile(path.join(__dirname, 'build/yandex-manifest.json'), contentManifest);

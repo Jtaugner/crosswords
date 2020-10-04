@@ -44,7 +44,7 @@
   font-size: 2rem;
   color: #111112;
   padding-bottom: 5px;
-  border-bottom: 1px solid #111112;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   margin-bottom: 10px;
 }
 
@@ -138,7 +138,7 @@
 
 .tm {
   background: url(tm.png) center center no-repeat;
-  box-shadow: 0 0 1px black;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
 .my-game {
