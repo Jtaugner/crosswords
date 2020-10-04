@@ -46,7 +46,10 @@ allFiles = allFiles.map((file) => {
 const allFilesString = allFiles.join(',\n');
 const version = Date.now();
 
-const  contentSW = `var CACHE_NAME = 'brainGame';
+
+
+
+const  contentSW = `var CACHE_NAME = 'game-v${version}';
 
 this.addEventListener('install', function (event) {
     event.waitUntil(
@@ -55,19 +58,19 @@ this.addEventListener('install', function (event) {
         })
     );
 });
-var CACHE_PREFIX = 'game-v${version}';
+var CACHE_PREFIX = 'brainGame}';
 
 this.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-            console.log('delete ' + cacheName);
-          return caches.delete(cacheName);
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    if (0 === cacheName.indexOf(CACHE_PREFIX)
+                        && cacheName !== CACHE_NAME) return caches.delete(cacheName);
+                })
+            );
         })
-      );
-    })
-  );
+    );
 });
 
 this.addEventListener('fetch', function (event) {
