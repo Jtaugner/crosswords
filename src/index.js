@@ -35,6 +35,7 @@ export function saveData() {
             const state = {gameProgress: getState()};
             const newData = JSON.stringify(state);
             if(newData === recentData) return;
+            recentData = newData;
             if(playerGame) playerGame.setData(state).then((ignored) => {}).catch(()=>{});
         }
     }catch (ignored) {}
