@@ -32,6 +32,9 @@ function useTip1() {
         canUseTip1 = 1;
     }, 1000);
 }
+
+let gameEnds = false;
+
 class Crossword extends Component {
     letterSize = getLetterSize(this.props.levelWords[0].length);
     letterStyle = {
@@ -69,6 +72,7 @@ class Crossword extends Component {
         if(!levelWords && this.props.levelProgress.length > 0){
             selectedCell = this.getNextOrPrevLetter(true, -1);
         }
+        gameEnds = false;
         return {
             selectedCell: selectedCell,
             wrongWords: [],
@@ -241,10 +245,13 @@ class Crossword extends Component {
 
     };
     testWin = () => {
+        if(gameEnds) return;
         const progress = this.props.levelProgress;
         for(let i = 0; i < progress.length; i++){
             if(progress[i] !== true) return;
         }
+        console.log('test win - true');
+        gameEnds = true;
         return this.props.endGame();
     };
 

@@ -57,16 +57,20 @@ this.addEventListener('install', function (event) {
 });
 var CACHE_PREFIX = 'game-v${version}';
 
-this.addEventListener('activate', function (event) {
-    event.waitUntil(
-        caches.keys().then(keyList => {
-            return Promise.all(keyList.map(key => {
-                if (key.indexOf(CACHE_PREFIX) === 0 && key !== CACHE_NAME) {
-                    return caches.delete(key);
-                }
-            }));
+this.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          // Return true if you want to remove this cache,
+          // but remember that caches are shared across
+          // the whole origin
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
         })
-    );
+      );
+    })
+  );
 });
 
 this.addEventListener('fetch', function (event) {

@@ -114,6 +114,8 @@ class GamePage extends Component {
     };
 
     endGame = () => {
+        console.log('end Game test');
+        if(this.state.isEnd) return;
         this.setState({isEnd: true});
         this.props.clearOpenedKeyboardWords(this.props.level);
         this.props.clearLevelFromProgress(this.props.level);
@@ -122,6 +124,8 @@ class GamePage extends Component {
         }, 400);
         console.log(this.props.level, this.props.lastLevel);
         if(this.props.level === this.props.lastLevel){
+            console.log('end Game');
+            console.trace();
             this.props.increaseLastLevel();
             this.props.addMoney();
             this.setState({
