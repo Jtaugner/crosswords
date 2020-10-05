@@ -277,6 +277,7 @@ class GamePage extends Component {
                     usingTip={this.state.usingTip}
 
                     levelWords={this.levelWords}
+                    progress={this.progress}
 
                     startLevelAgain={this.startLevelAgain}
 
