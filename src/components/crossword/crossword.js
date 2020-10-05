@@ -90,13 +90,14 @@ class Crossword extends Component {
         clearTimeout(timeout2);
         if(this.props.usingTip){
             if(this.props.tipType === 1) return;
-            if(this.props.tipType === 2){
-                if(this.props.openedKeyboardWords && this.props.openedKeyboardWords.includes(wordIndex)) return;
+            else if(this.props.tipType === 2){
+                if(
+                    (this.props.openedKeyboardWords && this.props.openedKeyboardWords.includes(wordIndex))
+                    || this.props.levelProgress[wordIndex] === true) return;
                 this.props.addOpenedKeyboard(wordIndex);
                 if(this.props.isSounds) openKeyboardSound.play();
                 this.props.getTip();
-            }
-            if(this.props.tipType === 3){
+            }else if(this.props.tipType === 3){
                 if(this.props.levelProgress[wordIndex] === true) return;
                 this.props.levelProgress[wordIndex] = true;
                 this.changeLevelProgress();
@@ -121,7 +122,8 @@ class Crossword extends Component {
         if(this.props.levelProgress[line] === true) return -1;
         if (isNext && newIndex < this.props.levelWords[0].length - 1) {
             for (let i = newIndex + 1; i < this.props.levelWords[0].length; i++) {
-                if(this.props.levelProgress[line][i] === 0){
+                if(this.props.levelProgress[line][i] === 0 ||
+                    (!this.props.startFromFirstCell && this.props.levelProgress[line][i] !== 1)){
                     newIndex = i;
                     break;
                 }
@@ -197,6 +199,7 @@ class Crossword extends Component {
         let index;
         if(wordIndex !== undefined) index = wordIndex;
         else index = this.props.selectedWordIndex;
+
 
         if (this.testWord(index)) {
             this.addRightWords([index]);
