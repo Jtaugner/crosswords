@@ -21,6 +21,16 @@ const lettersTranslitMap = {
     'q' : 'й', 'w' : 'ц', 'e' : 'у', 'r' : 'к', 't' : 'е', 'y' : 'н', 'u' : 'г', 'i' : 'ш', 'o' : 'щ', 'p' : 'з', '[' : 'х', ']' : 'ъ', 'a' : 'ф', 's' : 'ы', 'd' : 'в', 'f' : 'а', 'g' : 'п', 'h' : 'р', 'j' : 'о', 'k' : 'л', 'l' : 'д', ';' : 'ж', '\'' : 'э', 'z' : 'я', 'x' : 'ч', 'c' : 'с', 'v' : 'м', 'b' : 'и', 'n' : 'т', 'm' : 'ь', ',' : 'б', '.' : 'ю'
 };
 
+function deletePoint(exp) {
+    try{
+        if(exp[exp.length-1] === "."){
+            return exp.substr(0, exp.length-1);
+        }
+    }catch(ignored){}
+    return  exp;
+
+}
+
 class ActionBlock extends Component{
 
 
@@ -78,7 +88,7 @@ class ActionBlock extends Component{
 
     };
     render(){
-        const wordDescription = getLevelWordsDescription(this.props.level, this.props.selectedWordIndex);
+        const wordDescription = deletePoint(getLevelWordsDescription(this.props.level, this.props.selectedWordIndex));
         return (
             <div
                 className={'actionBlock'}
