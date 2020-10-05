@@ -8,21 +8,27 @@ import {shopItems} from "../../projectCommon";
 import {initPlayer, saveData} from "../../index";
 import {giveParams} from "../../App";
 
-let canGetTips = true;
+
+let videoTime = true;
 
 function Shop(props) {
-    const {onClick, payments, gameSDK, addMoney, advTime, showAdv} = props;
+    const {onClick, payments, gameSDK, addMoney} = props;
     const buyThing = (id) => {
         if(id === 'free'){
-            if(!advTime && !canGetTips) return;
-            canGetTips = false;
-            setTimeout(()=>{
-                canGetTips = true;
-            }, 300000);
-            showAdv();
-            giveParams({'free': 1});
-            addMoney(5);
-            onClick();
+            if(!videoTime) return;
+            gameSDK.adv.showRewardedVideo({
+                callbacks: {
+                    onRewarded: () => {
+                        giveParams({'free': 1});
+                        addMoney(5);
+                        onClick();
+                        videoTime = false;
+                        setTimeout(()=>{
+                            videoTime = true;
+                        }, 300000);
+                    }
+                }
+            });
             return;
         }
         try{
@@ -63,7 +69,7 @@ function Shop(props) {
             {
                 shopItems.map((item, index) => {
                         return (item.id !== 'free'
-                            || (item.id === 'free' && advTime && canGetTips)) ?
+                            || (item.id === 'free' && videoTime)) ?
                             <div
                                 className={'shop__item shop__item_' + index}
                                 key={'shop' + index}

@@ -104,10 +104,7 @@ class App extends Component {
 
                 {this.props.settings ? <Settings/> : ''}
                 {this.props.shopOpened ?
-                    <Shop
-                        showAdv={this.props.showAdv}
-                        advTime={advTime}
-                /> : ''}
+                    <Shop/> : ''}
 
             </>
         );
