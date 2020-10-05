@@ -58,6 +58,8 @@ $doneLevel: #ae90b7;
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
+
+    display: -webkit-box;
   }
   .levels .levels__line:nth-child(odd){
     padding-left: 75px;
