@@ -19,7 +19,7 @@ export function giveParams(data) {
     }catch(ignored){}
 }
 let timeout;
-console.log('V-2');
+console.log('V-3');
 
 //Реклама
 let advTime = true;
