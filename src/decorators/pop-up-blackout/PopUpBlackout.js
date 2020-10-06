@@ -1,10 +1,12 @@
 import React from 'react'
 import './index.scss'
+import {Link} from "react-router-dom";
 
 function popUpBlackout(OriginalComponent) {
     //В onClick должна приходить функция закрытия модального окна
     return (props) => {
-        return <div className={'pop-up-anim'}>
+
+        const Comp = <div className={'pop-up-anim'}>
             <div className={'blackout'} onClick={props.onClick}/>
             <OriginalComponent
                 {...props}
@@ -12,6 +14,12 @@ function popUpBlackout(OriginalComponent) {
             />
 
         </div>;
+        if(props.getHome) {
+            return <Link to={'/home'}>
+                {Comp}
+            </Link>
+        }
+        return Comp;
     }
 
 }

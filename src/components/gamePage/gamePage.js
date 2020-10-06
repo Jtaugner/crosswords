@@ -155,7 +155,14 @@ class GamePage extends Component {
 
     scrollToWord = (ref) => {
         if(ref){
-            ref.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
+            try{
+                ref.scrollIntoView({behavior: 'smooth', block: "center", inline: "center"});
+            }catch(ignored){
+                try{
+                    ref.scrollIntoView();
+                }catch(ign){}
+            }
+
         }
     };
 

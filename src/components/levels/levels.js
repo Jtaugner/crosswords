@@ -13,7 +13,14 @@ class Levels extends Component {
 
     componentDidMount() {
         if(this.levelRef){
-            this.levelRef.scrollIntoView({behavior: 'auto', block: "center", inline: "center"});
+            try{
+                this.levelRef.scrollIntoView({behavior: 'auto', block: "center", inline: "center"});
+            }catch(ignored){
+                try{
+                    this.levelRef.scrollIntoView();
+                }catch(ign){}
+            }
+
         }
 
     }

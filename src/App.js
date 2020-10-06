@@ -51,6 +51,8 @@ class App extends Component {
     componentDidCatch(error, info) {
         // Послать ошибку в яндекс метрику
         try{
+            console.log(info);
+            console.log(error);
             const str = error.toString() + '---' + info.componentStack.slice(0, 150);
             giveParams({[str]: 1})
         }catch(ignored){}
@@ -70,7 +72,9 @@ class App extends Component {
                                     isError: false
                                 })
                             }
-                        }/>
+                        }
+                        getHome={true}
+                    />
                 </>
             )
         }

@@ -97,6 +97,7 @@ class Crossword extends Component {
                 this.props.addOpenedKeyboard(wordIndex);
                 if(this.props.isSounds) openKeyboardSound.play();
                 this.props.getTip();
+                this.getFirstFreeCellInLine(wordIndex);
             }else if(this.props.tipType === 3){
                 if(this.props.levelProgress[wordIndex] === true) return;
                 this.props.levelProgress[wordIndex] = true;

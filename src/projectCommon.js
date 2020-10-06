@@ -234,7 +234,7 @@ export const getDoneProgressLevel = (level) => {
     const length = gameLevels[level].levelWords.length;
     const progress = [];
     for(let i = 0; i < length; i++) progress.push(true);
-    return progress;;
+    return progress;
 };
 export const createLastLevelGameProgress = (level) => {
     const words = gameLevels[level].levelWords;
@@ -243,11 +243,15 @@ export const createLastLevelGameProgress = (level) => {
 
 export const getLevelWordsDescription = (level, wordIndex) => {
     if(wordIndex === -1) return  '';
-    return gameLevels[level].levelWordsDescriptions
-        [
+    let desc = '';
+    try{
+        desc = gameLevels[level].levelWordsDescriptions
+            [
             getLevelWords(level)[wordIndex]
                 .toUpperCase()
-        ];
+            ];
+    }catch (ignored) {}
+    return desc;
 };
 
 export const tipsCost = [1, 3, 3, 5];
