@@ -25,7 +25,7 @@ import {createLastLevelGameProgress, getDoneProgressLevel, getLevelWords, tipsCo
 import MenuLink from "../menuLink/menuLink";
 import EndGameWindow from "../endGameWindow/endGameWindow";
 import {winSound} from "../../sounds";
-import {giveParams} from "../../App";
+import {giveParams, reachGoal} from "../../App";
 
 const crosswordRef = React.createRef();
 
@@ -134,13 +134,13 @@ class GamePage extends Component {
                 addMoney: true
             });
             if(this.props.level === 10){
-                giveParams({'level10': 1});
+                reachGoal('level10');
             }else if(this.props.level === 50){
-                giveParams({'level50': 1});
-            }else if(this.props.level === 150){
-                giveParams({'level150': 150});
-            }else if(this.props.level === 200){
-                giveParams({'level200': 200});
+                reachGoal('level50');
+            }else if(this.props.level === 199){
+                reachGoal('level200');
+            } else if(this.props.level === 290){
+                reachGoal('level290');
             }
         }else{
             this.setState({

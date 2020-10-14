@@ -13,13 +13,20 @@ import {YM_METRIKA_ID} from './projectCommon'
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Shop from "./components/shop/shop";
 
+export function reachGoal(goal) {
+    try{
+        window.ym(YM_METRIKA_ID,'reachGoal', goal)
+    }catch(ignored){}
+}
 export function giveParams(data) {
     try{
         window.ym(YM_METRIKA_ID, 'params', data);
     }catch(ignored){}
 }
+
+
 let timeout;
-console.log('V-3');
+console.log('V-4');
 
 //Реклама
 let advTime = true;
