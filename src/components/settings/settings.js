@@ -30,14 +30,14 @@ function Settings(props) {
                 <div className="settings__header">Настройки</div>
                 <ul>
                     <li>
-                            <input type="checkbox"
-                                   onChange={toggleSounds}
-                                   checked={sounds}
-                                   id="musicCheckbox" className="checkbox" />
-                            <label
-                                htmlFor="musicCheckbox">
-                                Звук
-                            </label>
+                        <input type="checkbox"
+                               onChange={toggleSounds}
+                               checked={sounds}
+                               id="musicCheckbox" className="checkbox" />
+                        <label
+                            htmlFor="musicCheckbox">
+                            Звук
+                        </label>
                     </li>
 
                     <li>
@@ -67,12 +67,12 @@ function Settings(props) {
                            target="_blank"
                            rel="noopener noreferrer"
                            className={'settings__group'}
-                            onClick={()=>{
-                                try{
-                                    giveParams({'openVK': 1});
-                                }catch(ignored){}
+                           onClick={()=>{
+                               try{
+                                   giveParams({'openVK': 1});
+                               }catch(ignored){}
 
-                            }}
+                           }}
                         >
                             Наша группа ВКонтакте
                         </a>
@@ -86,7 +86,7 @@ function Settings(props) {
                         games.map((obj)=>{
                             return  <li key={obj.id} onClick={()=>doParams(obj.id)}>
                                 <a href={"https://yandex.ru/games/play/" + obj.id} target="_blank"
-                                rel="noopener noreferrer"
+                                   rel="noopener noreferrer"
                                 >
                                     <div className={"my-game " + obj.classGame} />
                                 </a>

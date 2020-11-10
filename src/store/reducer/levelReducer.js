@@ -1,6 +1,8 @@
-import {INCREASE_LEVEL, SELECT_LEVEL} from "../common";
+import {getFromLocalStorage, INCREASE_LEVEL, SELECT_LEVEL} from "../common";
 
-export const levelReducer = (state = 0, action) => {
+let lastLevel = getFromLocalStorage('lastLevel', 0);
+
+export const levelReducer = (state = lastLevel, action) => {
     if(action.type === SELECT_LEVEL){
         return action.level;
     }else if(action.type === INCREASE_LEVEL){

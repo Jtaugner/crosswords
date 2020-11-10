@@ -108,7 +108,7 @@ function createApp() {
     ReactDOM.render(
         <Provider store={store}>
             <MemoryRouter
-                initialEntries={['/home']}
+                initialEntries={['/game']}
                 initialIndex={0}
             >
                 <App/>
