@@ -8,10 +8,15 @@ import {MemoryRouter} from "react-router-dom";
 import {
     addMoney, changeFromPlayerData,
     changeGamePayments,
-    changeGameSDK,
+    changeGameSDK, chooseLevel,
 } from "./store/ac";
 import {shopItems} from "./projectCommon";
-import {selectLastLevel, selectLevelProgress, selectMoney, selectOpenedKeyboardWords} from "./store/selectors";
+import {
+    selectLastLevel,
+    selectLevelProgress,
+    selectMoney,
+    selectOpenedKeyboardWords
+} from "./store/selectors";
 
 var playerGame;
 
@@ -74,7 +79,10 @@ export function initPlayer(ysdk) {
             console.log('date', gp);
             if(gp){
                 if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
-                if(gp.lastLevel) store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
+                if(gp.lastLevel) {
+                    store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
+                    store.dispatch(chooseLevel(gp.lastLevel));
+                }
                 if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
                 if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
 
