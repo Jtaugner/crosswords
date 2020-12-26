@@ -25,6 +25,13 @@
   cursor: pointer;
 }
 
+.keyboard__visualTip {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  font-size: 0.5em;
+}
+
 .keyboard__line .keyboard__letter:last-child {
   margin-right: 0;
 }
@@ -65,6 +72,11 @@
   .keyboard__deleteButton {
     background-size: 65%;
   }
+
+  .keyboard__visualTip {
+    right: 5px;
+    font-size: 0.65em;
+  }
 }
 @media (min-width: 800px) {
   .keyboard {
@@ -75,6 +87,10 @@
 
   .keyboard__deleteButton {
     background-size: 55%;
+  }
+
+  .keyboard__visualTip {
+    right: 6px;
   }
 }
 

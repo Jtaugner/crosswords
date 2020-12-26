@@ -132,6 +132,11 @@ function Keyboard(props) {
                                     key={'letter' + letter}
                                 >
                                     {letter === softSign ? chooseSoftLetter(letter) : letter}
+                                    {
+                                        letter === softSign ?
+                                            <div className={'keyboard__visualTip'}>ъ</div>
+                                            : ''
+                                    }
                                     <div
                                         className="keyboard__letter keyboard__letterTip"
                                         style={{width:  getLetterTipSize()}}
