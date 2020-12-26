@@ -132,6 +132,23 @@ html, body, #root {
 }
 
 @media (min-width: 600px) {
+  .slide-enter,
+.slide-exit {
+    transition: opacity 1000ms ease-in-out;
+  }
+
+  .slide-exit, .slide-enter {
+    opacity: 1;
+  }
+
+  .slide-exit-active {
+    opacity: 0;
+  }
+
+  .transGroupMenu .slide-exit-active {
+    transform: none;
+  }
+
   .icon {
     width: 45px;
     height: 45px;
