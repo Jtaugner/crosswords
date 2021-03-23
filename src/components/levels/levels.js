@@ -79,18 +79,12 @@ class Levels extends Component {
         };
         if(window.innerWidth >= 600){
             let k = 0;
-            let isReverse = false;
             levelList = [[], [], [], [], []];
             for (let i = 0; i < gameLevelsLength; i++) {
                 levelList[k].push(addLevel(i));
-                if(isReverse) k--;
-                else k++;
+                k++
                 if(k === 5) {
-                    k = 4;
-                    isReverse = true;
-                }else if(k === -1){
                     k = 0;
-                    isReverse = false;
                 }
             }
 
