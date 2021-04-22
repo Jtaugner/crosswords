@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import {store} from "./store";
 import {MemoryRouter} from "react-router-dom";
 import {
-    addMoney, changeFromPlayerData,
+    addMoney, changeFromPlayerData, changeGameCatalog,
     changeGamePayments,
     changeGameSDK, chooseLevel,
 } from "./store/ac";
@@ -79,29 +79,15 @@ export function initPlayer(ysdk) {
             console.log('date', gp);
             if(gp){
                 if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
+                if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
+                if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
                 if(gp.lastLevel) {
                     store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
                     store.dispatch(chooseLevel(gp.lastLevel));
                 }
-                if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
-                if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
-
-                /*
-                    Пример измененеия данных
-                        store.dispatch(changeExp(gp.exp));
-                 */
             }else{
                 saveData();
             }
-            ysdk.getPayments({signed: false}).then(_payments => {
-                // Покупки доступны.
-                store.dispatch(changeGamePayments(_payments));
-                _payments.getPurchases().then(purchases => purchases.forEach((id)=>{
-                    consumePurchase(id, _payments);
-                }));
-            }).catch(err => {
-                console.log(err);
-            });
             createApp();
         }).catch((e) => {
             createApp();
@@ -109,6 +95,17 @@ export function initPlayer(ysdk) {
     }).catch((e) => {
         console.log(e);
         createApp();
+    });
+
+    ysdk.getPayments({signed: false}).then(_payments => {
+        _payments.getCatalog().then(catalog => store.dispatch(changeGameCatalog(catalog)) );
+        // Покупки доступны.
+        store.dispatch(changeGamePayments(_payments));
+        _payments.getPurchases().then(purchases => purchases.forEach((id)=>{
+            consumePurchase(id, _payments);
+        }));
+    }).catch(err => {
+        console.log(err);
     });
 }
 
@@ -133,6 +130,9 @@ if (window.YaGames) {
             .then(ysdk => {
                 store.dispatch(changeGameSDK(ysdk));
                 var isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
+
+                console.log(ysdk.environment.i18n);
+
                 if ('serviceWorker' in navigator && !isNativeCache) {
                     window.onload = function () {
                         navigator.serviceWorker

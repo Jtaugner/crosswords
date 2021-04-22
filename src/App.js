@@ -29,7 +29,10 @@ let timeout;
 console.log('V-4');
 
 //Реклама
-let advTime = true;
+let advTime = false;
+setTimeout(()=>{
+     advTime = true;
+}, 20000);
 class App extends Component {
     constructor(props) {
         super(props);

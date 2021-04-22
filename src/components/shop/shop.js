@@ -1,7 +1,7 @@
 import React from 'react';
 import './shop.scss'
 import {connect} from "react-redux";
-import {selectGameSDK, selectMoney, selectPayments} from "../../store/selectors";
+import {selectCatalog, selectGameSDK, selectMoney, selectPayments} from "../../store/selectors";
 import {addMoney, toggleShopOpened} from "../../store/ac";
 import popUpBlackout from "../../decorators/pop-up-blackout/PopUpBlackout";
 import {shopItems} from "../../projectCommon";
@@ -12,7 +12,7 @@ import {giveParams} from "../../App";
 let videoTime = true;
 
 function Shop(props) {
-    const {onClick, payments, gameSDK, addMoney} = props;
+    const {onClick, payments, gameSDK, addMoney, catalog} = props;
     const buyThing = (id) => {
         if(id === 'free'){
             if(!videoTime) return;
@@ -60,6 +60,14 @@ function Shop(props) {
         }catch (ignored) {}
 
     };
+    const getPrice = (item, index) => {
+        try{
+            console.log(catalog[index].price);
+            return catalog[index].price;
+        }catch(e){
+            return item.price + '₽';
+        }
+    }
     return (
         <div className="shop popUp">
             <div className="popUp__header">
@@ -82,7 +90,7 @@ function Shop(props) {
                                     className="shop__button_buy"
                                     onClick={()=>buyThing(item.id)}
                                 >
-                                    {item.price} ₽
+                                    {getPrice(item, index)}
                                 </div>
                             </div> : ''
 
@@ -97,6 +105,7 @@ export default connect(
         money: selectMoney(store),
         gameSDK: selectGameSDK(store),
         payments: selectPayments(store),
+        catalog: selectCatalog(store)
     }),
     (dispatch) => ({
         onClick: () => dispatch(toggleShopOpened()),

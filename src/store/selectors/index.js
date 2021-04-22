@@ -17,3 +17,4 @@ export const selectStartFromFirstCell= (store) => store.startFromFirstCell;
 
 export const selectShopOpened = (store) => store.shopOpened;
 export const selectOpenedKeyboardWords = (store) => store.openedKeyboardWords;
+export const selectCatalog = (store) => store.catalog;

@@ -1,6 +1,6 @@
 import {
     ADD_MONEY,
-    ADD_OPENED_KEYBOARD, CHANGE_FROM_PLAYER_DATA,
+    ADD_OPENED_KEYBOARD, CHANGE_FROM_PLAYER_DATA, CHANGE_GAME_CATALOG,
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK,
     CHANGE_LEVEL_PROGRESS, CLEAR_LEVEL_FROM_PROGRESS,
@@ -52,7 +52,10 @@ export const changeGamePayments = (payments) => ({
     type: CHANGE_GAME_PAYMENTS,
     payments
 });
-
+export const changeGameCatalog = (catalog) => ({
+    type: CHANGE_GAME_CATALOG,
+    catalog
+});
 
 export const changeFromPlayerData = (id, data) => ({
     type: CHANGE_FROM_PLAYER_DATA,
