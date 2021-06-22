@@ -10,7 +10,7 @@ import {
     changeGamePayments,
     changeGameSDK, chooseLevel,
 } from "./store/ac";
-import {shopItems} from "./projectCommon";
+import {gameLevels, shopItems} from "./projectCommon";
 import {
     selectLastLevel,
     selectLevelProgress,
@@ -47,15 +47,17 @@ export function saveData() {
 }
 
 function consumePurchase(purchase, payments) {
-    for(let i = 0; i < shopItems.length; i++){
-        if(shopItems[i].id === purchase.productID){
-            store.dispatch(addMoney(shopItems[i].amount));
-            break;
+    try{
+        for(let i = 0; i < shopItems.length; i++){
+            if(shopItems[i].id === purchase.productID){
+                store.dispatch(addMoney(shopItems[i].amount));
+                break;
+            }
         }
-    }
-    giveParams({[purchase.productID]: 1});
-    payments.consumePurchase(purchase.purchaseToken);
-    saveData();
+        giveParams({[purchase.productID]: 1});
+        payments.consumePurchase(purchase.purchaseToken);
+        saveData();
+    }catch(e){}
 }
 
 export function initPlayer(ysdk) {
@@ -83,7 +85,9 @@ export function initPlayer(ysdk) {
                 if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
                 if(gp.lastLevel) {
                     store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
-                    store.dispatch(chooseLevel(gp.lastLevel));
+                    store.dispatch(
+                        chooseLevel(gp.lastLevel >= gameLevels.length ? gameLevels.length-1 : gp.lastLevel)
+                    );
                 }
             }else{
                 saveData();
@@ -131,7 +135,6 @@ if (window.YaGames) {
                 store.dispatch(changeGameSDK(ysdk));
                 var isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
 
-                console.log(ysdk.environment.i18n);
 
                 if ('serviceWorker' in navigator && !isNativeCache) {
                     window.onload = function () {
