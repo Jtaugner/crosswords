@@ -12,6 +12,7 @@ import {startFromFirstCellReducer} from "./startFromFirstCellReducer";
 import {shopOpenedReducer} from "./shopOpenedReducer";
 import {openedKeyboardWordsReducer} from "./openedKeyboardWordsReducer";
 import {gameCatalogReducer} from "./gameCatalogReducer";
+import {playerSDKReducer} from "./playerSDKReducer";
 
 const reducer = combineReducers({
     settings: settingsReducer,
@@ -26,7 +27,8 @@ const reducer = combineReducers({
     startFromFirstCell:  startFromFirstCellReducer,
     shopOpened: shopOpenedReducer,
     openedKeyboardWords: openedKeyboardWordsReducer,
-    catalog: gameCatalogReducer
+    catalog: gameCatalogReducer,
+    player: playerSDKReducer
 
 });
 

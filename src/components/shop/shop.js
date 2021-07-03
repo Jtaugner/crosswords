@@ -1,7 +1,7 @@
 import React from 'react';
 import './shop.scss'
 import {connect} from "react-redux";
-import {selectCatalog, selectGameSDK, selectMoney, selectPayments} from "../../store/selectors";
+import {selectCatalog, selectGameSDK, selectMoney, selectPayments, selectPlayer} from "../../store/selectors";
 import {addMoney, toggleShopOpened} from "../../store/ac";
 import popUpBlackout from "../../decorators/pop-up-blackout/PopUpBlackout";
 import {shopItems} from "../../projectCommon";
@@ -12,7 +12,7 @@ import {giveParams} from "../../App";
 let videoTime = true;
 
 function Shop(props) {
-    const {onClick, payments, gameSDK, addMoney, catalog} = props;
+    const {onClick, payments, gameSDK, addMoney, catalog, player} = props;
     const buyThing = (id) => {
         if(id === 'free'){
             if(!videoTime) return;
@@ -32,7 +32,8 @@ function Shop(props) {
             return;
         }
         try{
-            if(payments){
+            console.log(payments, player);
+            if(payments && player){
                 payments.purchase(id).then(purchase => {
                     if(purchase.productID === id){
                         for(let i = 0; i < shopItems.length; i++){
@@ -43,7 +44,9 @@ function Shop(props) {
                         }
                         giveParams({[id]: 1});
                         payments.consumePurchase(purchase.purchaseToken);
-                        saveData();
+                        setTimeout(()=>{
+                            saveData();
+                        }, 1000);
                     }
                 }).catch((e)=>{
                     console.log("PAYMENTS ERROR: " + e);
@@ -105,7 +108,8 @@ export default connect(
         money: selectMoney(store),
         gameSDK: selectGameSDK(store),
         payments: selectPayments(store),
-        catalog: selectCatalog(store)
+        catalog: selectCatalog(store),
+        player: selectPlayer(store)
     }),
     (dispatch) => ({
         onClick: () => dispatch(toggleShopOpened()),

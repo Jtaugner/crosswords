@@ -169,7 +169,7 @@ html, body, #root {
     width: 10px;
   }
 }
-@media (min-width: 600px) and (min-height: 750px) {
+@media (min-width: 600px) {
   #root, .mainPage, .gamePage {
     background: url(assets/images/background_desktop.png) center center no-repeat;
     background-size: cover;

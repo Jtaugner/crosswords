@@ -8,7 +8,7 @@ import {MemoryRouter} from "react-router-dom";
 import {
     addMoney, changeFromPlayerData, changeGameCatalog,
     changeGamePayments,
-    changeGameSDK, chooseLevel,
+    changeGameSDK, changePlayer, chooseLevel,
 } from "./store/ac";
 import {gameLevels, shopItems} from "./projectCommon";
 import {
@@ -62,6 +62,7 @@ function consumePurchase(purchase, payments) {
 
 export function initPlayer(ysdk) {
     ysdk.getPlayer().then(_player => {
+        console.log('INIT PLAYER');
         // Игрок авторизован.
         playerGame = _player;
 
@@ -75,6 +76,8 @@ export function initPlayer(ysdk) {
         setInterval(()=>{
             saveData();
         }, 60000);
+
+        store.dispatch(changePlayer( _player));
 
         playerGame.getData(['gameProgress'], false).then((data) => {
             const gp = data.gameProgress;

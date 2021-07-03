@@ -3,7 +3,7 @@ import {
     ADD_OPENED_KEYBOARD, CHANGE_FROM_PLAYER_DATA, CHANGE_GAME_CATALOG,
     CHANGE_GAME_PAYMENTS,
     CHANGE_GAME_SDK,
-    CHANGE_LEVEL_PROGRESS, CLEAR_LEVEL_FROM_PROGRESS,
+    CHANGE_LEVEL_PROGRESS, CHANGE_PLAYER_SDK, CLEAR_LEVEL_FROM_PROGRESS,
     CLEAR_OPENED_KEYBOARD,
     INCREASE_LAST_LEVEL,
     INCREASE_LEVEL,
@@ -56,6 +56,10 @@ export const changeGameCatalog = (catalog) => ({
     type: CHANGE_GAME_CATALOG,
     catalog
 });
+export const changePlayer = (player) => ({
+    type: CHANGE_PLAYER_SDK,
+    player
+})
 
 export const changeFromPlayerData = (id, data) => ({
     type: CHANGE_FROM_PLAYER_DATA,
