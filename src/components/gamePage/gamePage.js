@@ -128,7 +128,6 @@ class GamePage extends Component {
         setTimeout(()=>{
             if(this.props.isSounds) winSound.play();
         }, 400);
-        saveData();
         if(this.props.level === this.props.lastLevel){
             this.props.increaseLastLevel();
             this.props.addMoney();
@@ -149,6 +148,7 @@ class GamePage extends Component {
                 addMoney: false
             })
         }
+        saveData();
     };
 
     changeWordRef = (ref) => {

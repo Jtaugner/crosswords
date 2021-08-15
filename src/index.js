@@ -36,6 +36,7 @@ function getState() {
 // Сохранение данных в аккаунт пользователя Яндекса
 export function saveData() {
     try{
+        console.log('saveData');
         if (playerGame) {
             const state = {gameProgress: getState()};
             const newData = JSON.stringify(state);
