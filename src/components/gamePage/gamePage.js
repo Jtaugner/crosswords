@@ -26,6 +26,7 @@ import MenuLink from "../menuLink/menuLink";
 import EndGameWindow from "../endGameWindow/endGameWindow";
 import {winSound} from "../../sounds";
 import {giveParams, reachGoal} from "../../App";
+import {saveData} from "../../index";
 
 const crosswordRef = React.createRef();
 
@@ -127,6 +128,7 @@ class GamePage extends Component {
         setTimeout(()=>{
             if(this.props.isSounds) winSound.play();
         }, 400);
+        saveData();
         if(this.props.level === this.props.lastLevel){
             this.props.increaseLastLevel();
             this.props.addMoney();
