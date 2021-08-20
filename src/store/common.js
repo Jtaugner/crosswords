@@ -61,8 +61,16 @@ export const getJSONFromLocalStorage = (name, defaultVal) => {
 
 };
 
+export const getSec = () => {
+    let date = new Date();
+    return date.getTime()
+}
+
 export const setElementToLocalStorage = (name, val) => {
     try {
+        if(name === 'lastLevel'){
+            localStorage.setItem('time', getSec());
+        }
         localStorage.setItem(name, val);
     } catch (e) {}
 }

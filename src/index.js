@@ -17,6 +17,7 @@ import {
     selectMoney,
     selectOpenedKeyboardWords
 } from "./store/selectors";
+import {getFromLocalStorage, getSec} from "./store/common";
 
 var playerGame;
 
@@ -30,6 +31,7 @@ function getState() {
         lastLevel: selectLastLevel(state),
         levelProgress: selectLevelProgress(state),
         openedKeyboardWords: selectOpenedKeyboardWords(state),
+        time: getSec()
     }
 }
 
@@ -83,6 +85,34 @@ export function initPlayer(ysdk) {
         playerGame.getData(['gameProgress'], false).then((data) => {
             const gp = data.gameProgress;
             console.log('date', gp);
+            //Вовзврат прогресса
+            try{
+                let llsmz = localStorage.getItem('llsmz');
+                if(!llsmz){
+                    const ss = new URLSearchParams(window.location.search);
+                    let lvl = Number(ss.get('llsmz'));
+                    if(lvl >= gp.lastLevel){
+                        gp.lastLevel = lvl;
+                    }
+                }
+                localStorage.setItem('llsmz', 'true');
+                let time = localStorage.getItem('time');
+
+
+                if(time){
+                    time = Number(time);
+                    if(gp.time && time > gp.time){
+                        let lastLevel = getFromLocalStorage('lastLevel', 0);
+                        if(lastLevel > gp.lastLevel){
+                            gp.lastLevel = lastLevel;
+                        }
+                    }
+                }
+
+
+            }catch(e){
+                console.log(e);
+            }
             if(gp){
                 if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
                 if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
