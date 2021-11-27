@@ -139,15 +139,17 @@ export default connect(
             ...stateProps,
             ...dispatchProps,
             showAdv: () => {
+                advTime = false;
                 if(stateProps.sdk && advTime){
                     stateProps.sdk.adv.showFullscreenAdv({
                         callbacks: {
                             onClose: function(wasShown) {
                                 if(wasShown){
-                                    advTime = false;
                                     setTimeout(()=>{
                                         advTime = true;
                                     }, 200000);
+                                }else{
+                                    advTime = true;
                                 }
                             }
                         }
