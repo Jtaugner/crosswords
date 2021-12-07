@@ -140,8 +140,10 @@ class GamePage extends Component {
                 reachGoal('level50');
             }else if(this.props.level === 199){
                 reachGoal('level200');
-            } else if(this.props.level === 290){
+            } else if(this.props.level === 290) {
                 reachGoal('level290');
+            }else if(this.props.level === 1574){
+                giveParams({'level1575': 1});
             }
         }else{
             this.setState({

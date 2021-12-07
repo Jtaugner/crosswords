@@ -139,8 +139,8 @@ export default connect(
             ...stateProps,
             ...dispatchProps,
             showAdv: () => {
-                advTime = false;
                 if(stateProps.sdk && advTime){
+                    advTime = false;
                     stateProps.sdk.adv.showFullscreenAdv({
                         callbacks: {
                             onClose: function(wasShown) {
