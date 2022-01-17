@@ -4,7 +4,7 @@
   flex-flow: column nowrap;
   width: 100%;
   height: 220px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(12, 2, 13, 0.6);
 }
 
 .actionBlock__interaction {
@@ -24,12 +24,12 @@
 }
 
 .actionBlock__changeWord-down {
-  background: url(changeWord-down.png) center center no-repeat;
+  background: url(changeWord-down.svg) center center no-repeat;
   margin-left: 15px;
 }
 
 .actionBlock__changeWord-up {
-  background: url(changeWord-up.png) center center no-repeat;
+  background: url(changeWord-up.svg) center center no-repeat;
 }
 
 .actionBlock__changeWord {

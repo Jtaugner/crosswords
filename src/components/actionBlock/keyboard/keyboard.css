@@ -57,8 +57,8 @@
 }
 
 .keyboard__deleteButton {
-  background: url(delete.png) 40% center no-repeat white;
-  background-size: 75%;
+  background: url(delete.svg) 45% center no-repeat white;
+  background-size: 65%;
   border-radius: 8px;
   cursor: pointer;
 }

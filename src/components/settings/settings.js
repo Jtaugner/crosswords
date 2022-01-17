@@ -66,7 +66,7 @@ function Settings(props) {
                         <a href={'https://vk.com/jaugr'}
                            target="_blank"
                            rel="noopener noreferrer"
-                           className={'settings__group'}
+                           className={'settings__group vkHref'}
                            onClick={()=>{
                                try{
                                    giveParams({'openVK': 1});
@@ -74,7 +74,8 @@ function Settings(props) {
 
                            }}
                         >
-                            Наша группа ВКонтакте
+                            Группа ВКонтакте
+                            <div className="vk-img"></div>
                         </a>
                     </li>
 
