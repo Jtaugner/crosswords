@@ -130,6 +130,9 @@ class GamePage extends Component {
         }, 400);
         if(this.props.level === this.props.lastLevel){
             this.props.increaseLastLevel();
+            if(this.props.level === 1603){
+                giveParams({'getLastLevel': 1});
+            }
             this.props.addMoney();
             this.setState({
                 addMoney: true
