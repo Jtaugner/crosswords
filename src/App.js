@@ -145,9 +145,10 @@ export default connect(
                         callbacks: {
                             onClose: function(wasShown) {
                                 if(wasShown){
+                                    let timeout = window.innerWidth > window.innerHeight ? 70000 : 120000;
                                     setTimeout(()=>{
                                         advTime = true;
-                                    }, 200000);
+                                    }, timeout);
                                 }else{
                                     advTime = true;
                                 }

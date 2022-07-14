@@ -20,12 +20,12 @@ function Shop(props) {
                 callbacks: {
                     onRewarded: () => {
                         giveParams({'free': 1});
-                        addMoney(5);
+                        addMoney(10);
                         onClick();
                         videoTime = false;
                         setTimeout(()=>{
                             videoTime = true;
-                        }, 300000);
+                        }, 70000);
                     }
                 }
             });
