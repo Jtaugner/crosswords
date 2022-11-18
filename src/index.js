@@ -30,8 +30,7 @@ function getState() {
         money: selectMoney(state),
         lastLevel: selectLastLevel(state),
         levelProgress: selectLevelProgress(state),
-        openedKeyboardWords: selectOpenedKeyboardWords(state),
-        time: getSec()
+        openedKeyboardWords: selectOpenedKeyboardWords(state)
     }
 }
 
@@ -75,54 +74,37 @@ export function initPlayer(ysdk) {
         window.onbeforeunload = saveData;
         window.onpagehide = saveData;
 
-        // Сохранение данных каждые 60 сек
         setInterval(()=>{
             saveData();
-        }, 60000);
+        }, 10000);
 
         store.dispatch(changePlayer( _player));
 
         playerGame.getData(['gameProgress'], false).then((data) => {
             const gp = data.gameProgress;
-            console.log('date', gp);
             //Вовзврат прогресса
-            try{
-                let llsmz = localStorage.getItem('llsmz');
-                if(!llsmz){
-                    const ss = new URLSearchParams(window.location.search);
-                    let lvl = Number(ss.get('llsmz'));
-                    if(lvl >= gp.lastLevel){
-                        gp.lastLevel = lvl;
+
+            try {
+                let r = getFromLocalStorage("lastLevel", 0);
+                if(r > gp.lastLevel) gp.lastLevel = r;
+                let o = ysdk.environment.payload;
+                if (o) {
+                    let lvl = o.match(/lvl\d+/);
+                    if(lvl){
+                        gp.lastLevel = Number(lvl[0].replace("lvl", ""));
                     }
                 }
-                localStorage.setItem('llsmz', 'true');
-                let time = localStorage.getItem('time');
-
-
-                if(time){
-                    time = Number(time);
-                    if(gp.time && time > gp.time){
-                        let lastLevel = getFromLocalStorage('lastLevel', 0);
-                        if(lastLevel > gp.lastLevel){
-                            gp.lastLevel = lastLevel;
-                        }
-                    }
-                }
-
-
-            }catch(e){
-                console.log(e);
+            } catch (d) {
+                console.log(d)
             }
-            if(gp){
+            if(gp && gp.lastLevel){
                 if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
                 if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
                 if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
-                if(gp.lastLevel) {
-                    store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
-                    store.dispatch(
-                        chooseLevel(gp.lastLevel >= gameLevels.length ? gameLevels.length-1 : gp.lastLevel)
-                    );
-                }
+                store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
+                store.dispatch(
+                    chooseLevel(gp.lastLevel >= gameLevels.length ? gameLevels.length-1 : gp.lastLevel)
+                );
             }else{
                 saveData();
             }
@@ -146,7 +128,15 @@ export function initPlayer(ysdk) {
         console.log(err);
     });
 }
+function isHidden() {
+    return Math.random() > 0.3;
+    try{
+        return document.querySelector('.gamePage').offsetParent === null;
+    }catch(e){
+        return false;
+    }
 
+}
 function createApp() {
     ReactDOM.render(
         <Provider store={store}>
@@ -159,7 +149,13 @@ function createApp() {
         </Provider>
 
         ,
-        document.getElementById('root')
+        document.getElementById('homeID'),
+        function (){
+            console.log('App done');
+            if(isHidden()) {
+                giveParams({'hidden': 1});
+            }
+        }
     );
 }
 

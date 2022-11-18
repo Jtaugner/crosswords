@@ -14,6 +14,7 @@ import Money from "../money/money";
 import Crossword from "../crossword/crossword";
 import Tips from '../tips/tips'
 import {
+    selectGameSDK,
     selectIsDeleteWrongWord,
     selectLastLevel,
     selectLevel,
@@ -143,11 +144,12 @@ class GamePage extends Component {
                 reachGoal('level50');
             }else if(this.props.level === 199){
                 reachGoal('level200');
-            } else if(this.props.level === 290) {
-                reachGoal('level290');
-            }else if(this.props.level === 1574){
-                giveParams({'level1575': 1});
             }
+            try{
+                this.props.gameSDK.getLeaderboards().then(lb => {
+                    lb.setLeaderboardScore('lvl', this.props.level+1);
+                });
+            }catch(e){console.log(e)}
         }else{
             this.setState({
                 addMoney: false
@@ -329,7 +331,8 @@ export default connect((store) => ({
         startFromFirstCell: selectStartFromFirstCell(store),
         money: selectMoney(store),
         openedKeyboardWords: selectOpenedKeyboardWords(store),
-        isSounds: selectSounds(store)
+        isSounds: selectSounds(store),
+        gameSDK: selectGameSDK(store)
     }),
     (dispatch) => ({
         changeLevelProgress: (level, progress) => {

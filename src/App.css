@@ -5,7 +5,7 @@
   font-variant: normal;
   font-style: normal;
 }
-html, body, #root {
+html, body, .homeID {
   position: relative;
   width: 100%;
   height: 100%;
@@ -18,7 +18,7 @@ html, body, #root {
   user-select: none;
 }
 
-#root, .mainPage, .gamePage {
+.homeID, .mainPage, .gamePage {
   background: url(assets/images/background.png) center center no-repeat;
   background-size: cover;
   overflow: hidden;
@@ -169,7 +169,7 @@ html, body, #root {
   }
 }
 @media (min-width: 600px) {
-  #root, .mainPage, .gamePage {
+  .homeID, .mainPage, .gamePage {
     background: url(assets/images/background_desktop.png) center center no-repeat;
     background-size: cover;
   }
