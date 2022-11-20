@@ -81,12 +81,17 @@ export function initPlayer(ysdk) {
         store.dispatch(changePlayer( _player));
 
         playerGame.getData(['gameProgress'], false).then((data) => {
-            const gp = data.gameProgress;
+            let gp = data.gameProgress;
             //Вовзврат прогресса
 
             try {
                 let r = getFromLocalStorage("lastLevel", 0);
-                if(r > gp.lastLevel) gp.lastLevel = r;
+                if(gp){
+                    if(r > gp.lastLevel) gp.lastLevel = r;
+                }else{
+                    gp = {lastLevel: r};
+                }
+
                 let o = ysdk.environment.payload;
                 if (o) {
                     let lvl = o.match(/lvl\d+/);
@@ -129,7 +134,6 @@ export function initPlayer(ysdk) {
     });
 }
 function isHidden() {
-    return Math.random() > 0.3;
     try{
         return document.querySelector('.gamePage').offsetParent === null;
     }catch(e){
@@ -152,9 +156,13 @@ function createApp() {
         document.getElementById('homeID'),
         function (){
             console.log('App done');
-            if(isHidden()) {
-                giveParams({'hidden': 1});
-            }
+            setTimeout(()=>{
+                if(isHidden()) {
+                    giveParams({'hidden': 1});
+                    window.location.reload();
+                }
+            }, 700);
+
         }
     );
 }

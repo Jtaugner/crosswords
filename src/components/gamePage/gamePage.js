@@ -53,37 +53,43 @@ class GamePage extends Component {
 
         let progressWordLength = 0;
         const newProgress = createLastLevelGameProgress(this.props.level);
-        if(progress){
-            if(progress.length !== newProgress.length){
-                progressWordLength = -1;
-            }else{
-                for(let i = 0; i < progress.length; i++){
-                    if(progress[i] !== true) {
-                        progressWordLength = progress[i].length;
-                        break;
+        try{
+            if(progress){
+                if(progress.length !== newProgress.length){
+                    progressWordLength = -1;
+                }else{
+                    for(let i = 0; i < progress.length; i++){
+                        if(progress[i] !== true) {
+                            progressWordLength = progress[i].length;
+                            break;
+                        }
                     }
                 }
+
             }
 
-        }
+            if(!progress && this.props.level < this.props.lastLevel && !startGameAgain){
+                isDoneLevel = true;
+                progress = getDoneProgressLevel(this.props.level);
+            }else if(!progress || progressWordLength !== this.levelWords[0].length){
+                progress = newProgress;
 
+                this.props.changeLevelProgress(this.props.level, progress);
+            }
 
-
-        if(!progress && this.props.level < this.props.lastLevel && !startGameAgain){
-            isDoneLevel = true;
-            progress = getDoneProgressLevel(this.props.level);
-        }else if(!progress || progressWordLength !== this.levelWords[0].length){
+            for(let i = 0; i < progress.length; i++){
+                if(progress[i] !== true) {
+                    selectedWordIndex = i;
+                    break;
+                }
+            }
+        }catch(e){
             progress = newProgress;
-
-            this.props.changeLevelProgress(this.props.level, progress);
         }
 
-        for(let i = 0; i < progress.length; i++){
-            if(progress[i] !== true) {
-                selectedWordIndex = i;
-                break;
-            }
-        }
+
+
+
         this.progress = progress;
 
 
