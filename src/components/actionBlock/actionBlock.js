@@ -6,14 +6,18 @@ import StartGameBlock from "./startGameBlock/startGameBlock";
 
 function getWordDescriptionFontSize(desc) {
     if(window.innerWidth > 600) return 16;
-    const l = desc.length;
-    let font = 17;
+    try{
+        const l = desc.length;
+        let font = 17;
 
-    for(let i = 21; i < l; i += 10){
-        font--;
+        for(let i = 21; i < l; i += 10){
+            font--;
+        }
+        if(font < 12) return 12;
+        return font;
+    }catch(e){
+        return 12;
     }
-    if(font < 12) return 12;
-    return font;
 }
 
 
