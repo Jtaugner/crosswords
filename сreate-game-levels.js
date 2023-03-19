@@ -2708,7 +2708,7 @@ console.log("SUM: ", randLength.reduce((b, e)=> b + wordsArray2[e].length, 0));
 
 let levelsAll = '';
 let allAmount = 0;
-for (let i = 0; i < 200; i++){
+for (let i = 0; i < 400; i++){
     // console.log('i: ', i, ali, allWords.length);
     let length = randLength[Math.floor(Math.random()*randLength.length)];
     let amount = randAmount[Math.floor(Math.random()*randAmount.length)];
