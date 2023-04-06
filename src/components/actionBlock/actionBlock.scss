@@ -33,13 +33,13 @@
 }
 //Стрелки смены слова
 $changeWordMargin: 15px;
-$changeWordSize: 25px;
+$changeWordSize: 35px;
 .actionBlock__changeWord-down{
-  background: url(changeWord-down.svg) center center no-repeat;
+  background: url(changeWord-down.svg) center center no-repeat, white;
   margin-left: $changeWordMargin;
 }
 .actionBlock__changeWord-up{
-  background: url(changeWord-up.svg) center center no-repeat;
+  background: url(changeWord-up.svg) center center no-repeat, white;
 }
 
 .actionBlock__changeWord{
@@ -48,7 +48,9 @@ $changeWordSize: 25px;
   height: $changeWordSize;
   margin: 0 $changeWordMargin;
 
-  background-size: 100%;
+  background-size: 60%;
+
+  border-radius: 50%;
 
   cursor: pointer;
 }

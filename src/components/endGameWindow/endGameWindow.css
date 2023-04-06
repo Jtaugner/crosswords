@@ -1,6 +1,63 @@
 .endGame {
-  height: 40%;
-  width: 90%;
+  position: relative;
+  height: 260px;
+  width: 300px;
+  background-color: white;
+  font-family: "Inter", sans-serif;
+  border-radius: 10px;
+}
+
+.endGame__header {
+  position: relative;
+  width: 300px;
+  height: 70px;
+  background: linear-gradient(180deg, #4154FF 0%, #00E1EF 100%);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 20px;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  font-family: "Inter", sans-serif;
+}
+
+.endGame__header:before, .endGame__header:after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: -40px;
+  background: url(fastener.svg) center center no-repeat;
+  background-size: 100%;
+  width: 8px;
+  height: 52px;
+  z-index: 10;
+}
+
+.endGame__header:after {
+  left: auto;
+  right: 10px;
+}
+
+.endGame__icon {
+  position: absolute;
+  top: -25px;
+  right: 10px;
+  width: 80px;
+  height: 80px;
+  background: url(ic.png) center center no-repeat;
+  background-size: 100%;
+}
+
+.endGame__goodGame {
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
 .endGame__prize {
@@ -10,20 +67,32 @@
 }
 
 .endGame__prizeMoney {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
-  color: #ab65bd;
-  padding-top: 10px;
+  width: 80px;
+  height: 80px;
+  margin: 20px auto 0 auto;
+  border-radius: 10px;
+  background: url(../shop/item__3.svg) center center no-repeat, #F1F1F1;
+  background-size: 65%;
 }
 
-.endGame__money {
-  width: 40px;
-  height: 40px;
-  background: url(../../assets/images/money.png) center center no-repeat;
+.endGame__moneyCount {
+  position: absolute;
+  top: 7px;
+  right: -45px;
+  width: 58px;
+  height: 29.5px;
+  background: url(prize.svg) center center no-repeat;
   background-size: 100%;
-  margin: 0 3px;
+}
+
+.endGame__moneyCount__count {
+  color: white;
+  font-size: 1.7rem;
+  transform: rotate(5deg);
 }
 
 .endGame__actions {
@@ -33,60 +102,78 @@
   left: 0;
   bottom: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  padding: 0 20px;
 }
 
 .endGame__actions .menu {
   width: 40px;
   height: 40px;
-  margin: 0;
+  margin: 0 30px 0 0;
 }
 
 .endGame__nextLevel {
-  background: url(next.png) center center no-repeat;
-  background-size: 100%;
+  width: 130px;
+  height: 40px;
+  background: linear-gradient(180deg, #4059FF 0%, #02DDF0 100%);
+  border-radius: 10px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.endGame__wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 600px) {
   .endGame {
-    width: 550px;
+    width: 500px;
     height: 280px;
   }
 
-  .endGame .popUp__header {
-    font-size: 2.8rem;
-    height: 70px;
-    top: -25px;
+  .endGame__header {
+    width: 500px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+  }
+
+  .endGame__goodGame {
+    font-size: 2.1rem;
+    line-height: 2.1rem;
   }
 
   .endGame__prize {
-    font-size: 2.6rem;
-  }
-
-  .endGame__prizeMoney {
-    font-size: 3.5rem;
-  }
-
-  .endGame__money {
-    width: 50px;
-    height: 50px;
+    font-size: 2.5rem;
   }
 
   .endGame__actions {
-    height: 60px;
+    margin-bottom: 10px;
   }
 
   .endGame__actions .menu {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+    background-size: 55%;
+    margin-right: 50px;
   }
 
   .endGame__nextLevel {
-    background: url(next.png) center center no-repeat;
-    background-size: 100%;
-    cursor: pointer;
+    height: 60px;
+    width: 180px;
+    font-size: 2.2rem;
   }
 }
 

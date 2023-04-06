@@ -9,23 +9,24 @@ $moneyColor: #a95dbc;
   align-items: center;
 
   width: 100px;
-  height: 35px;
-  border-radius: 14px;
+  height: 40px;
+  border-radius: 100px;
 
   background-color: white;
 
-  border-bottom: 2px solid $moneyColor;
 
   text-align: center;
   font-size: 1.6rem;
   color: $darkFontColor;
+
+  font-family: 'Inter', sans-serif;
 
 
   margin-left: auto;
 
   cursor: pointer;
 }
-$leftShift: 6px;
+$leftShift: 8px;
 .moneyBlock__moneyAmount{
   position: absolute;
   top: 50%;
@@ -39,12 +40,12 @@ $leftShift: 6px;
 }
 .moneyBlock__moneyPic{
 
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 26px;
 
   margin-left: $leftShift;
 
-  background: url(../../assets/images/money.png) center center no-repeat;
+  background: url(../../assets/images/money.svg) center center no-repeat;
   background-size: 100%;
 }
 
@@ -61,9 +62,9 @@ $leftShift: 6px;
   justify-content: center;
   align-items: center;
 
-  background-color: $moneyColor;
+  background-color: #1772AF;
   border-radius: 50%;
-  box-shadow: 0.5px 1px 1px #754488;
+  box-shadow: 0.5px 1px 1px #105A8C;
 
   font-size: 2rem;
   line-height: 2rem;

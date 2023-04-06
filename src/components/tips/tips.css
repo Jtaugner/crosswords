@@ -1,59 +1,59 @@
 .tips {
   width: 100%;
-  height: 60px;
+  height: 70px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding-right: 10px;
+  font-family: "Inter", sans-serif;
 }
 
 .tip1 {
-  width: 30px;
-  height: 40px;
-  background: url(tip1.png) center center no-repeat;
+  background: url(tip1.svg) center center no-repeat, white;
 }
 
 .tip2 {
-  width: 40px;
-  height: 40px;
-  background: url(tip2.png) center center no-repeat;
+  background: url(tip2.svg) center center no-repeat, white;
 }
 
 .tip3 {
-  width: 34px;
-  height: 40px;
-  background: url(tip3.png) center center no-repeat;
+  background: url(tip3.svg) center center no-repeat, white;
 }
 
 .tip4 {
-  width: 20px;
-  height: 45px;
-  background: url(tip4.png) center center no-repeat;
+  background: url(tip4.svg) center center no-repeat, white;
 }
 
 .tip {
   position: relative;
-  background-size: 100%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .tip__cost {
   position: absolute;
-  bottom: -5px;
-  right: -8px;
-  color: white;
-  font-size: 1.4rem;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #051225;
+  font-size: 1.5rem;
 }
 
-.tip__cost:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background: url(../../assets/images/money.png) center center no-repeat;
+.tip__costImage {
+  width: 12px;
+  height: 14px;
+  background: url(../../assets/images/money.svg) center center no-repeat;
   background-size: 100%;
+  margin-left: 3px;
 }
 
 @media (min-width: 600px) {
@@ -63,29 +63,34 @@
     padding: 0;
   }
 }
-@media (min-height: 800px) {
+@media (min-height: 600px) and (min-width: 600px) {
   .tips {
-    height: 70px;
+    height: 90px;
+  }
+
+  .tip {
+    width: 65px;
+    height: 65px;
+    background-size: 50%;
   }
 
   .tip1 {
-    width: 40px;
-    height: 53.3px;
-  }
-
-  .tip2 {
-    width: 53.3px;
-    height: 53.3px;
-  }
-
-  .tip3 {
-    width: 45.3px;
-    height: 53.3px;
+    background-size: 45%;
   }
 
   .tip4 {
-    width: 26.6px;
-    height: 60px;
+    background-size: 30%;
+  }
+
+  .tip__cost {
+    height: 25px;
+    bottom: -15px;
+    font-size: 2rem;
+  }
+
+  .tip__costImage {
+    width: 18px;
+    height: 21px;
   }
 }
 

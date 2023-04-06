@@ -3392,6 +3392,7 @@ export const shopItems = [
     {amount: 25, price: 20, id: 'item1'},
     {amount: 75, price: 40, id: 'item2'},
     {amount: 150, price: 70, id: 'item3'},
+    {amount: 400, price: 150, id: 'item4'},
     {amount: 10, price: 0, id: 'free'},
 ];
 

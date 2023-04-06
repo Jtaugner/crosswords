@@ -4,6 +4,19 @@ import popUpBlackout from "../../decorators/pop-up-blackout/PopUpBlackout";
 import {connect} from "react-redux";
 
 
+function getPlayerStyles(player, playerRait){
+    let styles = "leaderBoardInfo__player ";
+    if(player.rank < 21){
+        styles += 'leaderBoardInfo_' + player.rank;
+    }
+    if(playerRait && playerRait.rank === player.rank) {
+        styles += ' leaderBoardInfo_mine ';
+    }
+    if(player.rank === 20){
+        styles += ' lastRang'
+    }
+    return styles
+}
 
 
 
@@ -20,39 +33,38 @@ function LeaderBoardWindow(props) {
             {
                 leaderBoard ?
                     <div className="leaderBoardInfo">
-                        <div>
                             {
                                 Object.keys(leaderBoard).map((key)=>{
                                     let player = leaderBoard[key];
                                     return <div
-                                        className={'leaderBoardInfo__player' +
-                                        (' leaderBoardInfo_' + player.rank) +
-                                        (playerRait && playerRait.rank === player.rank ? ' leaderBoardInfo_my' : '') +
-                                        (player.rank === 20 ? ' lastRang' : '')}
-                                        key={'player' + player.rank}
+                                        className={getPlayerStyles(player, playerRait)}
                                     >
-                                        <div className="leaderBoardInfo__rank">{ player.rank }</div>
                                         <div className="leaderBoardInfo__playerInfo">
+                                            <div className="leaderBoardInfo__firstBlock">
+                                                <div
+                                                    className={"leaderBoardInfo__image"}
+                                                    style={{background: 'url(' + player.player.getAvatarSrc('medium') + ') center center no-repeat'}}
+                                                >
+                                                </div>
+                                                <div className="leaderBoardInfo__nameAndScore">
+                                                    <div className="leaderBoardInfo__name">{ player.player.publicName ? player.player.publicName : 'Нет имени' }</div>
+                                                    <div className="leaderBoardInfo__score">Уровень: { player.score }</div>
+                                                </div>
+                                            </div>
                                             <div
-                                                className="leaderBoardInfo__image"
-                                                style={{
-                                                    background: 'url(' + player.player.getAvatarSrc('medium') + ') center center no-repeat'
-                                                }}
+                                                className={"leaderBoardInfo__rank " + (player.rank > 20 ? 'leaderBoardInfo_big' : '')}
                                             >
-                                            </div>
-                                            <div className="leaderBoardInfo__name">
-                                                { player.player.publicName ? player.player.publicName : 'Нет имени' }
-                                            </div>
-                                            <div className="leaderBoardInfo__score">
-                                                { player.score }
+                                                <div className={"leaderBoardInfo__rankInner " + (player.rank > 99999 ? 'leaderBoardInfo__rankInner_bigRank' : '')}
+                                                >
+                                                    {player.rank}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 })
                             }
 
-
-                        </div>
                     </div>
                     :
                     <div className="ratingLoading">

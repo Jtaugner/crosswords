@@ -3,13 +3,13 @@
   display: flex;
   align-items: center;
   width: 100px;
-  height: 35px;
-  border-radius: 14px;
+  height: 40px;
+  border-radius: 100px;
   background-color: white;
-  border-bottom: 2px solid #a95dbc;
   text-align: center;
   font-size: 1.6rem;
   color: #282828;
+  font-family: "Inter", sans-serif;
   margin-left: auto;
   cursor: pointer;
 }
@@ -19,15 +19,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 6px;
+  margin-left: 8px;
   align-self: center;
 }
 
 .moneyBlock__moneyPic {
-  width: 20px;
-  height: 20px;
-  margin-left: 6px;
-  background: url(../../assets/images/money.png) center center no-repeat;
+  width: 23px;
+  height: 26px;
+  margin-left: 8px;
+  background: url(../../assets/images/money.svg) center center no-repeat;
   background-size: 100%;
 }
 
@@ -41,9 +41,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #a95dbc;
+  background-color: #1772AF;
   border-radius: 50%;
-  box-shadow: 0.5px 1px 1px #754488;
+  box-shadow: 0.5px 1px 1px #105A8C;
   font-size: 2rem;
   line-height: 2rem;
   color: white;

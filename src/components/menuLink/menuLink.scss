@@ -5,11 +5,15 @@
 
   margin-left: 10px;
 
-  background: url(menu.svg) center center no-repeat;
-  background-size: 100%;
+  background: url(menu.svg) center center no-repeat, white;
+  background-size: 55%;
 }
 
 .menu__endGame{
-  background: url(menuEndGame.svg) center center no-repeat ;
-  background-size: 100%;
+  width: 40px;
+  height: 40px;
+  background: url(home.svg) center center no-repeat, transparent;
+  border-image: linear-gradient(180deg, #4059FF 0%, #02DDF0 100%);
+  border: 2px solid  #3997f7;
+  border-radius: 10px;
 }

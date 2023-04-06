@@ -1,6 +1,6 @@
 @import '../../root';
 $close: #c1c0c0;
-$doneLevel: #924F9F;
+$doneLevel: rgba(11, 79, 124, 1);
 .levels{
   overflow-y: auto;
 
@@ -23,7 +23,8 @@ $doneLevel: #924F9F;
   font-size: 3rem;
   color: $doneLevel;
 
-  border: 3px solid $doneLevel;
+  font-family: 'Inter', sans-serif;
+
   border-radius: 50%;
 }
 .levels__level_small{
@@ -33,15 +34,14 @@ $doneLevel: #924F9F;
   margin-left: auto;
 }
 .levels__level_close{
-  background: white url(closeLevel.png) center center no-repeat;
-  background-size: 50%;
+  background: white url(closeLevel.svg) center center no-repeat;
+  background-size: 80%;
   border-color: $close;
 
 }
 .levels__level_last{
-  color: #b95dc2;
-  border-color: #b95dc2;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  color: #828282;
+  box-shadow: 0 0 20px rgba(255,255,255,0.5);
 }
 @media (min-width: 600px) {
   .levels{

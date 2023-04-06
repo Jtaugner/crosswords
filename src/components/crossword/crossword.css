@@ -4,7 +4,7 @@
   width: 98%;
   border-radius: 5px;
   margin: 0 auto;
-  padding: 10px 5px;
+  padding: 5px;
   box-shadow: 0 0 7px 0 black;
 }
 
@@ -26,20 +26,19 @@
 }
 
 .crossword__letter {
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.9);
   color: #9b9b9b;
   margin-right: 5px;
-  opacity: 0.95;
   cursor: pointer;
 }
 
 .crossword__word_selected .crossword__letter {
   color: white;
-  background-color: #b170c1;
+  background-color: #0089E4;
 }
 
 .crossword__word .crossword__letter:last-child {
@@ -47,7 +46,7 @@
 }
 
 .crossword__word_selected .crossword__letter_done {
-  background-color: #9454a6;
+  background-color: #0089E4;
   color: white;
 }
 

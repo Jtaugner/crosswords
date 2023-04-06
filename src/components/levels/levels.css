@@ -13,8 +13,8 @@
   height: 60px;
   background-color: white;
   font-size: 3rem;
-  color: #924F9F;
-  border: 3px solid #924F9F;
+  color: #0b4f7c;
+  font-family: "Inter", sans-serif;
   border-radius: 50%;
 }
 
@@ -27,15 +27,14 @@
 }
 
 .levels__level_close {
-  background: white url(closeLevel.png) center center no-repeat;
-  background-size: 50%;
+  background: white url(closeLevel.svg) center center no-repeat;
+  background-size: 80%;
   border-color: #c1c0c0;
 }
 
 .levels__level_last {
-  color: #b95dc2;
-  border-color: #b95dc2;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  color: #828282;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 @media (min-width: 600px) {

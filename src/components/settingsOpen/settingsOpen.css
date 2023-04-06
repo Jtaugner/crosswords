@@ -1,6 +1,6 @@
 .settingsOpen {
-  background: url(settingsOpen.svg) center center no-repeat;
-  background-size: 100%;
+  background: url(settingsOpen.svg) center center no-repeat, white;
+  background-size: 60%;
 }
 
 @media (min-width: 600px) {

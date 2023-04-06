@@ -1,13 +1,8 @@
 @import '../../root';
 
 .leaderBoardIcon{
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-}
+  background: url(leaderBoard.svg) center center no-repeat, white;
+  background-size: 60%;
 
-@media (min-width: 600px) {
-  .leaderBoardIcon{
-    left: 25px;
-  }
+  margin-left: 15px;
 }

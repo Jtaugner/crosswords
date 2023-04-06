@@ -14,7 +14,10 @@ function Tips(props) {
                         key={'cost' + index}
                         onClick={()=> getTip(index)}
                     >
-                        <div className="tip__cost">{cost}</div>
+                        <div className="tip__cost">
+                            {cost}
+                            <div className="tip__costImage" />
+                        </div>
                     </div>
                 ))
             }

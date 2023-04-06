@@ -1,13 +1,7 @@
 .leaderBoardIcon {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-}
-
-@media (min-width: 600px) {
-  .leaderBoardIcon {
-    left: 25px;
-  }
+  background: url(leaderBoard.svg) center center no-repeat, white;
+  background-size: 60%;
+  margin-left: 15px;
 }
 
 /*# sourceMappingURL=leaderBoardOpen.css.map */

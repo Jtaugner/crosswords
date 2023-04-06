@@ -96,12 +96,12 @@ function MainPage(props) {
         <div className={'mainPage'}>
             <TopMenu>
                 <SettingsOpen onClick={settingsOpenOnClick}/>
+                <LeaderBoardOpen onClick={leaderBoardOpenOnClick}/>
                 <Money/>
 
             </TopMenu>
 
             <Levels canSwitchPage={props.canSwitchPage}/>
-            <LeaderBoardOpen onClick={leaderBoardOpenOnClick}/>
 
             {isSettingsOpen ? <Settings closeSettings={settingsCloseOnClick}/> : ''}
             {isLeaderBoardOpen ?

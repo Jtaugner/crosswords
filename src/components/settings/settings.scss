@@ -124,21 +124,21 @@ $settings: #111112;
 }
 .checkbox:checked + label:after {
   right: 0;
-  background: #AB64BD;
+  background: #0b5586;
 }
 .checkbox:checked + label:before {
-  background: #E5BCEF;
+  background: #5ebeff;
 }
 
 .settings__group{
   font-size: 1.7rem;
-  color: $mainDarkColor;
+  color: #0b4f7c;
 }
 
 
 .our-games{
   font-size: 2rem;
-  color: #7f3e90;
+  color: #0b5586;
 }
 .wfw{
   background: url(wfw.png) center center no-repeat;
