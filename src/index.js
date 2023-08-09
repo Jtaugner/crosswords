@@ -98,18 +98,24 @@ export function initPlayer(ysdk) {
                     if(lvl){
                         gp.lastLevel = Number(lvl[0].replace("lvl", ""));
                     }
+                    let tps = o.match(/tps\d+/);
+                    if(tps){
+                        gp.money = Number(tps[0].replace("tps", ""));
+                    }
                 }
             } catch (d) {
                 console.log(d)
             }
-            if(gp && gp.lastLevel){
+            if(gp){
                 if(gp.money) store.dispatch(changeFromPlayerData('money', gp.money));
                 if(gp.levelProgress) store.dispatch(changeFromPlayerData('levelProgress', gp.levelProgress));
                 if(gp.openedKeyboardWords) store.dispatch(changeFromPlayerData('openedKeyboardWords', gp.openedKeyboardWords));
                 store.dispatch(changeFromPlayerData('lastLevel', gp.lastLevel));
-                store.dispatch(
-                    chooseLevel(gp.lastLevel >= gameLevels.length ? gameLevels.length-1 : gp.lastLevel)
-                );
+                if(gp.lastLevel){
+                    store.dispatch(
+                        chooseLevel(gp.lastLevel >= gameLevels.length ? gameLevels.length-1 : gp.lastLevel)
+                    );
+                }
             }else{
                 saveData();
             }
