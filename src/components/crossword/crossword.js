@@ -382,7 +382,7 @@ class Crossword extends Component {
             this.addDoneWord(selectedLine);
             return true;
         }else{
-            this.props.showAdv();
+            // this.props.showAdv();
         }
 
 
