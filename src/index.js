@@ -50,8 +50,10 @@ export function saveData() {
 
 function consumePurchase(purchase, payments) {
     try{
+        console.log('try to consume: ', purchase.productID);
         for(let i = 0; i < shopItems.length; i++){
             if(shopItems[i].id === purchase.productID){
+                console.log('addMoney');
                 store.dispatch(addMoney(shopItems[i].amount));
                 break;
             }
@@ -119,6 +121,18 @@ export function initPlayer(ysdk) {
             }else{
                 saveData();
             }
+            ysdk.getPayments({signed: false}).then(_payments => {
+                _payments.getCatalog().then(catalog => store.dispatch(changeGameCatalog(catalog)) );
+                // Покупки доступны.
+                console.log('покупки доступны');
+                store.dispatch(changeGamePayments(_payments));
+                _payments.getPurchases().then(purchases => purchases.forEach((id)=>{
+                    console.log('consumePurchase', id);
+                    consumePurchase(id, _payments);
+                }));
+            }).catch(err => {
+                console.log(err);
+            });
             createApp();
         }).catch((e) => {
             createApp();
@@ -128,16 +142,6 @@ export function initPlayer(ysdk) {
         createApp();
     });
 
-    ysdk.getPayments({signed: false}).then(_payments => {
-        _payments.getCatalog().then(catalog => store.dispatch(changeGameCatalog(catalog)) );
-        // Покупки доступны.
-        store.dispatch(changeGamePayments(_payments));
-        _payments.getPurchases().then(purchases => purchases.forEach((id)=>{
-            consumePurchase(id, _payments);
-        }));
-    }).catch(err => {
-        console.log(err);
-    });
 }
 function isHidden() {
     try{
