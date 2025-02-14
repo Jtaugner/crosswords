@@ -20,7 +20,7 @@ import {
 import {getFromLocalStorage, getSec} from "./store/common";
 
 var playerGame;
-
+let YSDK;
 
 let recentData = '';
 
@@ -46,6 +46,36 @@ export function saveData() {
             if(playerGame) playerGame.setData(state).then((ignored) => {}).catch(()=>{});
         }
     }catch (ignored) {}
+}
+
+export let allGamesInfo = []
+
+function getAllGames(){
+    console.log('all games');
+    const games = [99195,99196,100325,98125];
+    games.forEach(id => {
+        getGameObj(id);
+    })
+}
+
+function getGameObj(id){
+    try{
+        YSDK.features.GamesAPI.getGameByID(id).then(({isAvailable, game}) => {
+            console.log('game', id, isAvailable);
+            if (isAvailable) {
+                allGamesInfo.push(game);
+            } else {
+                return undefined
+            }
+        }).catch(err => {
+            console.log(err);
+            return undefined
+        })
+    }catch(e){
+        console.log('eerr');
+        return undefined
+    }
+
 }
 
 function consumePurchase(purchase, payments) {
@@ -166,6 +196,7 @@ function createApp() {
         document.getElementById('homeID'),
         function (){
             console.log('App done');
+            if(YSDK && YSDK.features && YSDK.features.LoadingAPI) YSDK.features.LoadingAPI.ready();
             setTimeout(()=>{
                 if(isHidden()) {
                     giveParams({'hidden': 1});
@@ -180,9 +211,11 @@ function createApp() {
 if (window.YaGames) {
         window.YaGames.init()
             .then(ysdk => {
+                console.log('gt sdk');
+                YSDK = ysdk;
                 store.dispatch(changeGameSDK(ysdk));
                 var isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
-
+                getAllGames();
 
                 if ('serviceWorker' in navigator && !isNativeCache) {
                     window.onload = function () {

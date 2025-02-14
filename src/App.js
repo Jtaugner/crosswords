@@ -27,7 +27,15 @@ export function giveParams(data) {
 
 let timeout;
 console.log('V-4');
-
+document.oncontextmenu = function(e){
+    stopEvent(e);
+}
+function stopEvent(event){
+    if(event.preventDefault !== undefined)
+        event.preventDefault();
+    if(event.stopPropagation !== undefined)
+        event.stopPropagation();
+}
 //Реклама
 let advTime = false;
 setTimeout(()=>{

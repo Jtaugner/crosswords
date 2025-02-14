@@ -4,14 +4,7 @@ import {connect} from "react-redux";
 import {toggleDeleteWrongWord, toggleSounds, toggleStartFromFirstCell} from "../../store/ac";
 import {selectIsDeleteWrongWord, selectSounds, selectStartFromFirstCell} from "../../store/selectors";
 import {giveParams} from "../../App";
-const games = [
-    {id: 99195, classGame: 'wfw'},
-    {id: 99196, classGame: 'wfl'},
-    {id: 100325, classGame: 'tm'},
-    {id: 98125, classGame: 'stm'},
-];
-
-//
+import {allGamesInfo} from '../../index'
 
 function Settings(props) {
     const {closeSettings,
@@ -84,12 +77,17 @@ function Settings(props) {
                         Наши игры
                     </li>
                     {
-                        games.map((obj)=>{
-                            return  <li key={obj.id} onClick={()=>doParams(obj.id)}>
-                                <a href={"https://yandex.ru/games/play/" + obj.id} target="_blank"
+                        allGamesInfo.map((obj)=>{
+                            return  <li key={obj.appID}>
+                                <a href={obj.url} target="_blank"
                                    rel="noopener noreferrer"
                                 >
-                                    <div className={"my-game " + obj.classGame} />
+                                    <div
+                                        className={"my-game"}
+                                        style={{
+                                            background: "url("+obj.coverURL+") center center no-repeat",
+                                            backgroundSize: "100%"
+                                        }}/>
                                 </a>
                             </li>
                         })
