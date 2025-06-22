@@ -213,6 +213,8 @@ if (window.YaGames) {
             .then(ysdk => {
                 console.log('gt sdk');
                 YSDK = ysdk;
+                let lang = ysdk?.environment?.i18n?.lang;
+                console.log('lang: ', lang);
                 store.dispatch(changeGameSDK(ysdk));
                 var isNativeCache = ysdk.yandexApp && ysdk.yandexApp.enabled;
                 getAllGames();
